@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include <lip-str-size_t.h>
+#include <lip-cstr-size_t.h>
 
 #include <rand-word.h>
 #include <stats.h>
@@ -20,13 +20,13 @@ int fill_2int_word(char* w) {
     return wlen;
 }
 
-int fill_table(LipOf(str,size_t)* ht, long n_words) {
+int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
     size_t zero = 0;
     char w[1 + 2 * sizeof(int)];
     char* wp = w;
     while (n_words --> 0) {
         fill_2int_word(w);
-        size_t* v = lipfn(str,size_t,get_or_set)(
+        size_t* v = lipfn(cstr,size_t,get_or_set)(
             ht,
             &wp,
             &zero
@@ -40,25 +40,25 @@ int fill_table(LipOf(str,size_t)* ht, long n_words) {
 }
 
 int run(size_t initial_capacity, size_t n_words) {
-    LipOf(str,size_t)* ht = &(LipOf(str,size_t)){0};
-    int err = lipfn(str,size_t,init)(ht, (LipInitArgs){.sz=initial_capacity});
+    LipOf(cstr,size_t)* ht = &(LipOf(cstr,size_t)){0};
+    int err = lipfn(cstr,size_t,init)(ht, (LipInitArgs){.sz=initial_capacity});
     if(err) { perror("lip init error"); return -1;}
 
     if (fill_table(ht, n_words)) {
-        lipfn(str,size_t,clean)(ht);
+        lipfn(cstr,size_t,clean)(ht);
         return -1;
     }
     
     typeof(lip_buf(ht))* buf = &lip_buf(ht);
 
-    LipEntryOf(str,size_t)* it = buffn(LipEntryOf(str,size_t),begin)(buf);
-    LipEntryOf(str,size_t)* end = buffn(LipEntryOf(str,size_t),end)(buf);
+    LipEntryOf(cstr,size_t)* it = buffn(LipEntryOf(cstr,size_t),begin)(buf);
+    LipEntryOf(cstr,size_t)* end = buffn(LipEntryOf(cstr,size_t),end)(buf);
 
     for (; it != end; ++it) {
         if (it->k) { printf("%s -> %ld\n", it->k, it->v); }
     }
 
-    lipfn(str,size_t,clean)(ht);
+    lipfn(cstr,size_t,clean)(ht);
     return 0;
 
 }

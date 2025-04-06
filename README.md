@@ -118,19 +118,19 @@ The key type default clean does nothing.
 To define custom key comparator and copy use `KTCmp` and `KTCpy` like:
 
 ```C
-#define KT str
+#define KT cstr
 #define KTCmp strp_compare
 #define KTCpy strp_copy
 #define VT int
 #define KHash strp_hash
-#include <lip.h> // LipOf(str, int)
+#include <lip.h> // LipOf(cstr, int)
 ```
 
 
-`lip-str-size_t.h` defines a `LipOf(char*, size_t)` setting `KTCmp`,
+`lip-cstr-size_t.h` defines a `LipOf(char*, size_t)` setting `KTCmp`,
 `KTCpy`, `KTClean` and `KHash`.
 
-The `typedef char* str` is needed because the macros used by che need
+The `typedef char* cstr` is needed because the macros used by che need
 their type parameters to be source code strings instead of actual types.
 
 `lip-string-size_t.h` define a `LipOf(string, size_t)` where `string` is

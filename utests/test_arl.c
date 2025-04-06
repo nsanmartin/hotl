@@ -13,15 +13,15 @@ typedef struct { int x, y; float f; } Foo;
 #define T Foo
 #include <arl.h>
 
-typedef char* str;
-int str_copy(str* dst, const str* src) {
+typedef char* cstr;
+int str_copy(cstr* dst, const cstr* src) {
     *dst = strdup(*src);
     return *dst == 0x0;
 }
 
-int str_compare(str* s, str* t) { return strcmp(*s, *t); }
-void strp_free(str* p) { free(*p); }
-#define T str
+int str_compare(cstr* s, cstr* t) { return strcmp(*s, *t); }
+void strp_free(cstr* p) { free(*p); }
+#define T cstr
 #define TCpy str_copy
 #define TCmp str_compare
 #define TClean strp_free
@@ -100,25 +100,25 @@ int test_arl_2(void) {
 int test_arl_string(void) {
     int status = 1;
 
-    ArlOf(str)* x = &(ArlOf(str)){0};
-    str s = "foo";
-    str* ptr = arlfn(str, append)(x, &s);
+    ArlOf(cstr)* x = &(ArlOf(cstr)){0};
+    cstr s = "foo";
+    cstr* ptr = arlfn(cstr, append)(x, &s);
     utest_assert(ptr, clean);
 
     s = "bar";
-    ptr = arlfn(str, append)(x, &s);
+    ptr = arlfn(cstr, append)(x, &s);
     utest_assert(ptr, clean);
 
-    str* v = arlfn(str, at)(x, 0);
+    cstr* v = arlfn(cstr, at)(x, 0);
     utest_assert(v, clean);
     utest_assert(strcmp("foo", *v) == 0, clean);
 
-    v = arlfn(str, at)(x, 1);
+    v = arlfn(cstr, at)(x, 1);
     utest_assert(v, clean);
     utest_assert(strcmp("bar", *v) == 0, clean);
 
 
-    clean_and_ret(status, clean, arlfn(str, clean)(x));
+    clean_and_ret(status, clean, arlfn(cstr, clean)(x));
 }
 
 
@@ -157,33 +157,33 @@ int test_arl_find_int(void) {
 
 int test_arl_find_string(void) {
     int status = 1;
-    ArlOf(str)* x = &(ArlOf(str)){0};
+    ArlOf(cstr)* x = &(ArlOf(cstr)){0};
 
-    str s = "foo";
-    str* ptr = arlfn(str, append)(x, &s);
+    cstr s = "foo";
+    cstr* ptr = arlfn(cstr, append)(x, &s);
     utest_assert(ptr, clean);
 
     s = "bar";
-    ptr = arlfn(str, append)(x, &s);
+    ptr = arlfn(cstr, append)(x, &s);
     utest_assert(ptr, clean);
 
     s = "foo";
-    str* strptr = arlfn(str, find)(x, &s);
+    cstr* strptr = arlfn(cstr, find)(x, &s);
     utest_assert(strptr, clean);
 
     s = "bar";
-    strptr = arlfn(str, find)(x, &s);
+    strptr = arlfn(cstr, find)(x, &s);
     utest_assert(strptr, clean);
 
     s = "1";
-    strptr = arlfn(str, find)(x, &s);
+    strptr = arlfn(cstr, find)(x, &s);
     utest_assert(!strptr, clean);
 
     s = "";
-    strptr = arlfn(str, find)(x, &s);
+    strptr = arlfn(cstr, find)(x, &s);
     utest_assert(!strptr, clean);
 
-    clean_and_ret(status, clean, arlfn(str, clean)(x));
+    clean_and_ret(status, clean, arlfn(cstr, clean)(x));
 }
 
 int test_arl_it(void) {
@@ -223,49 +223,49 @@ int test_arl_it(void) {
 int test_arl_find_str(void) {
     int status = 1;
 
-    ArlOf(str)* x = &(ArlOf(str)){0};
+    ArlOf(cstr)* x = &(ArlOf(cstr)){0};
 
     char* foo0 = strdup("foo");
-    str* ptr = arlfn(str, append)(x, &foo0);
+    cstr* ptr = arlfn(cstr, append)(x, &foo0);
     free(foo0);
     utest_assert(ptr, clean);
 
     char* bar0 = strdup("bar");
-    ptr = arlfn(str, append)(x, &bar0);
+    ptr = arlfn(cstr, append)(x, &bar0);
     free(bar0);
     utest_assert(ptr, clean);
 
 
     char* foo1 = strdup("foo");
-    str* strptr = arlfn(str, find)(x, &foo1);
+    cstr* strptr = arlfn(cstr, find)(x, &foo1);
     free(foo1);
     utest_assert(strptr, clean);
 
-    str lit = "foo";
-    ptr = arlfn(str, find)(x, &lit);
+    cstr lit = "foo";
+    ptr = arlfn(cstr, find)(x, &lit);
     utest_assert(ptr, clean);
 
     lit = "foobar";
-    ptr = arlfn(str, find)(x, &lit);
+    ptr = arlfn(cstr, find)(x, &lit);
     utest_assert(!ptr, clean);
 
     char* bar1 = strdup("bar");
-    ptr = arlfn(str, find)(x, &bar1);
+    ptr = arlfn(cstr, find)(x, &bar1);
     free(bar1);
     utest_assert(ptr, clean);
 
     char* one = strdup("1");
-    ptr = arlfn(str, find)(x, &one);
+    ptr = arlfn(cstr, find)(x, &one);
     free(one);
     utest_assert(!ptr, clean);
 
     char* empty = strdup("");
-    ptr = arlfn(str, find)(x, &empty);
+    ptr = arlfn(cstr, find)(x, &empty);
     free(empty);
     utest_assert(!ptr, clean);
 
 
-    clean_and_ret(status, clean, arlfn(str, clean)(x));
+    clean_and_ret(status, clean, arlfn(cstr, clean)(x));
 }
 
 int main(void) {

@@ -1,18 +1,18 @@
 /*
- * The str type is the c string char* type.
+ * The cstr type is the c string char* type.
  *
  * This name is consistent with standard lib functions
  * such as strcmp, strcpy, strdup, ...
  *
  */
 
-#ifndef _LIP_STR_SIZE_T__
-#define _LIP_STR_SIZE_T__
+#ifndef _LIP_CSTR_SIZE_T__
+#define _LIP_CSTR_SIZE_T__
 
 #include <che.h>
-typedef char* str;
+typedef char* cstr;
 
-#define KT str
+#define KT cstr
 #define KTCmp strp_compare
 #define KTCpy strp_copy
 #define KTClean(Ptr) do{ if(Ptr) free((void*)*Ptr);}while(0)
@@ -22,7 +22,7 @@ typedef char* str;
 
 #define VT size_t
 
-static inline int strp_compare(str* s1, str* s2) {
+static inline int strp_compare(cstr* s1, cstr* s2) {
     if (*s1 == *s2) { return 0; }
     int null = (-(*s1 == 0) | (*s2 == 0));
     if (null) return null;
