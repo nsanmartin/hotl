@@ -4,9 +4,9 @@
  * Buf: BT, BTCmp, BTCpy, BTClean -> ArlOf(BT)
  * ---
  *  + BT: element type
- *  + BTCmp: element ptr comparator. Default: hashi_compare_bytes
+ *  + BTCmp: element ptr comparator. Default: che_compare_bytes
  *    (memcmp sizeof T)
- *  + BTCpy: element ptr copy. Default: hashi_copy_bytes
+ *  + BTCpy: element ptr copy. Default: che_copy_bytes
  *           (memmove sizeof BT).
  *  + BTClean: element ptr clean. Default: (void).
  *
@@ -25,7 +25,7 @@
  *
  */
 
-#include <hashi.h>
+#include <che.h>
 
 #ifndef BT
 #error "Template type BT undefined"
@@ -90,12 +90,12 @@ buffn(BT, at)(BufOf(BT)* a, size_t ix) {
 }
 
 #ifndef BTCmp
-#define BTCmp(S1, S2) hashi_compare_bytes(S1, S2, sizeof(BT))
+#define BTCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(BT))
 #endif // BTCmp
 
 
 #ifndef BTCpy
-#define BTCpy(Dst, Src) hashi_copy_bytes(Dst, Src, sizeof(BT))
+#define BTCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(BT))
 #endif // BTCpy
 
 

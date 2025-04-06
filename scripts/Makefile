@@ -4,12 +4,12 @@ CXXFLAGS:=-g  -Wall -Wextra -Werror -pedantic
 BUILD:=../build
 INCLUDE:=.
 
-HASHI_OBJDIR=../build
-HASHI_SRCDIR=../src
-HASHI_INCLUDE=../include
-HASHI_HEADERS=$(wildcard $(HASHI_INCLUDE)/*.h)
-HASHI_SRCS=$(wildcard $(HASHI_SRCDIR)/*.c)
-HASHI_OBJ=$(HASHI_SRCS:src/%.c=$(HASHI_OBJDIR)/%.o)
+CHE_OBJDIR=../build
+CHE_SRCDIR=../src
+CHE_INCLUDE=../include
+CHE_HEADERS=$(wildcard $(CHE_INCLUDE)/*.h)
+CHE_SRCS=$(wildcard $(CHE_SRCDIR)/*.c)
+CHE_OBJ=$(CHE_SRCS:src/%.c=$(CHE_OBJDIR)/%.o)
 
 all: \
 	collisions \
@@ -20,19 +20,19 @@ all: \
 	stdin-count-cppmap \
 
 
-rand-word8-count: $(HASHI_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(HASHI_INCLUDE) \
+rand-word8-count: $(CHE_OBJ)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
-count-words8: $(HASHI_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(HASHI_INCLUDE) \
+count-words8: $(CHE_OBJ)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 stdin-count-cppmap: 
 	$(CXX) $(CXXFLAGS) -o $(BUILD)/$@ $@.c $^
 
-stdin-count: $(HASHI_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(HASHI_INCLUDE) \
+stdin-count: $(CHE_OBJ)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 
@@ -40,12 +40,12 @@ rand-word8s:
 	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(BUILD)/$@ $@.c 
 
 
-slot-sizes-words8: $(HASHI_OBJ)
+slot-sizes-words8: $(CHE_OBJ)
 	$(CC) $(CFLAGS) \
-		-I$(INCLUDE) -I$(HASHI_INCLUDE) -o $(BUILD)/$@-E.c $@.c $^ -lm
+		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@-E.c $@.c $^ -lm
 	$(CC) $(CFLAGS) \
-		-I$(INCLUDE) -I$(HASHI_INCLUDE) -o $(BUILD)/$@ $@.c $^ -lm
+		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@ $@.c $^ -lm
 
-collisions: $(HASHI_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(HASHI_INCLUDE) \
+collisions: $(CHE_OBJ)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm

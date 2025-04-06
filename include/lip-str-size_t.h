@@ -9,7 +9,7 @@
 #ifndef _LIP_STR_SIZE_T__
 #define _LIP_STR_SIZE_T__
 
-#include <hashi.h>
+#include <che.h>
 typedef char* str;
 
 #define KT str
@@ -33,7 +33,7 @@ static inline int strp_copy(char** dest, char** src) {
     return (*dest = strdup(*src)) == NULL;
 }
 static inline int strp_hash(char** s) {
-    return hashi_djb2_k33(*s, (size_t)strlen(*s));
+    return che_djb2_k33(*s, (size_t)strlen(*s));
 }
 #include <lip.h>
 

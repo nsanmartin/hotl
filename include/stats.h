@@ -1,5 +1,5 @@
-#ifndef __STATS_HASHI__H_
-#define __STATS_HASHI__H_
+#ifndef __STATS_CHE__H_
+#define __STATS_CHE__H_
 
 typedef struct {
     size_t n;

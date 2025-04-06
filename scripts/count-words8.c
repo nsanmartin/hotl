@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-// #include <hashi.h>
+// #include <che.h>
 #include <lip-str-size_t.h>
 
 #include <rand-word.h>

@@ -1,5 +1,5 @@
-#ifndef __HASHI_UTESTS_H__
-#define __HASHI_UTESTS_H__
+#ifndef __CHE_UTESTS_H__
+#define __CHE_UTESTS_H__
 
 #include <string.h>
 

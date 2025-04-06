@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include <hashi.h>
+#include <che.h>
 #include <stats.h>
 #include <util.h>
 
@@ -16,7 +16,7 @@ void process_line(char* line, Slots* slots) {
     while (*line) {
         char* wend = next_space(line);
         if (wend > line) {
-            size_t h = hashi_djb2_k33(line, wend-line) % slots->n;
+            size_t h = che_djb2_k33(line, wend-line) % slots->n;
             ++slots->s[h];
         }
         line = skip_space(wend);

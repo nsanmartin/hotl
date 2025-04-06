@@ -1,6 +1,6 @@
-hashi (generic hash table implementation).
+che (Containers HEader only library)
 
-`hashi` includes generic hash table and array list types. It uses the
+`che` includes generic hash table and array list types. It uses the
 generic programming technique of [clt](https://github.com/glouw/ctl)
 (the type-safe template-like c library).
 
@@ -71,9 +71,9 @@ Methods:
 Arl: T, TCmp, TCpy, TClean -> ArlOf(T)
 
 + `T`:      element type
-+ `TCmp`:   element ptr comparator. Default: `hashi_compare_bytes` (`memcmp
++ `TCmp`:   element ptr comparator. Default: `che_compare_bytes` (`memcmp
   sizeof T`)
-+ `TCpy`:   element ptr copy. Default: `hashi_copy_bytes` (`memmove sizeof
++ `TCpy`:   element ptr copy. Default: `che_copy_bytes` (`memmove sizeof
   T`).
 + `TClean`: element ptr clean. Default: `(void)`.
 
@@ -130,7 +130,7 @@ To define custom key comparator and copy use `KTCmp` and `KTCpy` like:
 `lip-str-size_t.h` defines a `LipOf(char*, size_t)` setting `KTCmp`,
 `KTCpy`, `KTClean` and `KHash`.
 
-The `typedef char* str` is needed because the macros used by hashi need
+The `typedef char* str` is needed because the macros used by che need
 their type parameters to be source code strings instead of actual types.
 
 `lip-string-size_t.h` define a `LipOf(string, size_t)` where `string` is
