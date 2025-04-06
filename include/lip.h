@@ -43,10 +43,10 @@ lipfn(KT,VT,clean_entry)(EntryT* e) {
     VTClean(&e->v);
 #endif //VTClean
 }
-#define BTClean lipfn(KT,VT,clean_entry)
+//#define BTClean lipfn(KT,VT,clean_entry)
 #endif // KTClean || VTClean
 
-#define BT EntryT
+#define T EntryT
 #include <buf.h>
 
 #define BufT BufOf(EntryT)

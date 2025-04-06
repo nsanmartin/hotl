@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <utests.h>
 
-#define BT int
+#define T int
 #include <buf.h>
 
-#define BT char
+#define T char
 #include <buf.h>
 
 /* calloc */

@@ -1,14 +1,14 @@
 /*
  * Buf (Buffer)
  *
- * Buf: BT, BTCmp, BTCpy, BTClean -> ArlOf(BT)
+ * Buf: T, TCmp, TCpy, TClean -> ArlOf(T)
  * ---
- *  + BT: element type
- *  + BTCmp: element ptr comparator. Default: che_compare_bytes
+ *  + T: element type
+ *  + TCmp: element ptr comparator. Default: che_compare_bytes
  *    (memcmp sizeof T)
- *  + BTCpy: element ptr copy. Default: che_copy_bytes
- *           (memmove sizeof BT).
- *  + BTClean: element ptr clean. Default: (void).
+ *  + TCpy: element ptr copy. Default: che_copy_bytes
+ *           (memmove sizeof T).
+ *  + TClean: element ptr clean. Default: (void).
  *
  * Methods:
  * -------
@@ -27,34 +27,34 @@
 
 #include <che.h>
 
-#ifndef BT
-#error "Template type BT undefined"
+#ifndef T
+#error "Template type T undefined"
 #endif
 
 #define buflen(B) (B)->len
-typedef struct BufOf(BT) {
-    BT* items;
+typedef struct BufOf(T) {
+    T* items;
     size_t len;
     size_t capacity;
-} BufOf(BT);
+} BufOf(T);
 
 
-static inline BT*
-buffn(BT, calloc)(BufOf(BT)* a, size_t len) {
+static inline T*
+buffn(T, calloc)(BufOf(T)* a, size_t len) {
     if (!len || a->items) { return NULL; }
-    a->items    = calloc(len, sizeof(BT)); 
+    a->items    = calloc(len, sizeof(T)); 
     a->len      = len;
     a->capacity = len;
     return a->items ? a->items : NULL;
 }
 
-static inline BT*
-buffn(BT, __ensure_extra_capacity)(BufOf(BT)* b, size_t len) {
+static inline T*
+buffn(T, __ensure_extra_capacity)(BufOf(T)* b, size_t len) {
     if (b->len + len < b->len) { /* overflow */ return NULL; }
     size_t rest_offset = b->len;
     if (b->len + len > b->capacity) {
         b->capacity  = b->len + len;
-        b->items = realloc((void*)b->items, b->capacity * sizeof(BT)); 
+        b->items = realloc((void*)b->items, b->capacity * sizeof(T)); 
         if (!b->items) { return NULL; };
     }
 
@@ -62,64 +62,64 @@ buffn(BT, __ensure_extra_capacity)(BufOf(BT)* b, size_t len) {
 } 
 
 
-static inline BT*
-buffn(BT, append)(BufOf(BT)* b, BT* data, size_t len) {
+static inline T*
+buffn(T, append)(BufOf(T)* b, T* data, size_t len) {
     if (!data || !len) { return NULL; }
-    BT* rest = buffn(BT, __ensure_extra_capacity)(b, len);
+    T* rest = buffn(T, __ensure_extra_capacity)(b, len);
     if (!rest) { return NULL; }
-    memcpy((void*)rest, data, len * sizeof(BT));
+    memcpy((void*)rest, data, len * sizeof(T));
     b->len += len;
     return rest;
 }
 
-static inline BT*
-buffn(BT, prepend)(BufOf(BT)* b, BT* data, size_t len) {
+static inline T*
+buffn(T, prepend)(BufOf(T)* b, T* data, size_t len) {
     if (!data || !len) { return NULL; }
-    BT* rest = buffn(BT, __ensure_extra_capacity)(b, len);
+    T* rest = buffn(T, __ensure_extra_capacity)(b, len);
     if (!rest) { return NULL; }
     if (b->len)
-        memmove((void*)(b->items + len), b->items, b->len * sizeof(BT));
-    memcpy((void*)b->items, data, len * sizeof(BT));
+        memmove((void*)(b->items + len), b->items, b->len * sizeof(T));
+    memcpy((void*)b->items, data, len * sizeof(T));
     b->len += len;
     return rest;
 }
 
-static inline BT*
-buffn(BT, at)(BufOf(BT)* a, size_t ix) {
+static inline T*
+buffn(T, at)(BufOf(T)* a, size_t ix) {
     return ix < a->len ? &a->items[ix] : NULL;
 }
 
-#ifndef BTCmp
-#define BTCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(BT))
-#endif // BTCmp
+#ifndef TCmp
+#define TCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(T))
+#endif // TCmp
 
 
-#ifndef BTCpy
-#define BTCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(BT))
-#endif // BTCpy
+#ifndef TCpy
+#define TCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(T))
+#endif // TCpy
 
 
-static inline BT* buffn(BT, begin)(BufOf(BT)*a) { return a->items; }
+static inline T* buffn(T, begin)(BufOf(T)*a) { return a->items; }
 
-static inline BT* buffn(BT, end)(BufOf(BT)*a) { return a->items ? a->items + a->len : a->items; }
+static inline T* buffn(T, end)(BufOf(T)*a) { return a->items ? a->items + a->len : a->items; }
 
-#ifdef BTCmp
-static inline BT*
-buffn(BT, find) (BufOf(BT)* a, BT* x) {
+#ifdef TCmp
+static inline T*
+buffn(T, find) (BufOf(T)* a, T* x) {
     for (size_t i = 0; i < a->len; ++i) {
-        BT* addr = &a->items[i];
-        if (BTCmp(addr, x) == 0) { return addr; }
+        T* addr = &a->items[i];
+        if (TCmp(addr, x) == 0) { return addr; }
     }
     return NULL;
 }
-#endif // BTCmp
+#endif // TCmp
 
 
 static inline void
-buffn(BT, reset)(BufOf(BT)*a) {
-#ifdef BTClean
-    for (BT* it = buffn(BT, begin)(a); it != buffn(BT,end)(a); ++it) {
-        BTClean(it);
+buffn(T, reset)(BufOf(T)*a) {
+#ifdef TClean
+    for (T* it = buffn(T, begin)(a); it != buffn(T,end)(a); ++it) {
+        TClean(it);
     }
 #endif
     a->len = 0;
@@ -127,14 +127,14 @@ buffn(BT, reset)(BufOf(BT)*a) {
 
 
 static inline void
-buffn(BT, clean)(BufOf(BT)*a) {
-    buffn(BT, reset)(a);
+buffn(T, clean)(BufOf(T)*a) {
+    buffn(T, reset)(a);
     free((void*)a->items);
-    *a = (BufOf(BT)){0};
+    *a = (BufOf(T)){0};
 }
 
-#undef BT
-#undef BTCmp
-#undef BTCpy
-#undef BTClean
+#undef T
+#undef TCmp
+#undef TCpy
+#undef TClean
 
