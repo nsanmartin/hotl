@@ -25,7 +25,7 @@ ArlOf(int)* p = &(ArlOf(int)){0};
 ```
 
 For example, elements can be appended with `append` or accessed with `at`,
-but the functions themself are return values of macro-functions.
+but the functions themselves are return values of macro-functions.
 
 ```C
 int i = 2;

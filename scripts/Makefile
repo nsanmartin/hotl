@@ -16,17 +16,25 @@ all: \
 	count-words8 \
 	rand-word8-count \
 	rand-word8s \
+	stdin-count-cppmap \
 	stdin-count \
 	stdin-count-cppmap \
 
 
-rand-word8-count: $(CHE_OBJ)
+collisions: $(CHE_OBJ)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 count-words8: $(CHE_OBJ)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
+
+rand-word8-count: $(CHE_OBJ)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
+		-o $(BUILD)/$@ $@.c $^ -lm
+
+rand-word8s: 
+	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(BUILD)/$@ $@.c 
 
 stdin-count-cppmap: 
 	$(CXX) $(CXXFLAGS) -o $(BUILD)/$@ $@.c $^
@@ -35,17 +43,8 @@ stdin-count: $(CHE_OBJ)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
-
-rand-word8s: 
-	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(BUILD)/$@ $@.c 
-
-
 slot-sizes-words8: $(CHE_OBJ)
 	$(CC) $(CFLAGS) \
 		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@-E.c $@.c $^ -lm
 	$(CC) $(CFLAGS) \
 		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@ $@.c $^ -lm
-
-collisions: $(CHE_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
-		-o $(BUILD)/$@ $@.c $^ -lm
