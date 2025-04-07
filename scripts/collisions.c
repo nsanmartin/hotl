@@ -12,7 +12,6 @@ typedef struct { size_t* s; size_t n; } Slots;
 
 void process_line(char* line, Slots* slots) {
     line = skip_space(line);
-
     while (*line) {
         char* wend = next_space(line);
         if (wend > line) {
@@ -36,9 +35,7 @@ int fill_table(Slots* slots) {
     return 0;
 }
 
-int size_t_cmp(const void* x, const void* y) {
-    return *(size_t*)x - *(size_t*)y;
-}
+int size_t_cmp(const void* x, const void* y) { return *(size_t*)x - *(size_t*)y; }
 
 int run(const long nslots) {
     Slots slots = {.s=malloc(sizeof(size_t)*nslots),.n=nslots};
@@ -57,11 +54,17 @@ int run(const long nslots) {
     return err;
 }
 
+#define COLLISIONS_HELP\
+    "usage: STREAM | %s NSLOTS\n\n"\
+    "Reads and hashes words from stdin and print for each collision count the number of slot,\n"\
+    "i.e., the number of slots for each quantity of coalitions.\n\n"\
+    "Ex:\n"\
+    "cat /dev/urandom | tr -cd \"a-z \\n\" | head -c 1000000 | %s 10000\n"
 int main(int argc, char* argv[]) {
     if (argc == 2) {
         const long nslots = strtol(argv[1], 0, 0);
         run(nslots);
     } else {
-        printf("usage %s NSLOTS\n", argv[0]);
+        printf(COLLISIONS_HELP, argv[0], argv[0]);
     }
 }

@@ -4,7 +4,6 @@
 #include <string.h>
 #include <ctype.h>
 
-// #include <che.h>
 #include <lip-cstr-size_t.h>
 
 #include <rand-word.h>
@@ -55,12 +54,11 @@ int run(size_t initial_capacity, size_t n_words) {
     LipEntryOf(cstr,size_t)* it = buffn(LipEntryOf(cstr,size_t),begin)(buf);
     LipEntryOf(cstr,size_t)* end = buffn(LipEntryOf(cstr,size_t),end)(buf);
 
-    ArlOf(size_t) lengths = {0};
+    ArlOf(size_t) lengths = (ArlOf(size_t)){0};
 
     for (; it != end; ++it) {
         if (it->k) {
-            int err = arlfn(size_t,append)(&lengths, &it->v);
-            if (err) {
+            if (!arlfn(size_t,append)(&lengths, &it->v)) {
                 perror("mem err appending");
                 arlfn(size_t,clean)(&lengths);
                 exit(1);
