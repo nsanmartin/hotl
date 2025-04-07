@@ -32,33 +32,33 @@ void stats_init(Stats* st, size_t* xs, size_t n) {
     st->stdev = sqrt((st->ss / st->n) - st->mean*st->mean);
 }
 
-double standard_deviation(size_t* xs, size_t n) {
-    double sum = 0;
-    double ss = 0;
-
-    for (size_t i = 0; i < n; ++i) {
-        sum += xs[i];
-        ss += xs[i] * xs[i];;
-    }
-
-    double mean = sum / n;
-    double ex2 = ss / n;
-    return sqrt(ex2 - mean*mean);
-}
-
-double standard_deviation_2(size_t* xs, size_t n) {
-    double sum = 0;
-    double ss = 0;
-
-    for (size_t i = 0; i < n; ++i) { sum += xs[i]; }
-    double mean = sum / n;
-
-    for (size_t i = 0; i < n; ++i) {
-        double dist = xs[i] - mean;
-        ss += dist * dist;
-    }
-    return sqrt(ss / n);
-}
+//static double standard_deviation(size_t* xs, size_t n) {
+//    double sum = 0;
+//    double ss = 0;
+//
+//    for (size_t i = 0; i < n; ++i) {
+//        sum += xs[i];
+//        ss += xs[i] * xs[i];;
+//    }
+//
+//    double mean = sum / n;
+//    double ex2 = ss / n;
+//    return sqrt(ex2 - mean*mean);
+//}
+//
+//static double standard_deviation_2(size_t* xs, size_t n) {
+//    double sum = 0;
+//    double ss = 0;
+//
+//    for (size_t i = 0; i < n; ++i) { sum += xs[i]; }
+//    double mean = sum / n;
+//
+//    for (size_t i = 0; i < n; ++i) {
+//        double dist = xs[i] - mean;
+//        ss += dist * dist;
+//    }
+//    return sqrt(ss / n);
+//}
 
 void print_freqs(Stats* st) {
     if (st->max == st->min) {

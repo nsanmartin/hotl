@@ -14,6 +14,6 @@ typedef struct {
 
 void stats_init(Stats* st, size_t* xs, size_t n);
 void print_freqs(Stats* st);
-double standard_deviation(size_t* xs, size_t n);
-double standard_deviation_2(size_t* xs, size_t n);
+//double standard_deviation(size_t* xs, size_t n);
+//double standard_deviation_2(size_t* xs, size_t n);
 #endif

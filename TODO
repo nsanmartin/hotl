@@ -2,4 +2,7 @@
 1. [ ] make tests parameterizing hash function
 2. [ ] implement hash table with buckets
 3. [*] change signature of KTClean (and VTClean) from KT -> () to KT* -> ().
-4. [ ] add a readme.
+4. [ ] implement arl reset
+
+#DONE:
+4. [* ] add a readme.

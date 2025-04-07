@@ -5,7 +5,7 @@ BUILD:=../build
 INCLUDE:=.
 
 CHE_OBJDIR=../build
-CHE_SRCDIR=../src
+CHE_SRCDIR=./src
 CHE_INCLUDE=../include
 CHE_HEADERS=$(wildcard $(CHE_INCLUDE)/*.h)
 CHE_SRCS=$(wildcard $(CHE_SRCDIR)/*.c)
