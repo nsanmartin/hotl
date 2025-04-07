@@ -13,28 +13,30 @@
 typedef char* cstr;
 
 #define KT cstr
-#define KTCmp strp_compare
-#define KTCpy strp_copy
-#define KTClean(Ptr) do{ if(Ptr) free((void*)*Ptr);}while(0)
+#define KTCmp cstrp_compare
+#define KTCpy cstrp_copy
+#define KTClean cstrp_clean
 #ifndef KHash
-#define KHash strp_hash
+#define KHash cstrp_hash
 #endif
 
 #define VT size_t
 
-static inline int strp_compare(cstr* s1, cstr* s2) {
+static inline int cstrp_compare(cstr* s1, cstr* s2) {
     if (*s1 == *s2) { return 0; }
     int null = (-(*s1 == 0) | (*s2 == 0));
     if (null) return null;
     return strcmp(*s1, *s2);
 }
 
-static inline int strp_copy(char** dest, char** src) {
+static inline int cstrp_copy(char** dest, char** src) {
     return (*dest = strdup(*src)) == NULL;
 }
-static inline int strp_hash(char** s) {
+static inline int cstrp_hash(char** s) {
     return che_djb2_k33(*s, (size_t)strlen(*s));
 }
+
+static inline void cstrp_clean(char** s) { free(*s); }
 #include <lip.h>
 
 #endif // _LIP_STR_SIZE_T__

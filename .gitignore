@@ -1,4 +1,5 @@
 .gdbinit
 build
 *.sw*
+tags
 

@@ -43,13 +43,11 @@ lipfn(KT,VT,clean_entry)(EntryT* e) {
     VTClean(&e->v);
 #endif //VTClean
 }
-//#define BTClean lipfn(KT,VT,clean_entry)
+#define TClean lipfn(KT,VT,clean_entry)
 #endif // KTClean || VTClean
 
 #define T EntryT
 #include <buf.h>
-
-#define BufT BufOf(EntryT)
 
 #define lipsz(L) (L)->table.len
 #define liptab(L) &(L)->table
@@ -274,10 +272,14 @@ static inline int lipfn(KT, VT, del)(LipOf(KT,VT)* l, KT* k) {
 static inline void lipfn(KT,VT, clean)(LipOf(KT,VT)*l) {
     buffn(EntryT, clean)(liptab(l));
 }
+
 #undef KT
-#undef VT
 #undef KHash 
-#undef EntryT
 #undef KTCmp
 #undef KTCpy
+#undef KTClean
+#undef VT
+#undef VTCmp
+#undef VTCpy
+#undef EntryT
 

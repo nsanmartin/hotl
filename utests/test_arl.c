@@ -14,17 +14,17 @@ typedef struct { int x, y; float f; } Foo;
 #include <arl.h>
 
 typedef char* cstr;
-int str_copy(cstr* dst, const cstr* src) {
+int cstr_copy(cstr* dst, const cstr* src) {
     *dst = strdup(*src);
     return *dst == 0x0;
 }
 
-int str_compare(cstr* s, cstr* t) { return strcmp(*s, *t); }
-void strp_free(cstr* p) { free(*p); }
+int cstr_compare(cstr* s, cstr* t) { return strcmp(*s, *t); }
+void cstrp_free(cstr* p) { free(*p); }
 #define T cstr
-#define TCpy str_copy
-#define TCmp str_compare
-#define TClean strp_free
+#define TCpy cstr_copy
+#define TCmp cstr_compare
+#define TClean cstrp_free
 #include <arl.h>
 
 typedef Foo* Fooptr;

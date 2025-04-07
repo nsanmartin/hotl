@@ -3,16 +3,17 @@
 
 #define KT int
 #define VT int
-#include <lip.h> // LipOf(int,int)
+#include <lip.h>             /* LipOf(int,int) */
 
-#include <lip-cstr-size_t.h> // LipOf(cstr,int)
+#include <lip-cstr-size_t.h> /* LipOf(cstr,size_t) */
 
 #define KT cstr
-#define KTCmp strp_compare
-#define KTCpy strp_copy
+#define KTCmp cstrp_compare
+#define KTCpy cstrp_copy
+#define KTClean cstrp_clean
 #define VT int
-#define KHash strp_hash
-#include <lip.h>
+#define KHash cstrp_hash
+#include <lip.h>             /* LipOf(cstr,int) */
 
 
 int test_0(void) {
@@ -178,34 +179,37 @@ int test_6(void) {
     //set "Foo" <- 11
     char* k = "Foo";
     int v = 11;
-    err = lipfn(cstr,int,set)(x, &k, &v);
-    utest_assert(!err, clean);
+    utest_assert_true(!lipfn(cstr,int,set)(x, &k, &v), clean);
 
     //get "Foo"
     int* g = lipfn(cstr,int,get)(x, &k);
-    utest_assert(g, clean);
-    utest_assert(*g == v, clean);
+    utest_assert_true(g, clean);
+    utest_assert_true(*g == v, clean);
 
     //set "Bar" <- 22
     k = strdup("Bar");
-    utest_assert(k, clean);
+    utest_assert_true(k, clean);
     v = 22;
     err = lipfn(cstr,int,set)(x, &k, &v);
-    utest_assert(!err, clean);
+    utest_assert_true(!err, clean);
 
     //get "Bar"
     g = lipfn(cstr,int,get)(x, &k);
-    utest_assert(g, clean);
-    utest_assert(*g == v, clean);
+    utest_assert_true(g, clean);
+    utest_assert_true(*g == v, clean);
     free(k);
 
     //get "Fubar"
     k = "Fubar";
     g = lipfn(cstr,int,get)(x, &k);
-    utest_assert(!g, clean);
+    utest_assert_true(!g, clean);
 
     //clean and return
-    clean_and_ret(status, clean, lipfn(cstr,int,clean)(x));
+    //clean_and_ret(status, clean, lipfn(cstr,int,clean)(x));
+    status = 0;
+clean:
+    lipfn(cstr,int,clean)(x);
+    return status;
 }
 
 

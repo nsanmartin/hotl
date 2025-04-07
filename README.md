@@ -119,10 +119,10 @@ To define custom key comparator and copy use `KTCmp` and `KTCpy` like:
 
 ```C
 #define KT cstr
-#define KTCmp strp_compare
-#define KTCpy strp_copy
+#define KTCmp cstrp_compare
+#define KTCpy cstrp_copy
 #define VT int
-#define KHash strp_hash
+#define KHash cstrp_hash
 #include <lip.h> // LipOf(cstr, int)
 ```
 
