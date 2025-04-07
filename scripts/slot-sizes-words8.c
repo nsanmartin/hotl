@@ -41,7 +41,7 @@ int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
 
 int run(size_t initial_capacity, size_t n_words) {
     LipOf(cstr,size_t)* ht = &(LipOf(cstr,size_t)){0};
-    int err = lipfn(cstr,size_t,init)(ht, initial_capacity);
+    int err = lipfn(cstr,size_t,init)(ht, (LipInitArgs){.sz=initial_capacity});
     if(err) { perror("lip init error"); return -1;}
 
     if (fill_table(ht, n_words)) {
@@ -58,8 +58,7 @@ int run(size_t initial_capacity, size_t n_words) {
 
     for (; it != end; ++it) {
         if (it->k) {
-            int err = arlfn(size_t,append)(&lengths, &it->v);
-            if (err) {
+            if(!arlfn(size_t,append)(&lengths, &it->v)) {
                 perror("mem err appending");
                 arlfn(size_t,clean)(&lengths);
                 exit(1);
