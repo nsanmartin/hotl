@@ -12,7 +12,7 @@
 #define T size_t
 #include <arl.h>
 
-int fill_2int_word(char* w) {
+static int fill_2int_word(char* w) {
     size_t wlen = 1 + rand() % (2 * sizeof(int) - 1);
     fill_int_word_rand(w);
     if (wlen > sizeof(int)) { fill_int_word_rand(w + sizeof(int)); }
@@ -20,7 +20,7 @@ int fill_2int_word(char* w) {
     return wlen;
 }
 
-int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
+static int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
     size_t zero = 0;
     char w[1 + 2 * sizeof(int)];
     char* wp = w;
@@ -31,15 +31,13 @@ int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
             &wp,
             &zero
         );
-        if (!v) {
-            puts("Error aborting"); return -1;
-        }
+        if (!v) { perror("Error aborting"); return -1; }
         *v = *v + 1;
     }
     return 0;
 }
 
-int run(size_t initial_capacity, size_t n_words) {
+static int run(size_t initial_capacity, size_t n_words) {
     LipOf(cstr,size_t)* ht = &(LipOf(cstr,size_t)){0};
     int err = lipfn(cstr,size_t,init)(ht, (LipInitArgs){.sz=initial_capacity});
     if(err) { perror("lip init error"); return -1;}
@@ -63,7 +61,6 @@ int run(size_t initial_capacity, size_t n_words) {
                 arlfn(size_t,clean)(&lengths);
                 exit(1);
             }
-            //printf("%s -> %ld\n", it->k, it->v);
         }
     }
 
@@ -84,12 +81,7 @@ int main(int argc, char* argv[]) {
         const long SEED = strtol(argv[2], 0, 0);
         const long CAPACITY = argc == 3 ? 8 : strtol(argv[3], 0, 0);
         srand(SEED);
-
-        printf(
-            "N: %ld, SEED: %ld, [INITIAL_CAPACITY]: %ld\n",
-            N, SEED, CAPACITY
-        );
-        //run(CAPACITY, N);
+        printf("N: %ld, SEED: %ld, [INITIAL_CAPACITY]: %ld\n", N, SEED, CAPACITY);
         run(CAPACITY, N);
     } else {
         printf("usage %s N CAPACITY SEED\n", argv[0]);
