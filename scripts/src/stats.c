@@ -1,5 +1,8 @@
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
+#include <errno.h>
+#include <fenv.h>
 #include <limits.h>
 #include <stddef.h>
 #include <stdbool.h>
@@ -8,9 +11,10 @@
 
 #include <stats.h>
 
-static inline bool is_sum_overflow(unsigned long long x, unsigned long long y) { return x > ULLONG_MAX - y; }
+static inline bool
+is_sum_overflow(unsigned long long x, unsigned long long y) { return x > ULLONG_MAX - y; }
 
-void stats_init(Stats* st, size_t* xs, size_t n) {
+void stats_init(Stats st[static 1], size_t* xs, size_t n) {
     *st = (Stats) {
        .n = n,
        .xs = xs,
@@ -29,42 +33,24 @@ void stats_init(Stats* st, size_t* xs, size_t n) {
     }
 
     st->mean = (double)st->sum / (double)st->n;
+    errno = 0; feclearexcept(FE_ALL_EXCEPT);
     st->stdev = sqrt((st->ss / st->n) - st->mean*st->mean);
+    if (errno) {
+        perror("error: sqrt failure");
+        exit(-1);
+    }
 }
 
-//static double standard_deviation(size_t* xs, size_t n) {
-//    double sum = 0;
-//    double ss = 0;
-//
-//    for (size_t i = 0; i < n; ++i) {
-//        sum += xs[i];
-//        ss += xs[i] * xs[i];;
-//    }
-//
-//    double mean = sum / n;
-//    double ex2 = ss / n;
-//    return sqrt(ex2 - mean*mean);
-//}
-//
-//static double standard_deviation_2(size_t* xs, size_t n) {
-//    double sum = 0;
-//    double ss = 0;
-//
-//    for (size_t i = 0; i < n; ++i) { sum += xs[i]; }
-//    double mean = sum / n;
-//
-//    for (size_t i = 0; i < n; ++i) {
-//        double dist = xs[i] - mean;
-//        ss += dist * dist;
-//    }
-//    return sqrt(ss / n);
-//}
-
-void print_freqs(Stats* st) {
+void print_freqs(Stats st[static 1]) {
+    if (st->max < st->min) {
+        perror("error max < min :(");
+        return;
+    }
     if (st->max == st->min) {
         puts("TODO: all eq :)");
         return;
     }
+    stats_print(st);
 
     size_t range = 1 + st->max - st->min;
     size_t frqs[range];

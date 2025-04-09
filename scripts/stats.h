@@ -12,8 +12,16 @@ typedef struct {
     double stdev;
 } Stats;
 
-void stats_init(Stats* st, size_t* xs, size_t n);
-void print_freqs(Stats* st);
-//double standard_deviation(size_t* xs, size_t n);
-//double standard_deviation_2(size_t* xs, size_t n);
+void stats_init(Stats st[static 1], size_t* xs, size_t n);
+void print_freqs(Stats st[static 1]);
+
+static inline void stats_print(Stats st[static 1]) {
+    printf("size_t n      : %lu\n",    st->n);
+    printf("size_t min    : %lu\n",    st->min);
+    printf("size_t max    : %lu\n",    st->max);
+    printf("double sum    : %lf\n",    st->sum);
+    printf("double mean   : %lf\n",    st->mean);
+    printf("double stdev  : %lf\n",    st->stdev);
+}
+
 #endif

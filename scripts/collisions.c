@@ -10,7 +10,7 @@
 
 typedef struct { size_t* s; size_t n; } Slots;
 
-void process_line(char* line, Slots* slots) {
+static void process_line(char* line, Slots* slots) {
     line = skip_space(line);
     while (*line) {
         char* wend = next_space(line);
@@ -23,27 +23,27 @@ void process_line(char* line, Slots* slots) {
 }
 
 
-int fill_table(Slots* slots) {
+static int fill_table(Slots* slots) {
     char* line = 0x0;
     size_t n = 0;
     ssize_t nread = 0;
     while ((nread = getline(&line, &n, stdin)) != -1) {
-        if (!line) { puts("Error aborting"); free(line); return -1; }
+        if (!line) { perror("Error aborting"); free(line); return -1; }
         process_line(line, slots);
     }
     free(line);
     return 0;
 }
 
-int size_t_cmp(const void* x, const void* y) { return *(size_t*)x - *(size_t*)y; }
+static int size_t_cmp(const void* x, const void* y) { return *(size_t*)x - *(size_t*)y; }
 
-int run(const long nslots) {
+static int run(const long nslots) {
     Slots slots = {.s=malloc(sizeof(size_t)*nslots),.n=nslots};
     if (!slots.s) { return -1; }
-    memset(slots.s, 0, slots.n);
+    memset(slots.s, 0, slots.n * sizeof(slots.s));
 
     int err = fill_table(&slots);
-    
+    if (err) { return err; }
     qsort(slots.s, slots.n, sizeof(*slots.s), size_t_cmp);
 
     Stats st;
@@ -51,7 +51,7 @@ int run(const long nslots) {
     print_freqs(&st);
 
     free(slots.s);
-    return err;
+    return 0;
 }
 
 #define COLLISIONS_HELP\
@@ -64,7 +64,5 @@ int main(int argc, char* argv[]) {
     if (argc == 2) {
         const long nslots = strtol(argv[1], 0, 0);
         run(nslots);
-    } else {
-        printf(COLLISIONS_HELP, argv[0], argv[0]);
-    }
+    } else  printf(COLLISIONS_HELP, argv[0], argv[0]);
 }

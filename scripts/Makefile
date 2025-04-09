@@ -1,5 +1,7 @@
 CFLAGS:=-g  -Wall -Wextra -Werror -pedantic -Wold-style-definition 
 CXXFLAGS:=-g  -Wall -Wextra -Werror -pedantic 
+SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
+				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
 
 BUILD:=../build
 INCLUDE:=.
@@ -22,29 +24,29 @@ all: \
 
 
 collisions: $(CHE_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 count-words8: $(CHE_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 rand-word8-count: $(CHE_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 rand-word8s: 
-	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(BUILD)/$@ $@.c 
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -o $(BUILD)/$@ $@.c 
 
 stdin-count-cppmap: 
 	$(CXX) $(CXXFLAGS) -o $(BUILD)/$@ $@.c $^
 
 stdin-count: $(CHE_OBJ)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I$(CHE_INCLUDE) \
 		-o $(BUILD)/$@ $@.c $^ -lm
 
 slot-sizes-words8: $(CHE_OBJ)
-	$(CC) $(CFLAGS) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) \
 		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@-E.c $@.c $^ -lm
-	$(CC) $(CFLAGS) \
+	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) \
 		-I$(INCLUDE) -I$(CHE_INCLUDE) -o $(BUILD)/$@ $@.c $^ -lm
