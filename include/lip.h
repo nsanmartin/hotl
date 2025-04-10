@@ -119,13 +119,6 @@ lipfn(KT, VT, __find)(LipOf(KT,VT)* l, KT* k, bool* found) {
         h = (h + 1) % buflen(liptab(l));
     }
     *found = false;
-    //printf(
-    //    "size: %ld,    \tinserts: %ld, max tries: %ld, nmovs: %ld\n",
-    //    buflen(liptab(l)),
-    //    l->inserts,
-    //    l->attempts,
-    //    nmovs
-    //); 
     return 0x0;
 }
 

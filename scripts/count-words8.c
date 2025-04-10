@@ -12,20 +12,13 @@
 #define T size_t
 #include <arl.h>
 
-static int fill_2int_word(char* w) {
-    size_t wlen = 1 + rand() % (2 * sizeof(int) - 1);
-    fill_int_word_rand(w);
-    if (wlen > sizeof(int)) { fill_int_word_rand(w + sizeof(int)); }
-    w[wlen] = '\0';
-    return wlen;
-}
 
 static int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
     size_t zero = 0;
     char w[1 + 2 * sizeof(int)];
     char* wp = w;
     while (n_words --> 0) {
-        fill_2int_word(w);
+        fill_2_int_or_less_word_rand(w);
         size_t* v = lipfn(cstr,size_t,get_or_set)(
             ht,
             &wp,
@@ -44,7 +37,7 @@ static int run(size_t initial_capacity, size_t n_words) {
 
     if (fill_table(ht, n_words)) {
         lipfn(cstr,size_t,clean)(ht);
-        return -1;
+        return EXIT_FAILURE;
     }
     
     typeof(lip_buf(ht))* buf = &lip_buf(ht);
@@ -52,37 +45,23 @@ static int run(size_t initial_capacity, size_t n_words) {
     LipEntryOf(cstr,size_t)* it = buffn(LipEntryOf(cstr,size_t),begin)(buf);
     LipEntryOf(cstr,size_t)* end = buffn(LipEntryOf(cstr,size_t),end)(buf);
 
-    ArlOf(size_t) lengths = (ArlOf(size_t)){0};
-
     for (; it != end; ++it) {
-        if (it->k) {
-            if (!arlfn(size_t,append)(&lengths, &it->v)) {
-                perror("mem err appending");
-                arlfn(size_t,clean)(&lengths);
-                exit(1);
-            }
-        }
+        if (it->k) printf("%s: %lu\n", it->k, it->v);
     }
 
-
-    Stats st;
-    stats_init(&st, lengths.items, lengths.len);
-    print_freqs(&st);
-
-    arlfn(size_t,clean)(&lengths);
     lipfn(cstr,size_t,clean)(ht);
-
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int main(int argc, char* argv[]) {
     if (argc == 4 || argc == 3) {
         const long N = strtol(argv[1], 0, 0);
-        const long SEED = strtol(argv[2], 0, 0);
-        const long CAPACITY = argc == 3 ? 8 : strtol(argv[3], 0, 0);
+        const long CAPACITY = strtol(argv[2], 0, 0);
+        if (!CAPACITY) { perror("CAPACITY must not be zero, aborting."); return EXIT_FAILURE; }
+        const long SEED = argc == 3 ? 8 : strtol(argv[3], 0, 0);
         srand(SEED);
-        printf("N: %ld, SEED: %ld, [INITIAL_CAPACITY]: %ld\n", N, SEED, CAPACITY);
-        run(CAPACITY, N);
+        printf("N: %ld, [INITIAL_CAPACITY]: %ld, SEED: %ld\n", N, CAPACITY, SEED);
+        return run(CAPACITY, N);
     } else {
         printf("usage %s N CAPACITY SEED\n", argv[0]);
     }

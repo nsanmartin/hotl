@@ -82,7 +82,11 @@ int run(size_t initial_capacity, bool sort) {
 }
 int main(int argc, char* argv[]) {
     if (argc > 2) {
-        printf("usage %s [INITIAL CAPACITY]\n", argv[0]);
+        printf(
+            "usage %s [INITIAL CAPACITY]\n"
+            "Prints the words and their frequency. Uses che lip.",
+            argv[0]
+        );
         return 0;
     }
 
