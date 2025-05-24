@@ -1,5 +1,5 @@
-#ifndef __CHE_SCRIPTS_UTIL__
-#define __CHE_SCRIPTS_UTIL__
+#ifndef __HOTL_SCRIPTS_UTIL__
+#define __HOTL_SCRIPTS_UTIL__
 
 static inline char* skip_space(char* l) {
     while (*l && isspace(*l)) { ++l; }

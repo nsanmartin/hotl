@@ -1,5 +1,5 @@
-#ifndef __RAND_WORD_CHE_H__
-#define __RAND_WORD_CHE_H__
+#ifndef __RAND_WORD_HOTL_H__
+#define __RAND_WORD_HOTL_H__
 
 #include <stdlib.h>
 

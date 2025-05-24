@@ -9,7 +9,7 @@
 #ifndef _LIP_CSTR_SIZE_T__
 #define _LIP_CSTR_SIZE_T__
 
-#include <che.h>
+#include <hotl.h>
 typedef char* cstr;
 
 #define KT cstr
@@ -33,7 +33,7 @@ static inline int cstrp_copy(char** dest, char** src) {
     return (*dest = strdup(*src)) == NULL;
 }
 static inline int cstrp_hash(char** s) {
-    return che_djb2_k33(*s, (size_t)strlen(*s));
+    return hotl_djb2_k33(*s, (size_t)strlen(*s));
 }
 
 static inline void cstrp_clean(char** s) { free(*s); }

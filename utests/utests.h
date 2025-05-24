@@ -1,5 +1,5 @@
-#ifndef __CHE_UTESTS_H__
-#define __CHE_UTESTS_H__
+#ifndef __HOTL_UTESTS_H__
+#define __HOTL_UTESTS_H__
 
 #include <string.h>
 

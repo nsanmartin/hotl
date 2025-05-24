@@ -1,7 +1,7 @@
-/* Global che functions, ie, with larger scope than #define T .. #undef T
+/* Global hotl functions, ie, with larger scope than #define T .. #undef T
  * */
-#ifndef __CHE__H__
-#define __CHE__H__
+#ifndef __HOTL__H__
+#define __HOTL__H__
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -29,17 +29,17 @@ enum { LipMaximumAttempts = 256, LipDefaultSize = 1024 };
 
 typedef struct { size_t sz; size_t attempts; } LipInitArgs;
 static inline int
-che_compare_bytes(const void* s1, const void* s2, size_t n) {
+hotl_compare_bytes(const void* s1, const void* s2, size_t n) {
     return memcmp(s1, s2, n);
 }
 
 static inline int
-che_copy_bytes(void* dest, const void* src, size_t n) {
+hotl_copy_bytes(void* dest, const void* src, size_t n) {
     memmove(dest, src, n); return 0;
 }
 
 static inline size_t
-che_djb2_k33_with_seed(char* s, size_t n, size_t seed) {
+hotl_djb2_k33_with_seed(char* s, size_t n, size_t seed) {
     unsigned long hash = seed; //5381;
 
     for (const char* end = s + n; s < end; ++s) {
@@ -50,8 +50,8 @@ che_djb2_k33_with_seed(char* s, size_t n, size_t seed) {
 }
 
 static inline size_t
-che_djb2_k33(char* s, size_t n) {
-    return che_djb2_k33_with_seed(s, n, 5381);
+hotl_djb2_k33(char* s, size_t n) {
+    return hotl_djb2_k33_with_seed(s, n, 5381);
 }
 
-#endif // __CHE__H__
+#endif // __HOTL__H__

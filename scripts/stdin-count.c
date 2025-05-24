@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
     if (argc > 2) {
         printf(
             "usage %s [INITIAL CAPACITY]\n"
-            "Prints the words and their frequency. Uses che lip.",
+            "Prints the words and their frequency. Uses hotl lip.",
             argv[0]
         );
         return 0;

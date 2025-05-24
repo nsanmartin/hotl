@@ -19,7 +19,7 @@
 
 #include <stdbool.h>
 
-#include <che.h>
+#include <hotl.h>
 
 #ifndef KT
 #error "Template type KT undefined"
@@ -54,19 +54,19 @@ lipfn(KT,VT,clean_entry)(EntryT* e) {
 
 
 #ifndef KTCmp
-#define KTCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(KT))
+#define KTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(KT))
 #endif // KTCmp
 
 #ifndef KTCpy
-#define KTCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(KT))
+#define KTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(KT))
 #endif // KTCpy
 
 #ifndef VTCmp
-#define VTCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(VT))
+#define VTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(VT))
 #endif // VTCmp
 
 #ifndef VTCpy
-#define VTCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(VT))
+#define VTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(VT))
 #endif // VTCpy
 
 typedef struct LipOf(KT,VT) {
@@ -93,7 +93,7 @@ static inline int
 lipfn(KT,VT,is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
 
 #ifndef KHash
-#define KHash(S) che_djb2_k33((char*)S, sizeof(KT))
+#define KHash(S) hotl_djb2_k33((char*)S, sizeof(KT))
 #endif // KHash
 
 /*

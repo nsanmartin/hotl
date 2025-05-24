@@ -4,8 +4,8 @@
  * Arl: T, TCmp, TCpy, TClean -> ArlOf(T)
  * ---
  *  + T: element type
- *  + TCmp: element ptr comparator. Default: che_compare_bytes (memcmp sizeof T)
- *  + TCpy: element ptr copy. Default: che_copy_bytes (memmove sizeof T).
+ *  + TCmp: element ptr comparator. Default: hotl_compare_bytes (memcmp sizeof T)
+ *  + TCpy: element ptr copy. Default: hotl_copy_bytes (memmove sizeof T).
  *  + TClean: element ptr clean. Default: (void).
  *
  * Methods:
@@ -22,7 +22,7 @@
  *
  */
 
-#include <che.h>
+#include <hotl.h>
 
 #ifndef T
 #error "Template type T undefined"
@@ -64,12 +64,12 @@ ArlFn(T, pop)(ArlOf(T)* a) {
 }
 
 #ifndef TCmp
-#define TCmp(S1, S2) che_compare_bytes(S1, S2, sizeof(T))
+#define TCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(T))
 #endif // TCmp
 
 
 #ifndef TCpy
-#define TCpy(Dst, Src) che_copy_bytes(Dst, Src, sizeof(T))
+#define TCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(T))
 #endif // TCpy
 
 

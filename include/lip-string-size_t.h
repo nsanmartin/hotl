@@ -5,7 +5,7 @@
 #ifndef _LIP_STRING_SIZE_T__
 #define _LIP_STRING_SIZE_T__
 
-#include <che.h>
+#include <hotl.h>
 typedef struct { size_t len; char* s; } string;
 
 #define KT string
@@ -39,7 +39,7 @@ static inline int stringp_copy(string* dest, string* src) {
     return 0;
 }
 static inline int stringp_hash(string* s) {
-    return che_djb2_k33(s->s, s->len);
+    return hotl_djb2_k33(s->s, s->len);
 }
 
 static inline void string_free(string* s) {  if(s) free(s->s); }
