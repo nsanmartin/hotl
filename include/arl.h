@@ -45,6 +45,16 @@ ArlFn(T, __realloc)(ArlOf(T)* a) {
     return a->items == 0;
 } 
 
+
+static inline int
+ArlFn(T, init_reserve)(ArlOf(T)* a, size_t size) {
+    if (a->capacity || a->items) return -1; /* we expect an empty arl */
+    a->len      = 0;
+    a->capacity = size;
+    a->items    = calloc(a->capacity, sizeof(T));
+    return a->items == 0;
+}
+
 static inline T*
 ArlFn(T, at)(ArlOf(T)* a, size_t ix) {
     return ix < a->len ? &a->items[ix] : NULL;
@@ -101,6 +111,15 @@ ArlFn(T, find) (ArlOf(T)* a, T* x) {
 }
 #endif // TCmp
 
+static inline void
+ArlFn(T, reset)(ArlOf(T)* a) {
+#ifdef TClean
+    for (T* it = arlfn(T, begin)(a); it != arlfn(T,end)(a); ++it) {
+        TClean(it);
+    }
+#endif
+    a->len = 0;
+}
 
 static inline void
 arlfn(T, clean)(ArlOf(T)*a) {
