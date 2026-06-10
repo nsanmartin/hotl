@@ -18,7 +18,7 @@
  * clean:  ArlOf(T)* -> void
  * end:    ArlOf(T)* -> T
  * find:   ArlOf(T)*, T* -> T*
- * pop:    ArlOf(T)* -> bool
+ * pop:    ArlOf(T)* -> T*
  *
  */
 
@@ -28,7 +28,15 @@
 #error "Template type T undefined"
 #endif
 
-#define arl_len(A) (A)->len
+#ifndef TCmp
+#define TCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(T))
+#endif // TCmp
+
+
+#ifndef TCpy
+#define TCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(T))
+#endif // TCpy
+
 
 typedef struct ArlOf(T) {
     T* items;
@@ -55,6 +63,7 @@ ArlFn(T, init_reserve)(ArlOf(T)* a, size_t size) {
     return a->items == 0;
 }
 
+
 static inline T*
 ArlFn(T, at)(ArlOf(T)* a, size_t ix) {
     return ix < a->len ? &a->items[ix] : NULL;
@@ -69,18 +78,12 @@ static inline bool
 ArlFn(T, pop)(ArlOf(T)* a) {
     T* pp = arlfn(T,back)(a);
     if (!pp) return false;
+#ifdef TClean
+    TClean(pp);
+#endif
     --a->len;
     return true;
 }
-
-#ifndef TCmp
-#define TCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(T))
-#endif // TCmp
-
-
-#ifndef TCpy
-#define TCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(T))
-#endif // TCpy
 
 
 static inline T*
@@ -92,6 +95,7 @@ ArlFn(T, append)(ArlOf(T)* a, const T* ptr) {
     return a->items + a->len++;
 }
 
+
 static inline T* arlfn(T, begin)(ArlOf(T)*a) { return a->items; }
 /*
  * We test whether items is NULL to avoid clang message:
@@ -100,7 +104,7 @@ static inline T* arlfn(T, begin)(ArlOf(T)*a) { return a->items; }
  */
 static inline T* arlfn(T, end)(ArlOf(T)*a) { return a->items ? a->items + a->len : a->items; }
 
-#ifdef TCmp
+
 static inline T*
 ArlFn(T, find) (ArlOf(T)* a, T* x) {
     for (size_t i = 0; i < a->len; ++i) {
@@ -109,7 +113,7 @@ ArlFn(T, find) (ArlOf(T)* a, T* x) {
     }
     return NULL;
 }
-#endif // TCmp
+
 
 static inline void
 ArlFn(T, reset)(ArlOf(T)* a) {
@@ -120,6 +124,7 @@ ArlFn(T, reset)(ArlOf(T)* a) {
 #endif
     a->len = 0;
 }
+
 
 static inline void
 arlfn(T, clean)(ArlOf(T)*a) {
@@ -132,6 +137,37 @@ arlfn(T, clean)(ArlOf(T)*a) {
     *a = (ArlOf(T)){0};
 }
 
+
+static inline int
+arlfn(T, remove_at)(ArlOf(T)* a, size_t ix) {
+    T* elem = arlfn(T,at)(a,ix);
+    if (!elem) return -1;
+#ifdef TClean
+    TClean(elem);
+#endif
+    --a->len;
+    if (ix < a->len)
+        memmove(elem,  elem + 1, a->len - ix);
+    return 0;
+}
+
+static inline void
+arlfn(T, remove)(ArlOf(T)* a, T* v) {
+    size_t rm_count = 0;
+    T* dest = arlfn(T, begin)(a);
+    for (T* it = arlfn(T, begin)(a); it != arlfn(T,end)(a); ++it) {
+        if (TCmp(it, v) == 0) {
+#ifdef TClean
+            TClean(it);
+#endif
+            ++rm_count;
+        } else {
+            if (dest < it) memmove(dest, it, 1);
+            ++dest;
+        }
+    }
+    a->len -= rm_count;
+}
 #undef T
 #undef TCmp
 #undef TCpy

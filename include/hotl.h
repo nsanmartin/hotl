@@ -18,6 +18,8 @@ enum { ArlDefaultInitialCapacity = 2 };
 #define ArlOf(T) CAT_IND(arl, T)
 #define ArlFn(T, Name) CAT_IND(CAT_IND(arl, T), Name)
 #define arlfn ArlFn
+#define arl_len(A) (A)->len
+
 
 #define LipOf(KT, VT) CAT_IND(CAT_IND(lip, KT), VT)
 #define lipfn(KT, VT, Name) CAT_IND(LipOf(KT, VT), Name)
@@ -28,6 +30,10 @@ enum { ArlDefaultInitialCapacity = 2 };
 enum { LipMaximumAttempts = 256, LipDefaultSize = 1024 };
 
 typedef struct { size_t sz; size_t attempts; } LipInitArgs;
+
+#define PairOf(T1, T2) CAT_IND(CAT_IND(pair, T1), T2)
+#define pairfn(T1, T2, Name) CAT_IND(PairOf(T1, T2), Name)
+
 static inline int
 hotl_compare_bytes(const void* s1, const void* s2, size_t n) {
     return memcmp(s1, s2, n);
