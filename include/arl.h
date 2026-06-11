@@ -147,7 +147,7 @@ arlfn(T, remove_at)(ArlOf(T)* a, size_t ix) {
 #endif
     --a->len;
     if (ix < a->len)
-        memmove(elem,  elem + 1, a->len - ix);
+        memmove(elem,  elem + 1, sizeof(T) * (a->len - ix));
     return 0;
 }
 
@@ -162,7 +162,7 @@ arlfn(T, remove)(ArlOf(T)* a, T* v) {
 #endif
             ++rm_count;
         } else {
-            if (dest < it) memmove(dest, it, 1);
+            if (dest < it) memmove(dest, it, sizeof(T));
             ++dest;
         }
     }

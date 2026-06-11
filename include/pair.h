@@ -19,7 +19,7 @@ pairfn(T1,T2,clean)(PairOf(T1,T2)* p) {
     T1Clean(&p->fst);
 #endif
 #ifdef T2Clean
-    T2Clean(&p->fst);
+    T2Clean(&p->snd);
 #endif
 }
 
@@ -39,14 +39,14 @@ pairfn(T1,T2,clean)(PairOf(T1,T2)* p) {
 static inline int
 pairfn(T1,T2,copy)(PairOf(T1,T2)* p, const T1* t1, const T2* t2) {
     if (T1Cpy(&p->fst, t1)) return -1;
-    if (T2Cpy(&p->fst, t2)) return -1;
+    if (T2Cpy(&p->snd, t2)) return -1;
     return 0;
 }
 
 static inline int
 pairfn(T1,T2,move)(PairOf(T1,T2)* p, const T1* t1, const T2* t2) {
     if (T1Move(&p->fst, t1)) return -1;
-    if (T2Move(&p->fst, t2)) return -1;
+    if (T2Move(&p->snd, t2)) return -1;
     return 0;
 }
 #undef T1
