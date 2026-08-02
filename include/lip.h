@@ -109,7 +109,7 @@ Fun(is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
  * + if an unexpected error in at, found is set to true and NULL returned.
  */
 static inline EntryT*
-Fun(__find)(LipType* l, KT* k, bool* found) {
+Fun( __find)(LipType* l, KT* k, bool found[1]) {
     size_t h = KHash(k) % l->table.len;
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
