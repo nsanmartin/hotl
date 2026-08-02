@@ -8,10 +8,11 @@ int main(int argc, char* argv[]) {
         const long SEED = strtol(argv[2], 0, 0);
         srand(SEED);
 
-        char w[1 + 2 * sizeof(int)];
+#define WSZ 1 + 2 * sizeof(int)
+        char w[WSZ];
         for (int i = 0; i < N; ++i) {
-            size_t l = fill_2_int_or_less_word_rand(w);
-            fwrite(w, 1, l + 1, stdout);
+            size_t l = fill_2_int_or_less_word_rand(w, WSZ - 1);
+            fwrite(w, 1, l, stdout);
             fwrite(" ", 1, 1, stdout);
         }
         fwrite("\n", 1, 1, stdout);

@@ -14,11 +14,12 @@
 
 
 static int fill_table(LipOf(cstr,size_t)* ht, long n_words) {
+#define WSZ 1 + 2 * sizeof(int)
     size_t zero = 0;
-    char w[1 + 2 * sizeof(int)];
+    char w[WSZ];
     char* wp = w;
     while (n_words --> 0) {
-        fill_2_int_or_less_word_rand(w);
+        fill_2_int_or_less_word_rand(w, WSZ - 1);
         size_t* v = lipfn(cstr,size_t,get_or_set)(
             ht,
             &wp,

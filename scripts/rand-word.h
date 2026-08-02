@@ -18,8 +18,8 @@ static inline void fill_2_int_word_rand(char* w) {
     w[2 * sizeof(int)] = '\0';
 }
 
-static inline int fill_2_int_or_less_word_rand(char* w) {
-    size_t wlen = 1 + rand() % (2 * sizeof(int) - 1);
+static inline int fill_2_int_or_less_word_rand(char* w, size_t max_wlen) {
+    size_t wlen = 1 + rand() % max_wlen;
     fill_int_word_rand(w);
     if (wlen > sizeof(int)) { fill_int_word_rand(w + sizeof(int)); }
     w[wlen] = '\0';
