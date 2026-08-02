@@ -1,5 +1,5 @@
 .PHONY: utests scripts
-utests:
+utests: tags
 	$(MAKE) -C utests
 
 scripts: 

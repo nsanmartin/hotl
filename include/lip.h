@@ -81,6 +81,8 @@ typedef struct LipType {
     BufOf(EntryT) table;
 } LipType;
 
+static inline EntryT* Fun(__get_entry)(LipType* l, KT* k);
+static inline EntryT* Fun(__insert)(LipType* l, KT* k, bool found[1]);
 
 static inline int
 Fun(init)(LipType* l, LipInitArgs p) {
@@ -109,7 +111,7 @@ Fun(is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
  * + if an unexpected error in at, found is set to true and NULL returned.
  */
 static inline EntryT*
-Fun( __find)(LipType* l, KT* k, bool found[1]) {
+Fun(__find)(LipType* l, KT* k, bool found[1]) {
     size_t h = KHash(k) % l->table.len;
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
@@ -129,6 +131,8 @@ Fun( __find)(LipType* l, KT* k, bool found[1]) {
 static inline int Fun(set)(LipType* l, KT* k, VT* v);
 static inline VT* Fun(get)(LipType* l, KT* k);
 
+
+
 static inline int
 Fun(__dup)(LipType* l) {
     size_t n = buflen(liptab(l));
@@ -136,27 +140,28 @@ Fun(__dup)(LipType* l) {
     int err = nX2 < n;
     if (err) { /* overflow */ return -1; }
 
-    VT zero_value = (VT){0};
-    if (l->zero) {
-        VT* z = Fun(get)(l, &(KT){0});
-        if (!z) { return -1; }
-        zero_value = *z;
+    bool has_zero     = l->zero;
+    EntryT zero_entry = (EntryT){0};
+    if (has_zero) {
+        EntryT* ent = Fun(__get_entry)(l, &(KT){0});
+        if (!ent) { return -1; }
+        zero_entry = *ent;
     }
 
     BufOf(EntryT) t0 = *liptab(l);
-    *(liptab(l)) = (BufOf(EntryT)){0};
-    EntryT* zero = l->zero;
-    size_t attempts = nX2 < LipMaximumAttempts ? nX2 : LipMaximumAttempts;
+    *(liptab(l))     = (BufOf(EntryT)){0};
+    size_t attempts  = nX2 < LipMaximumAttempts ? nX2 : LipMaximumAttempts;
     Fun(init)(l,(LipInitArgs){.sz=nX2,.attempts=attempts});
-    l->zero = zero;
 
-    if (l->zero) {
-        if (Fun(set)(l, &(KT){0}, &zero_value)) {
-            return -1;
-        }
+    if (has_zero) {
+        bool found;
+        l->zero = Fun(__insert)(l, &(KT){0}, &found);
+        if (!l->zero) return -1;
+        *l->zero = zero_entry;
+        zero_entry = (EntryT){0};
     }
 
-    EntryT* it = buffn(EntryT,begin)(&t0);
+    EntryT* it  = buffn(EntryT,begin)(&t0);
     EntryT* end = buffn(EntryT,end)(&t0);
     for(; it != end; ++it) {
         if (!Fun(is_zero)(&it->k)) {
@@ -172,30 +177,35 @@ Fun(__dup)(LipType* l) {
     return 0;
 }
 
-
-static inline int
-Fun(set)(LipType* l, KT* k, VT* v) {
-    bool found = 0;
-    EntryT* e = Fun(__find)(l, k, &found);
-    while (!e && !found) {
-        if (Fun(__dup)(l)) { return -1; }
-        e = Fun(__find)(l, k, &found);
+static inline EntryT*
+Fun(__insert)(LipType* l, KT* k, bool found[1]) {
+    *found = false;
+    EntryT* e = Fun(__find)(l, k, found);
+    while (!e && !*found) {
+        if (Fun(__dup)(l)) { return NULL; }
+        e = Fun(__find)(l, k, found);
     }
-    if (!e) { return -1; }
+    if (!e) return NULL;
 
     if (Fun(is_zero)(k)) {
-        found = l->zero != NULL;
+        *found = l->zero != NULL;
         l->zero = e;
     }
 
-    if (!found) {
+    if (!*found) {
         ++l->inserts;
-        if (KTCpy(&e->k, k)) {
-            puts("KTCpy failed");
-            return -1;
-        }
+        if (KTCpy(&e->k, k)) return NULL;
     }
-    if (VTCpy(&e->v, v)) { 
+    return e;
+} 
+
+
+static inline int
+Fun(set)(LipType* l, KT* k, VT* v) {
+    bool found;
+    EntryT* ent = Fun(__insert)(l, k, &found);
+    if (!ent) return -1;
+    if (VTCpy(&ent->v, v)) { 
         puts("VTCpy failed");
         return -1;
     }
