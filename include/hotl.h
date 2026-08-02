@@ -7,32 +7,34 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define CAT_LITERAL(A, B) A##_##B
-#define CAT_IND(A, B) CAT_LITERAL(A,B)
+#define HOTL_VERSION "0.1.3"
+
+#define HOTL_CAT_LITERAL(A, B) A##_##B
+#define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
 
 
-#define BufOf(T) CAT_IND(buf, T)
-#define buffn(T, Name) CAT_IND(CAT_IND(buf, T), Name)
+#define BufOf(T) HOTL_CAT_IND(buf, T)
+#define buffn(T, Name) HOTL_CAT_IND(HOTL_CAT_IND(buf, T), Name)
 
 enum { ArlDefaultInitialCapacity = 2 };
-#define ArlOf(T) CAT_IND(arl, T)
-#define ArlFn(T, Name) CAT_IND(CAT_IND(arl, T), Name)
+#define ArlOf(T) HOTL_CAT_IND(arl, T)
+#define ArlFn(T, Name) HOTL_CAT_IND(HOTL_CAT_IND(arl, T), Name)
 #define arlfn ArlFn
 #define arl_len(A) (A)->len
 
 
-#define LipOf(KT, VT) CAT_IND(CAT_IND(lip, KT), VT)
-#define lipfn(KT, VT, Name) CAT_IND(LipOf(KT, VT), Name)
-#define LipEntryOf(KT, VT) CAT_IND(LipOf(KT, VT), entry)
-#define LipZeroOf(KT, VT) CAT_IND(LipOf(KT, VT), zero)
+#define LipOf(KT, VT) HOTL_CAT_IND(HOTL_CAT_IND(lip, KT), VT)
+#define lipfn(KT, VT, Name) HOTL_CAT_IND(LipOf(KT, VT), Name)
+#define LipEntryOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), entry)
+#define LipZeroOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), zero)
 #define lip_buf(L) (L)->table
 
 enum { LipMaximumAttempts = 256, LipDefaultSize = 1024 };
 
 typedef struct { size_t sz; size_t attempts; } LipInitArgs;
 
-#define PairOf(T1, T2) CAT_IND(CAT_IND(pair, T1), T2)
-#define pairfn(T1, T2, Name) CAT_IND(PairOf(T1, T2), Name)
+#define PairOf(T1, T2) HOTL_CAT_IND(HOTL_CAT_IND(pair, T1), T2)
+#define pairfn(T1, T2, Name) HOTL_CAT_IND(PairOf(T1, T2), Name)
 
 static inline int
 hotl_compare_bytes(const void* s1, const void* s2, size_t n) {
