@@ -179,30 +179,30 @@ int test_6(void) {
     //set "Foo" <- 11
     char* k = "Foo";
     int v = 11;
-    utest_assert_true(!lipfn(cstr,int,set)(x, &k, &v), clean);
+    utest_assert(!lipfn(cstr,int,set)(x, &k, &v), clean);
 
     //get "Foo"
     int* g = lipfn(cstr,int,get)(x, &k);
-    utest_assert_true(g, clean);
-    utest_assert_true(*g == v, clean);
+    utest_assert(g, clean);
+    utest_assert(*g == v, clean);
 
     //set "Bar" <- 22
     k = strdup("Bar");
-    utest_assert_true(k, clean);
+    utest_assert(k, clean);
     v = 22;
     err = lipfn(cstr,int,set)(x, &k, &v);
-    utest_assert_true(!err, clean);
+    utest_assert(!err, clean);
 
     //get "Bar"
     g = lipfn(cstr,int,get)(x, &k);
-    utest_assert_true(g, clean);
-    utest_assert_true(*g == v, clean);
+    utest_assert(g, clean);
+    utest_assert(*g == v, clean);
     free(k);
 
     //get "Fubar"
     k = "Fubar";
     g = lipfn(cstr,int,get)(x, &k);
-    utest_assert_true(!g, clean);
+    utest_assert(!g, clean);
 
     //clean and return
     //clean_and_ret(status, clean, lipfn(cstr,int,clean)(x));
@@ -284,6 +284,34 @@ int test_8(void) {
     clean_and_ret(status, clean, lipfn(int,int,clean)(x));
 }
 
+
+int test_9(void) /*Empty lip should not have zero key*/{
+    LipOf(int,int)* x = &(LipOf(int,int)){0};
+    int err = lipfn(int,int,init)(x, (LipInitArgs){.sz=4});
+    utest_assert(!err, Fail);
+
+    int k = 0;
+    int* g = lipfn(int,int,get)(x, &k);
+    utest_assert(!g, Fail);
+
+
+    k     = 0;
+    int v = -1;
+    err = lipfn(int,int,set)(x, &k, &v);
+    utest_assert(!err, Fail);
+
+    k = 0;
+    g = lipfn(int,int,get)(x, &k);
+    utest_assert(g, Fail);
+
+    lipfn(int,int,clean)(x);
+    return 0;
+Fail:
+    lipfn(int,int,clean)(x);
+    return 1;
+}
+
+
 int main(void) {
     int failures 
         = test_0()
@@ -295,6 +323,7 @@ int main(void) {
         + test_6()
         + test_7()
         + test_8()
+        + test_9()
         ;
 
 	if (failures) {

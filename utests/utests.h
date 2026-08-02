@@ -9,10 +9,10 @@
 
 enum { TestOk = 0, TestFail = 1 };
 
-#define utest_assert_true(Expr, Tag) do{ \
-    if(!(Expr)) { fprintf(stderr, "assertion in line %d failed. ", __LINE__); goto Tag;} }while(0)
+#define ASSERT_FAIL_MSG  RED "Test Failure: " RESET "assertion in line %d failed. "
+#define utest_assert(Expr, Tag) do{ \
+    if(!(Expr)) { fprintf(stderr, ASSERT_FAIL_MSG, __LINE__); goto Tag;} }while(0)
 
-#define utest_assert(Expr, Tag) do{ if(!(Expr)) { goto Tag;} }while(0)
 #define utest_assert_ret(Expr) do{ if(!(Expr)) { return -1 ;} }while(0)
 
 #define clean_and_ret(Status, Tag, Cleanup) do{\
