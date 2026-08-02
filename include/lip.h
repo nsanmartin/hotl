@@ -235,10 +235,11 @@ static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
 }
 
 
-static inline VT* Fun(get)(LipType* l, KT* k) {
+static inline EntryT*
+Fun(__get_entry)(LipType* l, KT* k) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) { return 0x0; }
-        return &l->zero->v;
+        return l->zero;
     }
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
@@ -246,7 +247,7 @@ static inline VT* Fun(get)(LipType* l, KT* k) {
     if (!found) {
         return 0x0;
     }
-    return &e->v;
+    return e;
 }
 
 
@@ -268,6 +269,15 @@ static inline int Fun(del)(LipType* l, KT* k) {
 
 static inline void Fun(clean)(LipType*l) {
     buffn(EntryT, clean)(liptab(l));
+}
+
+
+/* Value Functions */
+
+static inline VT* Fun(get)(LipType* l, KT* k) {
+    EntryT* res = Fun(__get_entry)(l,k);
+    if (res) return &res->v;
+    return NULL;
 }
 
 #undef KT
