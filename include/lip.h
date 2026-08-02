@@ -31,11 +31,14 @@
 
 
 typedef struct { KT k; VT v; } LipEntryOf(KT, VT);
-#define EntryT LipEntryOf(KT, VT)
+#define EntryT          LipEntryOf(KT, VT)
+#define Fun(FName)  lipfn(KT,VT,FName)
+#define LipType        LipOf(KT,VT)
+
 //TODO: make KTClean : KT* -> ()
 #if defined(KTClean) || defined(VTClean) 
 static inline void
-lipfn(KT,VT,clean_entry)(EntryT* e) {
+Fun(clean_entry)(EntryT* e) {
 #ifdef KTClean
     KTClean(&e->k);
 #endif //KTClean
@@ -43,7 +46,7 @@ lipfn(KT,VT,clean_entry)(EntryT* e) {
     VTClean(&e->v);
 #endif //VTClean
 }
-#define TClean lipfn(KT,VT,clean_entry)
+#define TClean Fun(clean_entry)
 #endif // KTClean || VTClean
 
 #define T EntryT
@@ -69,17 +72,18 @@ lipfn(KT,VT,clean_entry)(EntryT* e) {
 #define VTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(VT))
 #endif // VTCpy
 
-typedef struct LipOf(KT,VT) {
+typedef struct LipType {
     /* If a type's zero coincides with plain zero we nees to distinguish
      * it from empty slot */
     size_t attempts;
     size_t inserts;
     EntryT* zero;
     BufOf(EntryT) table;
-} LipOf(KT,VT);
+} LipType;
+
 
 static inline int
-lipfn(KT,VT,init)(LipOf(KT,VT)* l, LipInitArgs p) {
+Fun(init)(LipType* l, LipInitArgs p) {
     if (p.sz == 0) { return 0; }
     p.attempts = p.attempts ? p.attempts : LipMaximumAttempts;
     p.sz = p.sz ? p.sz : LipDefaultSize;
@@ -90,7 +94,7 @@ lipfn(KT,VT,init)(LipOf(KT,VT)* l, LipInitArgs p) {
 }
 
 static inline int
-lipfn(KT,VT,is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
+Fun(is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
 
 #ifndef KHash
 #define KHash(S) hotl_djb2_k33((char*)S, sizeof(KT))
@@ -105,7 +109,7 @@ lipfn(KT,VT,is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
  * + if an unexpected error in at, found is set to true and NULL returned.
  */
 static inline EntryT*
-lipfn(KT, VT, __find)(LipOf(KT,VT)* l, KT* k, bool* found) {
+Fun(__find)(LipType* l, KT* k, bool* found) {
     size_t h = KHash(k) % l->table.len;
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
@@ -122,11 +126,11 @@ lipfn(KT, VT, __find)(LipOf(KT,VT)* l, KT* k, bool* found) {
     return 0x0;
 }
 
-static inline int lipfn(KT, VT, set)(LipOf(KT,VT)* l, KT* k, VT* v);
-static inline VT* lipfn(KT, VT, get)(LipOf(KT,VT)* l, KT* k);
+static inline int Fun(set)(LipType* l, KT* k, VT* v);
+static inline VT* Fun(get)(LipType* l, KT* k);
 
 static inline int
-lipfn(KT, VT, __dup)(LipOf(KT,VT)* l) {
+Fun(__dup)(LipType* l) {
     size_t n = buflen(liptab(l));
     size_t nX2 = n + n;
     int err = nX2 < n;
@@ -134,7 +138,7 @@ lipfn(KT, VT, __dup)(LipOf(KT,VT)* l) {
 
     VT zero_value = (VT){0};
     if (l->zero) {
-        VT* z = lipfn(KT, VT, get)(l, &(KT){0});
+        VT* z = Fun(get)(l, &(KT){0});
         if (!z) { return -1; }
         zero_value = *z;
     }
@@ -143,11 +147,11 @@ lipfn(KT, VT, __dup)(LipOf(KT,VT)* l) {
     *(liptab(l)) = (BufOf(EntryT)){0};
     EntryT* zero = l->zero;
     size_t attempts = nX2 < LipMaximumAttempts ? nX2 : LipMaximumAttempts;
-    lipfn(KT,VT,init)(l,(LipInitArgs){.sz=nX2,.attempts=attempts});
+    Fun(init)(l,(LipInitArgs){.sz=nX2,.attempts=attempts});
     l->zero = zero;
 
     if (l->zero) {
-        if (lipfn(KT,VT,set)(l, &(KT){0}, &zero_value)) {
+        if (Fun(set)(l, &(KT){0}, &zero_value)) {
             return -1;
         }
     }
@@ -155,9 +159,9 @@ lipfn(KT, VT, __dup)(LipOf(KT,VT)* l) {
     EntryT* it = buffn(EntryT,begin)(&t0);
     EntryT* end = buffn(EntryT,end)(&t0);
     for(; it != end; ++it) {
-        if (!lipfn(KT,VT,is_zero)(&it->k)) {
+        if (!Fun(is_zero)(&it->k)) {
             bool found;
-            EntryT* e = lipfn(KT,VT,__find)(l,&it->k,&found);
+            EntryT* e = Fun(__find)(l,&it->k,&found);
             if (found) { puts("error"); return -1; }
             memmove(e, it, sizeof(EntryT));
         }
@@ -170,16 +174,16 @@ lipfn(KT, VT, __dup)(LipOf(KT,VT)* l) {
 
 
 static inline int
-lipfn(KT, VT, set)(LipOf(KT,VT)* l, KT* k, VT* v) {
+Fun(set)(LipType* l, KT* k, VT* v) {
     bool found = 0;
-    EntryT* e = lipfn(KT,VT,__find)(l, k, &found);
+    EntryT* e = Fun(__find)(l, k, &found);
     while (!e && !found) {
-        if (lipfn(KT,VT,__dup)(l)) { return -1; }
-        e = lipfn(KT,VT,__find)(l, k, &found);
+        if (Fun(__dup)(l)) { return -1; }
+        e = Fun(__find)(l, k, &found);
     }
     if (!e) { return -1; }
 
-    if (lipfn(KT,VT,is_zero)(k)) {
+    if (Fun(is_zero)(k)) {
         found = l->zero != NULL;
         l->zero = e;
     }
@@ -200,22 +204,22 @@ lipfn(KT, VT, set)(LipOf(KT,VT)* l, KT* k, VT* v) {
 }
 
 
-static inline VT* lipfn(KT,VT,get_or_set)(LipOf(KT,VT)* l, KT* k, VT* v) {
-    if (lipfn(KT,VT,is_zero)(k)) {
+static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
+    if (Fun(is_zero)(k)) {
         if (!l->zero) { return 0x0; }
         return &l->zero->v;
     }
     bool found = 0;
-    EntryT* e = lipfn(KT,VT,__find)(l, k, &found);
+    EntryT* e = Fun(__find)(l, k, &found);
     while (!e && !found) {
-        if (lipfn(KT,VT,__dup)(l)) { return 0x0; }
-        e = lipfn(KT,VT,__find)(l, k, &found);
+        if (Fun(__dup)(l)) { return 0x0; }
+        e = Fun(__find)(l, k, &found);
     }
     if (!e) { /*TODO ERROR or MAX TRIES?*/
         puts("Unxpected error.");
         return 0x0;
     }
-    if (lipfn(KT,VT,is_zero)(k)) { l->zero = e; }
+    if (Fun(is_zero)(k)) { l->zero = e; }
     if (!found) {
         ++l->inserts;
         if (KTCpy(&e->k, k)) {
@@ -231,13 +235,13 @@ static inline VT* lipfn(KT,VT,get_or_set)(LipOf(KT,VT)* l, KT* k, VT* v) {
 }
 
 
-static inline VT* lipfn(KT, VT, get)(LipOf(KT,VT)* l, KT* k) {
-    if (lipfn(KT,VT,is_zero)(k)) {
+static inline VT* Fun(get)(LipType* l, KT* k) {
+    if (Fun(is_zero)(k)) {
         if (!l->zero) { return 0x0; }
         return &l->zero->v;
     }
     bool found = 0;
-    EntryT* e = lipfn(KT,VT,__find)(l, k, &found);
+    EntryT* e = Fun(__find)(l, k, &found);
     if (!e) { /*TODO ERROR or MAX TRIES?*/ return 0x0; }
     if (!found) {
         return 0x0;
@@ -246,8 +250,8 @@ static inline VT* lipfn(KT, VT, get)(LipOf(KT,VT)* l, KT* k) {
 }
 
 
-static inline int lipfn(KT, VT, del)(LipOf(KT,VT)* l, KT* k) {
-    if (lipfn(KT,VT,is_zero)(k)) {
+static inline int Fun(del)(LipType* l, KT* k) {
+    if (Fun(is_zero)(k)) {
         if (!l->zero) { return -1; }
         l->zero = NULL;
         --l->inserts;
@@ -255,14 +259,14 @@ static inline int lipfn(KT, VT, del)(LipOf(KT,VT)* l, KT* k) {
     }
 
     bool found = 0;
-    EntryT* e = lipfn(KT,VT,__find)(l, k, &found);
+    EntryT* e = Fun(__find)(l, k, &found);
     if (!e || !found) { return -1; }
     --l->inserts;
     return KTCpy(&e->k, &(KT){0});
 }
 
 
-static inline void lipfn(KT,VT, clean)(LipOf(KT,VT)*l) {
+static inline void Fun(clean)(LipType*l) {
     buffn(EntryT, clean)(liptab(l));
 }
 
