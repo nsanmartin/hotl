@@ -116,16 +116,15 @@ Fun(__find)(LipType* l, KT* k, bool found[1]) {
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
         EntryT* e = buffn(EntryT, at)(&l->table, h);
-        if (!e) { *found = true; return e; }
-        if (KTCmp(k, &e->k) == 0) { *found = true; return e; }
+        if (!e) { *found = true; return NULL; }                 /* AHRE_ERROR */
+        if (KTCmp(k, &e->k) == 0) { *found = true; return e; }  /* Ok */
         if (l->zero != e && KTCmp(&e->k, &(KT){0}) == 0) {
-            *found = false;
-            return e;
+            *found = false; return e;                           /* Ok */
         }
         h = (h + 1) % buflen(liptab(l));
     }
     *found = false;
-    return 0x0;
+    return NULL;                                                 /* Ok */
 }
 
 static inline int Fun(set)(LipType* l, KT* k, VT* v);
@@ -135,16 +134,15 @@ static inline VT* Fun(get)(LipType* l, KT* k);
 
 static inline int
 Fun(__dup)(LipType* l) {
-    size_t n = buflen(liptab(l));
-    size_t nX2 = n + n;
-    int err = nX2 < n;
-    if (err) { /* overflow */ return -1; }
+    const size_t n = buflen(liptab(l));
+    const size_t nX2 = n + n;
+    if (nX2 < n) return -1;                                 /* size_t overflow */
 
     bool has_zero     = l->zero;
     EntryT zero_entry = (EntryT){0};
     if (has_zero) {
         EntryT* ent = Fun(__get_entry)(l, &(KT){0});
-        if (!ent) { return -1; }
+        if (!ent) return -1;                                /* __get_entry ERROR */
         zero_entry = *ent;
     }
 
@@ -156,7 +154,7 @@ Fun(__dup)(LipType* l) {
     if (has_zero) {
         bool found;
         l->zero = Fun(__insert)(l, &(KT){0}, &found);
-        if (!l->zero) return -1;
+        if (!l->zero) return -1;                            /* __insert ERROR */
         *l->zero = zero_entry;
         zero_entry = (EntryT){0};
     }
@@ -167,25 +165,28 @@ Fun(__dup)(LipType* l) {
         if (!Fun(is_zero)(&it->k)) {
             bool found;
             EntryT* e = Fun(__find)(l,&it->k,&found);
-            if (found) { puts("error"); return -1; }
+            if (!e || found) return -1;                     /* __find ERROR or duplicated entry ERROR */
             memmove(e, it, sizeof(EntryT));
         }
     }
 
     /* We 'move' the pointers/bytes, so no cleanup. */
     free((void*)t0.items);
-    return 0;
+    return 0;                                               /* Ok */
 }
 
+/* inserts key and return the entry. On error return NULL */
 static inline EntryT*
 Fun(__insert)(LipType* l, KT* k, bool found[1]) {
     *found = false;
     EntryT* e = Fun(__find)(l, k, found);
+    if (!e && *found) return NULL;                     /* __find ERROR */
     while (!e && !*found) {
-        if (Fun(__dup)(l)) { return NULL; }
+        if (Fun(__dup)(l)) { return NULL; }            /* __dup ERROR */
         e = Fun(__find)(l, k, found);
+        if (!e && *found) return NULL;                 /* __find ERROR */
     }
-    if (!e) return NULL;
+    if (!e) return NULL;                               /* __find ERROR (redundant check) */
 
     if (Fun(is_zero)(k)) {
         *found = l->zero != NULL;
@@ -194,9 +195,9 @@ Fun(__insert)(LipType* l, KT* k, bool found[1]) {
 
     if (!*found) {
         ++l->inserts;
-        if (KTCpy(&e->k, k)) return NULL;
+        if (KTCpy(&e->k, k)) return NULL;              /* KTCpy ERROR */
     }
-    return e;
+    return e;                                          /* Ok */
 } 
 
 
@@ -234,12 +235,12 @@ static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
 static inline EntryT*
 Fun(__get_entry)(LipType* l, KT* k) {
     if (Fun(is_zero)(k)) {
-        if (!l->zero) { return 0x0; }
+        if (!l->zero) { return NULL; }
         return l->zero;
     }
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
-    if (!e) { /*TODO ERROR or MAX TRIES?*/ return 0x0; }
+    if (!e) { /*TODO ERROR or MAX TRIES?*/ return NULL; }
     if (!found) {
         return 0x0;
     }
