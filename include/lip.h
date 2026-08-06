@@ -200,20 +200,6 @@ Fun(__insert)(LipType* l, KT* k, bool found[1]) {
 } 
 
 
-static inline int
-Fun(set)(LipType* l, KT* k, VT* v) {
-    bool found;
-    EntryT* ent = Fun(__insert)(l, k, &found);
-    if (!ent) return -1;
-    if (VTCpy(&ent->v, v)) { 
-        puts("VTCpy failed");
-        return -1;
-    }
-    return 0;
-
-}
-
-
 static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) { return 0x0; }
@@ -261,6 +247,7 @@ Fun(__get_entry)(LipType* l, KT* k) {
 }
 
 
+//TODO0: Clean Entry
 static inline int Fun(del)(LipType* l, KT* k) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) { return -1; }
@@ -284,11 +271,28 @@ static inline void Fun(clean)(LipType*l) {
 
 /* Value Functions */
 
-static inline VT* Fun(get)(LipType* l, KT* k) {
+
+static inline VT*
+Fun(get)(LipType* l, KT* k) {
     EntryT* res = Fun(__get_entry)(l,k);
     if (res) return &res->v;
     return NULL;
 }
+
+
+static inline int
+Fun(set)(LipType* l, KT* k, VT* v) {
+    bool found;
+    EntryT* ent = Fun(__insert)(l, k, &found);
+    if (!ent) return -1;
+    if (VTCpy(&ent->v, v)) { 
+        puts("VTCpy failed");
+        return -1;
+    }
+    return 0;
+
+}
+
 
 #undef KT
 #undef KHash 

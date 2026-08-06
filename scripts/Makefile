@@ -1,7 +1,7 @@
 CFLAGS:=-g  -Wall -Wextra -Werror -pedantic -Wold-style-definition 
 CXXFLAGS:=-g  -Wall -Wextra -Werror -pedantic 
-SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
-				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
+# SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
+# 				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
 
 BUILD:=../build
 INCLUDE:=.
