@@ -81,7 +81,7 @@ typedef struct LipType {
     BufOf(EntryT) table;
 } LipType;
 
-static inline EntryT* Fun(__get_entry)(LipType* l, KT* k);
+static inline int Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]);
 static inline EntryT* Fun(__insert)(LipType* l, KT* k, bool found[1]);
 
 static inline int
@@ -103,6 +103,7 @@ Fun(is_zero)(KT* k) { return KTCmp(k, &(KT){0}) == 0; }
 #endif // KHash
 
 /*
+ * found==true and NULL is an error
  * return value:
  * + if value is found, `found` is set to true and a ptr returned
  * + if value is not found, `found` is set to false and a ptr to
@@ -141,8 +142,9 @@ Fun(__dup)(LipType* l) {
     bool has_zero     = l->zero;
     EntryT zero_entry = (EntryT){0};
     if (has_zero) {
-        EntryT* ent = Fun(__get_entry)(l, &(KT){0});
-        if (!ent) return -1;                                /* __get_entry ERROR */
+        EntryT* ent;
+        if (Fun(__get_entry)(l, &(KT){0}, &ent)) return -1; /* __get_entry ERROR */
+        if (!ent) return -1;                                /* ERROR: expecing zero */
         zero_entry = *ent;
     }
 
@@ -232,19 +234,25 @@ static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
 }
 
 
-static inline EntryT*
-Fun(__get_entry)(LipType* l, KT* k) {
+static inline int
+Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]) {
     if (Fun(is_zero)(k)) {
-        if (!l->zero) { return NULL; }
-        return l->zero;
+        if (!l->zero)  *ent = NULL;
+        else           *ent = l->zero;
+        return 0;                   /* Ok */
     }
+
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
-    if (!e) { /*TODO ERROR or MAX TRIES?*/ return NULL; }
-    if (!found) {
-        return 0x0;
+    if (!found && !e) {
+        *ent = NULL;
+        return 0;                   /* Ok: not found */
     }
-    return e;
+    if (found && e) {
+        *ent = e;
+        return 0;                   /* Ok: not found */
+    }
+    return -1;                      /* ERROR */
 }
 
 
@@ -275,7 +283,8 @@ static inline void Fun(clean)(LipType*l) {
 
 static inline VT*
 Fun(get)(LipType* l, KT* k) {
-    EntryT* res = Fun(__get_entry)(l,k);
+    EntryT* res;
+    if (Fun(__get_entry)(l,k, &res)) return NULL; /*TODO: raise ERROR */
     if (res) return &res->v;
     return NULL;
 }
