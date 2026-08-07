@@ -12,6 +12,10 @@
 #define HOTL_CAT_LITERAL(A, B) A##_##B
 #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
 
+#define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+#define HOTL_GET_MACRO_2_OR_3_PARAMS(_1,_2,_3,_4, NAME,...) NAME
+#define HOTL_SKIP(X)
+ 
 
 #define BufOf(T) HOTL_CAT_IND(buf, T)
 #define buffn(T, Name) HOTL_CAT_IND(HOTL_CAT_IND(buf, T), Name)
@@ -23,10 +27,27 @@ enum { ArlDefaultInitialCapacity = 2 };
 #define arl_len(A) (A)->len
 
 
-#define LipOf(KT, VT) HOTL_CAT_IND(HOTL_CAT_IND(lip, KT), VT)
-#define lipfn(KT, VT, Name) HOTL_CAT_IND(LipOf(KT, VT), Name)
-#define LipEntryOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), entry)
-#define LipZeroOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), zero)
+#define LipOf_1(KT) HOTL_CAT_IND(lipset, KT)
+#define LipOf_2(KT, VT) HOTL_CAT_IND(HOTL_CAT_IND(lipmap, KT), VT)
+#define LipEntryOf_1(KT) HOTL_CAT_IND(LipOf(KT), entry)
+#define LipEntryOf_2(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), entry)
+#define LipZeroOf_1(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), zero)
+#define LipZeroOf_2(KT) HOTL_CAT_IND(LipOf(KT, VT), zero)
+#define lipfn_2(KT, Name) HOTL_CAT_IND(LipOf(KT), Name)
+#define lipfn_3(KT, VT, Name) HOTL_CAT_IND(LipOf(KT, VT), Name)
+
+#define LipOf(...) \
+    HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipOf_2,LipOf_1,HOTL_SKIP)(__VA_ARGS__)
+#define LipEntryOf(...) \
+    HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipEntryOf_2,LipEntryOf_1,HOTL_SKIP)(__VA_ARGS__)
+#define LipZeroOf(...) \
+    HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipZeroOf_2,LipZeroOf_1,HOTL_SKIP)(__VA_ARGS__)
+#define lipfn(...) \
+    HOTL_GET_MACRO_2_OR_3_PARAMS(NULL,__VA_ARGS__,lipfn_3,lipfn_2,HOTL_SKIP)(__VA_ARGS__)
+
+// #define lipfn(KT, VT, Name) HOTL_CAT_IND(LipOf(KT, VT), Name)
+// #define LipEntryOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), entry)
+// #define LipZeroOf(KT, VT) HOTL_CAT_IND(LipOf(KT, VT), zero)
 #define lip_buf(L) (L)->table
 
 enum { LipMaximumAttempts = 256, LipDefaultSize = 1024 };

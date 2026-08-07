@@ -25,15 +25,30 @@
 #error "Template type KT undefined"
 #endif
 
-#ifndef VT
-#error "Template type VT undefined"
+#if !defined(VT) && defined(VTClean)
+#error "Template type VT undefined but VTClean received"
 #endif
 
+#ifdef VT
+    typedef struct { KT k; VT v; } LipEntryOf(KT, VT);
+    #define EntryT          LipEntryOf(KT, VT)
+    #define Fun(FName)      lipfn(KT,VT,FName)
+    #define LipType         LipOf(KT,VT)
 
-typedef struct { KT k; VT v; } LipEntryOf(KT, VT);
-#define EntryT          LipEntryOf(KT, VT)
-#define Fun(FName)  lipfn(KT,VT,FName)
-#define LipType        LipOf(KT,VT)
+    #ifndef VTCmp
+    #define VTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(VT))
+    #endif // VTCmp
+    
+    #ifndef VTCpy
+    #define VTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(VT))
+    #endif // VTCpy
+
+#else
+    typedef struct { KT k; } LipEntryOf(KT);
+    #define EntryT          LipEntryOf(KT)
+    #define Fun(FName)      lipfn(KT,FName)
+    #define LipType         LipOf(KT)
+#endif
 
 //TODO: make KTClean : KT* -> ()
 #if defined(KTClean) || defined(VTClean) 
@@ -64,14 +79,6 @@ Fun(clean_entry)(EntryT* e) {
 #define KTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(KT))
 #endif // KTCpy
 
-#ifndef VTCmp
-#define VTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(VT))
-#endif // VTCmp
-
-#ifndef VTCpy
-#define VTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(VT))
-#endif // VTCpy
-
 typedef struct LipType {
     /* If a type's zero coincides with plain zero we nees to distinguish
      * it from empty slot */
@@ -83,6 +90,11 @@ typedef struct LipType {
 
 static inline int Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]);
 static inline EntryT* Fun(__insert)(LipType* l, KT* k, bool found[1]);
+
+#ifdef VT
+static inline int Fun(set)(LipType* l, KT* k, VT* v);
+#else
+#endif
 
 static inline int
 Fun(init)(LipType* l, LipInitArgs p) {
@@ -127,9 +139,6 @@ Fun(__find)(LipType* l, KT* k, bool found[1]) {
     *found = false;
     return NULL;                                                 /* Ok */
 }
-
-static inline int Fun(set)(LipType* l, KT* k, VT* v);
-static inline int Fun(get)(LipType* l, KT* k, VT* v[1]);
 
 
 
@@ -256,8 +265,9 @@ static inline void Fun(clean)(LipType*l) {
 
 /* Value Functions */
 
-
-static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
+#ifdef VT
+static inline
+VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
     if (Fun(is_zero)(k) && l->zero) return &l->zero->v; /* Ok: get zero */
 
     bool found = 0;
@@ -285,6 +295,29 @@ Fun(set)(LipType* l, KT* k, VT* v) {
     if (VTCpy(&ent->v, v)) return -1;           /* VTCpy ERROR */
     return 0;                                   /* Ok */
 }
+
+#else
+
+static inline int
+Fun(get)(LipType* l, KT* k, KT* res[1]) {
+    EntryT* ent;
+    if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
+    if (ent) *res = &ent->k;                          /* Ok: found */
+    else *res = NULL;
+    return 0;                                       /* Ok: not found */
+}
+
+
+static inline int
+Fun(insert)(LipType* l, KT* k) {
+    bool found;
+    EntryT* ent = Fun(__insert)(l, k, &found);
+    if (!ent) return -1;                        /* __insert ERROR */
+    return 0;                                   /* Ok */
+}
+
+
+#endif
 
 
 #undef KT
