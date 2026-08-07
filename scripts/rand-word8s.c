@@ -8,7 +8,8 @@ int main(int argc, char* argv[]) {
         const long SEED = strtol(argv[2], 0, 0);
         srand(SEED);
 
-#define WSZ 1 + 2 * sizeof(int)
+/* #define WSZ 1 + 2 * sizeof(int) */
+#define WSZ 5
         char w[WSZ];
         for (int i = 0; i < N; ++i) {
             size_t l = fill_2_int_or_less_word_rand(w, WSZ - 1);

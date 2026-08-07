@@ -86,7 +86,7 @@ static inline EntryT* Fun(__insert)(LipType* l, KT* k, bool found[1]);
 
 static inline int
 Fun(init)(LipType* l, LipInitArgs p) {
-    if (p.sz == 0) { return 0; }
+    if (p.sz == 0) return 0;
     p.attempts = p.attempts ? p.attempts : LipMaximumAttempts;
     p.sz = p.sz ? p.sz : LipDefaultSize;
     l->attempts = p.sz < p.attempts ? p.sz : p.attempts;
@@ -203,37 +203,6 @@ Fun(__insert)(LipType* l, KT* k, bool found[1]) {
 } 
 
 
-static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
-    if (Fun(is_zero)(k)) {
-        if (!l->zero) { return 0x0; }
-        return &l->zero->v;
-    }
-    bool found = 0;
-    EntryT* e = Fun(__find)(l, k, &found);
-    while (!e && !found) {
-        if (Fun(__dup)(l)) { return 0x0; }
-        e = Fun(__find)(l, k, &found);
-    }
-    if (!e) { /*TODO ERROR or MAX TRIES?*/
-        puts("Unxpected error.");
-        return 0x0;
-    }
-    if (Fun(is_zero)(k)) { l->zero = e; }
-    if (!found) {
-        ++l->inserts;
-        if (KTCpy(&e->k, k)) {
-            puts("KTCpy failed");
-            return 0x0;
-        }
-        if (VTCpy(&e->v, v)) {
-            puts("VTCpy failed");
-            return 0x0;
-        }
-    }
-    return &e->v;
-}
-
-
 static inline int
 Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]) {
     if (Fun(is_zero)(k)) {
@@ -259,17 +228,24 @@ Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]) {
 //TODO0: Clean Entry
 static inline int Fun(del)(LipType* l, KT* k) {
     if (Fun(is_zero)(k)) {
-        if (!l->zero) { return -1; }
+        if (!l->zero) return -1;        /* CLIENT ERROR: cannot delete zero */
         l->zero = NULL;
         --l->inserts;
-        return 0;
+        return 0;                       /* Ok: delete zero */
     }
 
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
-    if (!e || !found) { return -1; }
+
+    if (!e && found) return -1;      /* HOTL ERROR */
+    if (!e || !found) return -1;     /* CLIENT ERROR: not fouind */ 
     --l->inserts;
     return KTCpy(&e->k, &(KT){0});
+}
+
+static inline int
+Fun(get_entry)(LipType* l, KT* k, EntryT* ent[1]) {
+    return Fun(__get_entry)(l,k, ent);
 }
 
 
@@ -281,12 +257,22 @@ static inline void Fun(clean)(LipType*l) {
 /* Value Functions */
 
 
+static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
+    if (Fun(is_zero)(k) && l->zero) return &l->zero->v; /* Ok: get zero */
+
+    bool found = 0;
+    EntryT* e = Fun(__insert)(l, k, &found);
+    if (!e) return NULL;                                /* ERROR: could not insert */
+    if (!found && VTCpy(&e->v, v)) return NULL;         /* ERROR: VTCpy failed */
+    return &e->v;
+}
+
 static inline VT*
 Fun(get)(LipType* l, KT* k) {
     EntryT* res;
     if (Fun(__get_entry)(l,k, &res)) return NULL; /*TODO: raise ERROR */
-    if (res) return &res->v;
-    return NULL;
+    if (res) return &res->v;                      /* Ok: found */
+    return NULL;                                  /* Ok: not found */
 }
 
 
@@ -294,13 +280,9 @@ static inline int
 Fun(set)(LipType* l, KT* k, VT* v) {
     bool found;
     EntryT* ent = Fun(__insert)(l, k, &found);
-    if (!ent) return -1;
-    if (VTCpy(&ent->v, v)) { 
-        puts("VTCpy failed");
-        return -1;
-    }
-    return 0;
-
+    if (!ent) return -1;                        /* __insert ERROR */
+    if (VTCpy(&ent->v, v)) return -1;           /* VTCpy ERROR */
+    return 0;                                   /* Ok */
 }
 
 
