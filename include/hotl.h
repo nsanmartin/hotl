@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define HOTL_VERSION "0.1.3"
+#define HOTL_VERSION "0.1.4"
 
 #define HOTL_CAT_LITERAL(A, B) A##_##B
 #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)

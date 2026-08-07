@@ -129,7 +129,7 @@ Fun(__find)(LipType* l, KT* k, bool found[1]) {
 }
 
 static inline int Fun(set)(LipType* l, KT* k, VT* v);
-static inline VT* Fun(get)(LipType* l, KT* k);
+static inline int Fun(get)(LipType* l, KT* k, VT* v[1]);
 
 
 
@@ -213,7 +213,7 @@ Fun(__get_entry)(LipType* l, KT* k, EntryT* ent[1]) {
 
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
-    if (!found && !e) {
+    if (!found && e) {
         *ent = NULL;
         return 0;                   /* Ok: not found */
     }
@@ -267,12 +267,13 @@ static inline VT* Fun(get_or_set)(LipType* l, KT* k, VT* v) {
     return &e->v;
 }
 
-static inline VT*
-Fun(get)(LipType* l, KT* k) {
-    EntryT* res;
-    if (Fun(__get_entry)(l,k, &res)) return NULL; /*TODO: raise ERROR */
-    if (res) return &res->v;                      /* Ok: found */
-    return NULL;                                  /* Ok: not found */
+static inline int
+Fun(get)(LipType* l, KT* k, VT* v[1]) {
+    EntryT* ent;
+    if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
+    if (ent) *v = &ent->v;                          /* Ok: found */
+    else *v = NULL;
+    return 0;                                       /* Ok: not found */
 }
 
 

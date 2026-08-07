@@ -9,7 +9,7 @@
 
 enum { TestOk = 0, TestFail = 1 };
 
-#define ASSERT_FAIL_MSG  RED "Test Failure: " RESET "assertion in line %d failed. "
+#define ASSERT_FAIL_MSG  RED "Test Failure: " RESET "assertion in line %d failed.\n"
 #define utest_assert(Expr, Tag) do{ \
     if(!(Expr)) { fprintf(stderr, ASSERT_FAIL_MSG, __LINE__); goto Tag;} }while(0)
 
