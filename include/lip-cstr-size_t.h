@@ -12,8 +12,8 @@
 #include <hotl.h>
 typedef char* cstr;
 
-#define Hotl_LipMap_Kt cstr
-#define Hotl_LipMap_Vt size_t
+#define Hotl_LipMap_KT cstr
+#define Hotl_LipMap_VT size_t
 #define LipKTCmp cstrp_compare
 #define LipKTCpy cstrp_copy
 #define LipKTClean cstrp_clean

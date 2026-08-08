@@ -51,5 +51,5 @@ Fun(insert)(LipType* l, LipKT* k) {
 #undef LipType
 #undef EntryT
 #undef Fun
-#undef Hotl_LipMap_Kt
+#undef Hotl_LipMap_KT
 #undef Hotl_LipSet_T

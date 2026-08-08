@@ -21,17 +21,17 @@
 
 #include <hotl.h>
 
-#ifndef Hotl_LipMap_Kt
-#error "Template type Hotl_LipMap_Kt undefined"
+#ifndef Hotl_LipMap_KT
+#error "Template type Hotl_LipMap_KT undefined"
 #endif
 
-#ifndef Hotl_LipMap_Vt
-#error "Template type Hotl_LipMap_Vt undefined"
+#ifndef Hotl_LipMap_VT
+#error "Template type Hotl_LipMap_VT undefined"
 #endif
 
 
-#define LipKT      Hotl_LipMap_Kt
-#define LipVT      Hotl_LipMap_Vt
+#define LipKT      Hotl_LipMap_KT
+#define LipVT      Hotl_LipMap_VT
 #define EntryT     LipMapEntryOf(LipKT, LipVT)
 #define Fun(FName) lipmapfn(LipKT,LipVT,FName)
 #define LipType    LipMapOf(LipKT,LipVT)
@@ -87,7 +87,6 @@ Fun(set)(LipType* l, LipKT* k, LipVT* v) {
 #undef LipType
 #undef LipVT
 #undef LipVTCpy
-// #undef LipVTCmp
 
-#undef Hotl_LipMap_Kt
-#undef Hotl_LipMap_Vt
+#undef Hotl_LipMap_KT
+#undef Hotl_LipMap_VT

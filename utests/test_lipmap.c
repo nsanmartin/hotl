@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <utests.h>
 
-#define Hotl_LipMap_Kt int
-#define Hotl_LipMap_Vt int
+#define Hotl_LipMap_KT int
+#define Hotl_LipMap_VT int
 #include <lipmap.h>             /* LipOf(int,int) */
 
 #include <lip-cstr-size_t.h> /* LipOf(cstr,size_t) */
 
-#define Hotl_LipMap_Kt cstr
-#define Hotl_LipMap_Vt int
+#define Hotl_LipMap_KT cstr
+#define Hotl_LipMap_VT int
 #define LipKTCmp cstrp_compare
 #define LipKTCpy cstrp_copy
 #define LipKTClean cstrp_clean

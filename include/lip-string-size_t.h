@@ -8,8 +8,8 @@
 #include <hotl.h>
 typedef struct { size_t len; char* s; } string;
 
-#define Hotl_LipMap_Kt string
-#define Hotl_LipMap_Vt size_t
+#define Hotl_LipMap_KT string
+#define Hotl_LipMap_VT size_t
 #define LipKTCmp       stringp_compare
 #define LipKTCpy       stringp_copy
 #define LipKTClean     string_free
