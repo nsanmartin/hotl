@@ -1,7 +1,7 @@
 /*
  * Lip (Linear probing hash set)
  *
- * Lip: T, THash, LipKtCmp, LipKtCpy -> LipOf(T)
+ * Lip: T, THash, LipKTCmp, LipKTCpy -> LipOf(T)
  * ---
  *
  * Methods:
@@ -20,15 +20,15 @@
 #error "Template type Hotl_LipSet_T undefined"
 #endif
 
-#define LipKt      Hotl_LipSet_T
-#define EntryT     LipSetEntryOf(LipKt)
-#define Fun(FName) lipsetfn(LipKt,FName)
-#define LipType    LipOf(LipKt)
-typedef struct { LipKt k; } EntryT;
+#define LipKT      Hotl_LipSet_T
+#define EntryT     LipSetEntryOf(LipKT)
+#define Fun(FName) lipsetfn(LipKT,FName)
+#define LipType    LipOf(LipKT)
+typedef struct { LipKT k; } EntryT;
 #include <lip.h>
 
 static inline int
-Fun(get)(LipType* l, LipKt* k, LipKt* res[1]) {
+Fun(get)(LipType* l, LipKT* k, LipKT* res[1]) {
     EntryT* ent;
     if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
     if (ent) *res = &ent->k;                          /* Ok: found */
@@ -38,7 +38,7 @@ Fun(get)(LipType* l, LipKt* k, LipKt* res[1]) {
 
 
 static inline int
-Fun(insert)(LipType* l, LipKt* k) {
+Fun(insert)(LipType* l, LipKT* k) {
     bool found;
     EntryT* ent = Fun(__insert)(l, k, &found);
     if (!ent) return -1;                        /* __insert ERROR */
@@ -48,7 +48,7 @@ Fun(insert)(LipType* l, LipKt* k) {
 
 
 /* END */
-#undef LipKt
+#undef LipKT
 #undef LipType
 #undef EntryT
 #undef Fun

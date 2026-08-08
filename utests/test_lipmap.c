@@ -9,9 +9,9 @@
 
 #define Hotl_LipMap_Kt cstr
 #define Hotl_LipMap_Vt int
-#define LipKtCmp cstrp_compare
-#define LipKtCpy cstrp_copy
-#define LipKtClean cstrp_clean
+#define LipKTCmp cstrp_compare
+#define LipKTCpy cstrp_copy
+#define LipKTClean cstrp_clean
 #define LipHash cstrp_hash
 #include <lipmap.h>             /* LipOf(cstr,int) */
 

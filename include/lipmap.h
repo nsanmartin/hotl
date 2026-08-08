@@ -1,18 +1,18 @@
 /*
  * Lip (Linear probing hash map)
  *
- * Lip: LipKt, LipVt, KHash, KTCmp, KTCpy -> LipOf(LipKt,LipVt)
+ * Lip: LipKT, LipVT, KHash, KTCmp, KTCpy -> LipOf(LipKT,LipVT)
  * ---
  *
  * Methods:
  * --------
  *
  *  + clean:      LipOf(KV,TV)* -> int 
- *  + del:        LipOf(KV,TV)*, LipKt* -> int 
- *  + get:        LipOf(KV,TV)*, LipKt* -> LipVt*
- *  + get_or_set: LipOf(KV,TV)*, LipKt*, LipVt* -> LipVt*
+ *  + del:        LipOf(KV,TV)*, LipKT* -> int 
+ *  + get:        LipOf(KV,TV)*, LipKT* -> LipVT*
+ *  + get_or_set: LipOf(KV,TV)*, LipKT*, LipVT* -> LipVT*
  *  + init:       LipOf(KV,TV)*, LipInitArgs -> int
- *  + set:        LipOf(KV,TV)*, LipKt*, LipVt* -> int
+ *  + set:        LipOf(KV,TV)*, LipKT*, LipVT* -> int
  *
  * */
 
@@ -30,38 +30,38 @@
 #endif
 
 
-#define LipKt      Hotl_LipMap_Kt
-#define LipVt      Hotl_LipMap_Vt
-#define EntryT     LipMapEntryOf(LipKt, LipVt)
-#define Fun(FName) lipmapfn(LipKt,LipVt,FName)
-#define LipType    LipMapOf(LipKt,LipVt)
-typedef struct { LipKt k; LipVt v; } EntryT;
+#define LipKT      Hotl_LipMap_Kt
+#define LipVT      Hotl_LipMap_Vt
+#define EntryT     LipMapEntryOf(LipKT, LipVT)
+#define Fun(FName) lipmapfn(LipKT,LipVT,FName)
+#define LipType    LipMapOf(LipKT,LipVT)
+typedef struct { LipKT k; LipVT v; } EntryT;
 #include <lip.h>
 
-// #ifndef LipVtCmp
-// #define LipVtCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(LipVt))
-// #endif // LipVtCmp
+// #ifndef LipVTCmp
+// #define LipVTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(LipVT))
+// #endif // LipVTCmp
 
-#ifndef LipVtCpy
-#define LipVtCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVt))
-#endif // LipVtCpy
+#ifndef LipVTCpy
+#define LipVTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVT))
+#endif // LipVTCpy
 
 
 /* Value Functions */
 
 static inline
-LipVt* Fun(get_or_set)(LipType* l, LipKt* k, LipVt* v) {
+LipVT* Fun(get_or_set)(LipType* l, LipKT* k, LipVT* v) {
     if (Fun(is_zero)(k) && l->zero) return &l->zero->v; /* Ok: get zero */
 
     bool found = 0;
     EntryT* e = Fun(__insert)(l, k, &found);
     if (!e) return NULL;                                /* ERROR: could not insert */
-    if (!found && LipVtCpy(&e->v, v)) return NULL;         /* ERROR: LipVtCpy failed */
+    if (!found && LipVTCpy(&e->v, v)) return NULL;         /* ERROR: LipVTCpy failed */
     return &e->v;
 }
 
 static inline int
-Fun(get)(LipType* l, LipKt* k, LipVt* v[1]) {
+Fun(get)(LipType* l, LipKT* k, LipVT* v[1]) {
     EntryT* ent;
     if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
     if (ent) *v = &ent->v;                          /* Ok: found */
@@ -71,24 +71,24 @@ Fun(get)(LipType* l, LipKt* k, LipVt* v[1]) {
 
 
 static inline int
-Fun(set)(LipType* l, LipKt* k, LipVt* v) {
+Fun(set)(LipType* l, LipKT* k, LipVT* v) {
     bool found;
     EntryT* ent = Fun(__insert)(l, k, &found);
     if (!ent) return -1;                        /* __insert ERROR */
-    if (LipVtCpy(&ent->v, v)) return -1;           /* LipVtCpy ERROR */
+    if (LipVTCpy(&ent->v, v)) return -1;           /* LipVTCpy ERROR */
     return 0;                                   /* Ok */
 }
 
 
 
 /* END */
-#undef LipKt
+#undef LipKT
 #undef EntryT
 #undef Fun
 #undef LipType
-#undef LipVt
-#undef LipVtCpy
-// #undef LipVtCmp
+#undef LipVT
+#undef LipVTCpy
+// #undef LipVTCmp
 
 #undef Hotl_LipMap_Kt
 #undef Hotl_LipMap_Vt

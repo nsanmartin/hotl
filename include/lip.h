@@ -1,7 +1,7 @@
 /*
  * Lip (Linear probing hash map)
  *
- * Lip: EntryT, VT, LipHash, T_Cmp, LipKtCpy -> LipOf(EntryT,VT)
+ * Lip: EntryT, VT, LipHash, T_Cmp, LipKTCpy -> LipOf(EntryT,VT)
  * ---
  *
  * Methods:
@@ -22,37 +22,37 @@
 #include <hotl.h>
 
 
-#ifndef LipKt
-#error "Template type LipKt undefined"
+#ifndef LipKT
+#error "Template type LipKT undefined"
 #endif
 
 #ifndef EntryT
 #error "Template type EntryT undefined"
 #endif
 
-#ifndef LipKtCmp
-#define LipKtCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(LipKt))
-#endif // LipKtCmp
+#ifndef LipKTCmp
+#define LipKTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(LipKT))
+#endif // LipKTCmp
 
-#ifndef LipKtCpy
-#define LipKtCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipKt))
-#endif // LipKtCpy
+#ifndef LipKTCpy
+#define LipKTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipKT))
+#endif // LipKTCpy
 
 
-#if defined(LipKtClean) || defined(LipVtClean) 
+#if defined(LipKTClean) || defined(LipVTClean) 
 static inline void
 Fun(clean_entry)(EntryT* e) {
-#ifdef LipKtClean
-    LipKtClean(&e->k);
-#endif //LipKtClean
-#ifdef LipVtClean
-    LipVtClean(&e->v);
-#endif //LipVtClean
+#ifdef LipKTClean
+    LipKTClean(&e->k);
+#endif //LipKTClean
+#ifdef LipVTClean
+    LipVTClean(&e->v);
+#endif //LipVTClean
 }
-#endif // LipKtClean || LipVtClean
+#endif // LipKTClean || LipVTClean
 
 #define T EntryT
-#if defined(LipKtClean) || defined(LipVtClean) 
+#if defined(LipKTClean) || defined(LipVTClean) 
 #define TClean Fun(clean_entry)
 #endif
 #include <buf.h>
@@ -71,8 +71,8 @@ typedef struct LipType {
     BufOf(EntryT) table;
 } LipType;
 
-static inline int Fun(__get_entry)(LipType* l, LipKt* k, EntryT* ent[1]);
-static inline EntryT* Fun(__insert)(LipType* l, LipKt* k, bool found[1]);
+static inline int Fun(__get_entry)(LipType* l, LipKT* k, EntryT* ent[1]);
+static inline EntryT* Fun(__insert)(LipType* l, LipKT* k, bool found[1]);
 
 static inline int
 Fun(init)(LipType* l, LipInitArgs p) {
@@ -86,10 +86,10 @@ Fun(init)(LipType* l, LipInitArgs p) {
 }
 
 static inline int
-Fun(is_zero)(LipKt* k) { return LipKtCmp(k, &(LipKt){0}) == 0; }
+Fun(is_zero)(LipKT* k) { return LipKTCmp(k, &(LipKT){0}) == 0; }
 
 #ifndef LipHash
-#define LipHash(S) hotl_djb2_k33((char*)S, sizeof(LipKt))
+#define LipHash(S) hotl_djb2_k33((char*)S, sizeof(LipKT))
 #endif // LipHash
 
 /*
@@ -102,14 +102,14 @@ Fun(is_zero)(LipKt* k) { return LipKtCmp(k, &(LipKt){0}) == 0; }
  * + if an unexpected error in at, found is set to true and NULL returned.
  */
 static inline EntryT*
-Fun(__find)(LipType* l, LipKt* k, bool found[1]) {
+Fun(__find)(LipType* l, LipKT* k, bool found[1]) {
     size_t h = LipHash(k) % l->table.len;
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
         EntryT* e = buffn(EntryT, at)(&l->table, h);
         if (!e) { *found = true; return NULL; }                 /* AHRE_ERROR */
-        if (LipKtCmp(k, &e->k) == 0) { *found = true; return e; }  /* Ok */
-        if (l->zero != e && LipKtCmp(&e->k, &(LipKt){0}) == 0) {
+        if (LipKTCmp(k, &e->k) == 0) { *found = true; return e; }  /* Ok */
+        if (l->zero != e && LipKTCmp(&e->k, &(LipKT){0}) == 0) {
             *found = false; return e;                           /* Ok */
         }
         h = (h + 1) % buflen(liptab(l));
@@ -130,7 +130,7 @@ Fun(__dup)(LipType* l) {
     EntryT zero_entry = (EntryT){0};
     if (has_zero) {
         EntryT* ent;
-        if (Fun(__get_entry)(l, &(LipKt){0}, &ent)) return -1; /* __get_entry ERROR */
+        if (Fun(__get_entry)(l, &(LipKT){0}, &ent)) return -1; /* __get_entry ERROR */
         if (!ent) return -1;                                /* ERROR: expecing zero */
         zero_entry = *ent;
     }
@@ -142,7 +142,7 @@ Fun(__dup)(LipType* l) {
 
     if (has_zero) {
         bool found;
-        l->zero = Fun(__insert)(l, &(LipKt){0}, &found);
+        l->zero = Fun(__insert)(l, &(LipKT){0}, &found);
         if (!l->zero) return -1;                            /* __insert ERROR */
         *l->zero = zero_entry;
         zero_entry = (EntryT){0};
@@ -166,7 +166,7 @@ Fun(__dup)(LipType* l) {
 
 /* inserts key and return the entry. On error return NULL */
 static inline EntryT*
-Fun(__insert)(LipType* l, LipKt* k, bool found[1]) {
+Fun(__insert)(LipType* l, LipKT* k, bool found[1]) {
     *found = false;
     EntryT* e = Fun(__find)(l, k, found);
     if (!e && *found) return NULL;                     /* __find ERROR */
@@ -184,14 +184,14 @@ Fun(__insert)(LipType* l, LipKt* k, bool found[1]) {
 
     if (!*found) {
         ++l->inserts;
-        if (LipKtCpy(&e->k, k)) return NULL;              /* LipKtCpy ERROR */
+        if (LipKTCpy(&e->k, k)) return NULL;              /* LipKTCpy ERROR */
     }
     return e;                                          /* Ok */
 } 
 
 
 static inline int
-Fun(__get_entry)(LipType* l, LipKt* k, EntryT* ent[1]) {
+Fun(__get_entry)(LipType* l, LipKT* k, EntryT* ent[1]) {
     if (Fun(is_zero)(k)) {
         if (!l->zero)  *ent = NULL;
         else           *ent = l->zero;
@@ -213,7 +213,7 @@ Fun(__get_entry)(LipType* l, LipKt* k, EntryT* ent[1]) {
 
 
 //TODO0: Clean Entry
-static inline int Fun(del)(LipType* l, LipKt* k) {
+static inline int Fun(del)(LipType* l, LipKT* k) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) return -1;        /* CLIENT ERROR: cannot delete zero */
         l->zero = NULL;
@@ -227,11 +227,11 @@ static inline int Fun(del)(LipType* l, LipKt* k) {
     if (!e && found) return -1;      /* HOTL ERROR */
     if (!e || !found) return -1;     /* CLIENT ERROR: not fouind */ 
     --l->inserts;
-    return LipKtCpy(&e->k, &(LipKt){0});
+    return LipKTCpy(&e->k, &(LipKT){0});
 }
 
 static inline int
-Fun(get_entry)(LipType* l, LipKt* k, EntryT* ent[1]) {
+Fun(get_entry)(LipType* l, LipKT* k, EntryT* ent[1]) {
     return Fun(__get_entry)(l,k, ent);
 }
 
@@ -243,6 +243,6 @@ static inline void Fun(clean)(LipType*l) {
 
 
 #undef LipHash 
-#undef LipKtCmp
-#undef LipKtCpy
-#undef LipKtClean
+#undef LipKTCmp
+#undef LipKTCpy
+#undef LipKTClean
