@@ -62,8 +62,7 @@ LipVT* Fun(get_or_set)(LipType* l, LipKT* k, LipVT* v) {
 
 static inline int
 Fun(get)(LipType* l, LipKT* k, LipVT* v[1]) {
-    EntryT* ent;
-    if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
+    EntryT* ent = Fun(__get_entry)(l,k );
     if (ent) *v = &ent->v;                          /* Ok: found */
     else *v = NULL;
     return 0;                                       /* Ok: not found */

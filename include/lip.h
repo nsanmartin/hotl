@@ -71,7 +71,7 @@ typedef struct LipType {
     BufOf(EntryT) table;
 } LipType;
 
-static inline int Fun(__get_entry)(LipType* l, LipKT* k, EntryT* ent[1]);
+static inline EntryT* Fun(__get_entry)(LipType* l, LipKT* k);
 static inline EntryT* Fun(__insert)(LipType* l, LipKT* k, bool found[1]);
 
 static inline int
@@ -103,19 +103,18 @@ Fun(is_zero)(LipKT* k) { return LipKTCmp(k, &(LipKT){0}) == 0; }
  */
 static inline EntryT*
 Fun(__find)(LipType* l, LipKT* k, bool found[1]) {
-    size_t h = LipHash(k) % l->table.len;
+    size_t h = LipHash(k);
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
-        EntryT* e = buffn(EntryT, at)(&l->table, h);
-        if (!e) { *found = true; return NULL; }                 /* AHRE_ERROR */
-        if (LipKTCmp(k, &e->k) == 0) { *found = true; return e; }  /* Ok */
+        EntryT* e = &l->table.items[h % l->table.len];
+        if (LipKTCmp(k, &e->k) == 0) { *found = true; return e; }   /* Ok */
         if (l->zero != e && LipKTCmp(&e->k, &(LipKT){0}) == 0) {
-            *found = false; return e;                           /* Ok */
+            *found = false; return e;                               /* Ok */
         }
-        h = (h + 1) % buflen(liptab(l));
+        h = (h + 1);
     }
     *found = false;
-    return NULL;                                                 /* Ok */
+    return NULL;                                                    /* Ok */
 }
 
 
@@ -129,8 +128,7 @@ Fun(__dup)(LipType* l) {
     bool has_zero     = l->zero;
     EntryT zero_entry = (EntryT){0};
     if (has_zero) {
-        EntryT* ent;
-        if (Fun(__get_entry)(l, &(LipKT){0}, &ent)) return -1; /* __get_entry ERROR */
+        EntryT* ent = Fun(__get_entry)(l, &(LipKT){0});
         if (!ent) return -1;                                /* ERROR: expecing zero */
         zero_entry = *ent;
     }
@@ -190,25 +188,14 @@ Fun(__insert)(LipType* l, LipKT* k, bool found[1]) {
 } 
 
 
-static inline int
-Fun(__get_entry)(LipType* l, LipKT* k, EntryT* ent[1]) {
-    if (Fun(is_zero)(k)) {
-        if (!l->zero)  *ent = NULL;
-        else           *ent = l->zero;
-        return 0;                   /* Ok */
-    }
+static inline EntryT*
+Fun(__get_entry)(LipType* l, LipKT* k) {
+    if (Fun(is_zero)(k)) return l->zero;
 
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
-    if (!found && e) {
-        *ent = NULL;
-        return 0;                   /* Ok: not found */
-    }
-    if (found && e) {
-        *ent = e;
-        return 0;                   /* Ok: not found */
-    }
-    return -1;                      /* ERROR */
+    if (found && e) return e;
+    return NULL;
 }
 
 
@@ -230,9 +217,9 @@ static inline int Fun(del)(LipType* l, LipKT* k) {
     return LipKTCpy(&e->k, &(LipKT){0});
 }
 
-static inline int
-Fun(get_entry)(LipType* l, LipKT* k, EntryT* ent[1]) {
-    return Fun(__get_entry)(l,k, ent);
+static inline EntryT*
+Fun(get_entry)(LipType* l, LipKT* k) {
+    return Fun(__get_entry)(l,k);
 }
 
 

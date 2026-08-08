@@ -29,11 +29,10 @@ typedef struct { LipKT k; } EntryT;
 
 static inline int
 Fun(get)(LipType* l, LipKT* k, LipKT* res[1]) {
-    EntryT* ent;
-    if (Fun(__get_entry)(l,k, &ent)) return -1;     /* __get_entry ERROR */
+    EntryT* ent = Fun(__get_entry)(l,k);
     if (ent) *res = &ent->k;                          /* Ok: found */
     else *res = NULL;
-    return 0;                                       /* Ok: not found */
+    return 0;                                        /* Ok: not found */
 }
 
 
