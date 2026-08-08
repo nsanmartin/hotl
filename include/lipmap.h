@@ -7,12 +7,18 @@
  * Methods:
  * --------
  *
- *  + clean:      LipOf(KV,TV)* -> int 
- *  + del:        LipOf(KV,TV)*, LipKT* -> int 
- *  + get:        LipOf(KV,TV)*, LipKT* -> LipVT*
- *  + get_or_set: LipOf(KV,TV)*, LipKT*, LipVT* -> LipVT*
- *  + init:       LipOf(KV,TV)*, LipInitArgs -> int
- *  + set:        LipOf(KV,TV)*, LipKT*, LipVT* -> int
+ *  From lip.h:
+ *  ----------
+ *  + init:       LipOf(K,V)*, LipInitArgs -> int
+ *  + clean_entry LipOf(K,V)*, EntryT*     -> void
+ *  + del:        LipOf(K,V)*, K*          -> int 
+ *  + clean:      LipOf(K,V)*              -> int 
+ *
+ *  From lipmap.h:
+ *  -------------
+ *  + get_or_set: LipOf(K,V)*, K*, V* -> V*
+ *  + get:        LipOf(K,V)*, K*     -> V*
+ *  + set:        LipOf(K,V)*, K*, V* -> int
  *
  * */
 

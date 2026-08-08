@@ -4,14 +4,18 @@
  * Lip: T, THash, LipKTCmp, LipKTCpy -> LipOf(T)
  * ---
  *
- * Methods:
- * --------
- *  + clean:      LipOf(T)*              ->  int 
- *  + del:        LipOf(T)*, T*          ->  int 
- *  + get:        LipOf(T)*, T*          ->  T*
- *  + get_or_set: LipOf(T)*, T*          ->  T*
- *  + init:       LipOf(T)*, LipInitArgs ->  int
- *  + insert:     LipOf(T)*, T*          ->  int
+ *
+ *  From lip.h:
+ *  ----------
+ *  + init:       LipOf(K)*, LipInitArgs -> int
+ *  + clean_entry LipOf(K)*, EntryT*     -> void
+ *  + del:        LipOf(K)*, K*          -> int 
+ *  + clean:      LipOf(K)*              -> int 
+ *
+ *  From lipset.h:
+ *  -------------
+ *  + find:       LipOf(K)*, K*          -> K*
+ *  + insert:     LipOf(K)*, K*          -> int
  * */
 
 #include <hotl.h>

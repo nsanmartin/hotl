@@ -7,12 +7,10 @@
  * Methods:
  * --------
  *
- *  + clean:      LipOf(KV,TV)* -> int 
- *  + del:        LipOf(KV,TV)*, EntryT* -> int 
- *  + get:        LipOf(KV,TV)*, EntryT* -> VT*
- *  + get_or_set: LipOf(KV,TV)*, EntryT*, VT* -> VT*
- *  + init:       LipOf(KV,TV)*, LipInitArgs -> int
- *  + set:        LipOf(KV,TV)*, EntryT*, VT* -> int
+ *  + init:       LipOf(K,V)*, LipInitArgs -> int
+ *  + clean_entry LipOf(K,V)*, EntryT*     -> void
+ *  + del:        LipOf(K,V)*, K*          -> int 
+ *  + clean:      LipOf(K,V)*              -> int 
  *
  * */
 
@@ -199,7 +197,8 @@ Fun(__get_entry)(LipType* l, LipKT* k) {
 }
 
 
-static inline int Fun(del)(LipType* l, LipKT* k) {
+static inline int
+Fun(del)(LipType* l, LipKT* k) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) return -1;        /* CLIENT ERROR: cannot delete zero */
         l->zero = NULL;
@@ -218,13 +217,14 @@ static inline int Fun(del)(LipType* l, LipKT* k) {
     return LipKTCpy(&e->k, &(LipKT){0});
 }
 
-static inline EntryT*
-Fun(get_entry)(LipType* l, LipKT* k) {
-    return Fun(__get_entry)(l,k);
-}
+// static inline EntryT*
+// Fun(get_entry)(LipType* l, LipKT* k) {
+//     return Fun(__get_entry)(l,k);
+// }
 
 
-static inline void Fun(clean)(LipType*l) {
+static inline void
+Fun(clean)(LipType*l) {
     buffn(EntryT, clean)(liptab(l));
 }
 
