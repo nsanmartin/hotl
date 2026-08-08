@@ -10,8 +10,8 @@ HEADERS=$(wildcard $(INCLUDE)/*.h)
 SRCS=$(wildcard $(SRCDIR)/*.c)
 OBJ=$(SRCS:src/%.c=$(OBJDIR)/%.o)
 
-test_all: test_lip test_arl test_buf test_lipset
-	$(BUILD)/test_lip \
+test_all: test_lipmap test_arl test_buf test_lipset
+	$(BUILD)/test_lipmap \
 		&& $(BUILD)/test_arl \
 		&& $(BUILD)/test_buf \
 		&& $(BUILD)/test_lipset
@@ -22,7 +22,7 @@ test_buf: test_buf.c
 	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I. -o $(BUILD)/$@ $^
 
 
-test_lip: test_lip.c
+test_lipmap: test_lipmap.c
 	$(CC) -E $(CFLAGS) -I$(INCLUDE) -I. -o $(BUILD)/$@-E.c $<
 	$(CC) $(CFLAGS) $(SANITIZE_FLAGS) -I$(INCLUDE) -I. -o $(BUILD)/$@ $^
 

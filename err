@@ -1,0 +1,1239 @@
+In file included from ../include/lipset.h:17,
+                 from test_lipset.c:5:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:28:18: note: in expansion of macro ‘EntryT’
+   28 | typedef struct { EntryT entry; } LipEntryOf(EntryT);
+      |                  ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:36:5: note: in expansion of macro ‘T’
+   36 |     T* items;
+      |     ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:42:15: note: in expansion of macro ‘T’
+   42 | static inline T*
+      |               ^
+../include/buf.h: In function ‘buf_lipset_T_entry_calloc’:
+../include/hotl.h:30:34: error: ‘lipset_T_entry’ undeclared (first use in this function); did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:45:38: note: in expansion of macro ‘T’
+   45 |     a->items    = calloc(len, sizeof(T));
+      |                                      ^
+../include/hotl.h:30:34: note: each undeclared identifier is reported only once for each function it appears in
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:45:38: note: in expansion of macro ‘T’
+   45 |     a->items    = calloc(len, sizeof(T));
+      |                                      ^
+../include/buf.h: At top level:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:51:15: note: in expansion of macro ‘T’
+   51 | static inline T*
+      |               ^
+../include/buf.h: In function ‘buf_lipset_T_entry___ensure_extra_capacity’:
+../include/hotl.h:30:34: error: ‘lipset_T_entry’ undeclared (first use in this function); did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:57:66: note: in expansion of macro ‘T’
+   57 |         b->items = realloc((void*)b->items, b->capacity * sizeof(T));
+      |                                                                  ^
+../include/buf.h: At top level:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:65:15: note: in expansion of macro ‘T’
+   65 | static inline T*
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:66:31: note: in expansion of macro ‘T’
+   66 | buffn(T, append)(BufOf(T)* b, T* data, size_t len) {
+      |                               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:75:15: note: in expansion of macro ‘T’
+   75 | static inline T*
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:76:32: note: in expansion of macro ‘T’
+   76 | buffn(T, prepend)(BufOf(T)* b, T* data, size_t len) {
+      |                                ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:87:15: note: in expansion of macro ‘T’
+   87 | static inline T*
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:102:15: note: in expansion of macro ‘T’
+  102 | static inline T* buffn(T, begin)(BufOf(T)*a) { return a->items; }
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:104:15: note: in expansion of macro ‘T’
+  104 | static inline T* buffn(T, end)(BufOf(T)*a) { return a->items ? a->items + a->len : a->items; }
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:107:15: note: in expansion of macro ‘T’
+  107 | static inline T*
+      |               ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:46:11: note: in expansion of macro ‘EntryT’
+   46 | #define T EntryT
+      |           ^~~~~~
+../include/buf.h:108:30: note: in expansion of macro ‘T’
+  108 | buffn(T, find) (BufOf(T)* a, T* x) {
+      |                              ^
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:66:5: note: in expansion of macro ‘EntryT’
+   66 |     EntryT* zero;
+      |     ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:70:48: note: in expansion of macro ‘EntryT’
+   70 | static inline int Fun(__get_entry)(LipType* l, EntryT* k, EntryT* ent[1]);
+      |                                                ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:70:59: note: in expansion of macro ‘EntryT’
+   70 | static inline int Fun(__get_entry)(LipType* l, EntryT* k, EntryT* ent[1]);
+      |                                                           ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:71:15: note: in expansion of macro ‘EntryT’
+   71 | static inline EntryT* Fun(__insert)(LipType* l, EntryT* k, bool found[1]);
+      |               ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:71:49: note: in expansion of macro ‘EntryT’
+   71 | static inline EntryT* Fun(__insert)(LipType* l, EntryT* k, bool found[1]);
+      |                                                 ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:85:14: note: in expansion of macro ‘EntryT’
+   85 | Fun(is_zero)(EntryT* k) { return TCmp(k, &(EntryT){0}) == 0; }
+      |              ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:100:15: note: in expansion of macro ‘EntryT’
+  100 | static inline EntryT*
+      |               ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:101:25: note: in expansion of macro ‘EntryT’
+  101 | Fun(__find)(LipType* l, EntryT* k, bool found[1]) {
+      |                         ^~~~~~
+../include/lip.h: In function ‘lipset_T___dup’:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:126:5: note: in expansion of macro ‘EntryT’
+  126 |     EntryT zero_entry = (EntryT){0};
+      |     ^~~~~~
+../include/hotl.h:30:34: error: ‘lipset_T_entry’ undeclared (first use in this function); did you mean ‘lipset_T_init’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:126:26: note: in expansion of macro ‘EntryT’
+  126 |     EntryT zero_entry = (EntryT){0};
+      |                          ^~~~~~
+In file included from ../include/lipset.h:25:
+../include/lip.h:126:33: error: expected ‘,’ or ‘;’ before ‘{’ token
+  126 |     EntryT zero_entry = (EntryT){0};
+      |                                 ^
+../include/lip.h:128:17: error: ‘ent’ undeclared (first use in this function); did you mean ‘int’?
+  128 |         EntryT* ent;
+      |                 ^~~
+      |                 int
+../include/hotl.h:30:34: error: implicit declaration of function ‘lipset_T___get_entry’ [-Wimplicit-function-declaration]
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:36:27: note: in expansion of macro ‘HOTL_CAT_IND’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                           ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:36:40: note: in expansion of macro ‘LipOf’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                                        ^~~~~
+../include/lip.h:29:25: note: in expansion of macro ‘lipsetfn’
+   29 | #define Fun(FName)      lipsetfn(T,FName)
+      |                         ^~~~~~~~
+../include/lip.h:129:13: note: in expansion of macro ‘Fun’
+  129 |         if (Fun(__get_entry)(l, &(EntryT){0}, &ent)) return -1; /* __get_entry ERROR */
+      |             ^~~
+../include/lip.h:129:42: error: expected ‘)’ before ‘{’ token
+  129 |         if (Fun(__get_entry)(l, &(EntryT){0}, &ent)) return -1; /* __get_entry ERROR */
+      |                             ~            ^
+      |                                          )
+../include/hotl.h:30:34: error: implicit declaration of function ‘lipset_T___insert’; did you mean ‘lipset_T_init’? [-Wimplicit-function-declaration]
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:36:27: note: in expansion of macro ‘HOTL_CAT_IND’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                           ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:36:40: note: in expansion of macro ‘LipOf’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                                        ^~~~~
+../include/lip.h:29:25: note: in expansion of macro ‘lipsetfn’
+   29 | #define Fun(FName)      lipsetfn(T,FName)
+      |                         ^~~~~~~~
+../include/lip.h:141:19: note: in expansion of macro ‘Fun’
+  141 |         l->zero = Fun(__insert)(l, &(EntryT){0}, &found);
+      |                   ^~~
+../include/lip.h:141:45: error: expected ‘)’ before ‘{’ token
+  141 |         l->zero = Fun(__insert)(l, &(EntryT){0}, &found);
+      |                                ~            ^
+      |                                             )
+../include/lip.h:144:30: error: expected ‘;’ before ‘{’ token
+  144 |         zero_entry = (EntryT){0};
+      |                              ^
+      |                              ;
+../include/lip.h:140:14: error: unused variable ‘found’ [-Werror=unused-variable]
+  140 |         bool found;
+      |              ^~~~~
+../include/lip.h:147:13: error: ‘it’ undeclared (first use in this function); did you mean ‘int’?
+  147 |     EntryT* it  = buffn(EntryT,begin)(&t0);
+      |             ^~
+      |             int
+../include/lip.h:148:13: error: ‘end’ undeclared (first use in this function)
+  148 |     EntryT* end = buffn(EntryT,end)(&t0);
+      |             ^~~
+../include/hotl.h:30:34: error: implicit declaration of function ‘lipset_T_is_zero’; did you mean ‘lipset_T___dup’? [-Wimplicit-function-declaration]
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:36:27: note: in expansion of macro ‘HOTL_CAT_IND’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                           ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:36:40: note: in expansion of macro ‘LipOf’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                                        ^~~~~
+../include/lip.h:29:25: note: in expansion of macro ‘lipsetfn’
+   29 | #define Fun(FName)      lipsetfn(T,FName)
+      |                         ^~~~~~~~
+../include/lip.h:150:14: note: in expansion of macro ‘Fun’
+  150 |         if (!Fun(is_zero)(&it->k)) {
+      |              ^~~
+../include/lip.h:152:21: error: ‘e’ undeclared (first use in this function)
+  152 |             EntryT* e = Fun(__find)(l,&it->k,&found);
+      |                     ^
+../include/hotl.h:30:34: error: implicit declaration of function ‘lipset_T___find’; did you mean ‘lipset_T___dup’? [-Wimplicit-function-declaration]
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:36:27: note: in expansion of macro ‘HOTL_CAT_IND’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                           ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:36:40: note: in expansion of macro ‘LipOf’
+   36 | #define lipsetfn(T, Name) HOTL_CAT_IND(LipOf(T), Name)
+      |                                        ^~~~~
+../include/lip.h:29:25: note: in expansion of macro ‘lipsetfn’
+   29 | #define Fun(FName)      lipsetfn(T,FName)
+      |                         ^~~~~~~~
+../include/lip.h:152:25: note: in expansion of macro ‘Fun’
+  152 |             EntryT* e = Fun(__find)(l,&it->k,&found);
+      |                         ^~~
+../include/lip.h: At top level:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:164:15: note: in expansion of macro ‘EntryT’
+  164 | static inline EntryT*
+      |               ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:165:27: note: in expansion of macro ‘EntryT’
+  165 | Fun(__insert)(LipType* l, EntryT* k, bool found[1]) {
+      |                           ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:190:30: note: in expansion of macro ‘EntryT’
+  190 | Fun(__get_entry)(LipType* l, EntryT* k, EntryT* ent[1]) {
+      |                              ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:190:41: note: in expansion of macro ‘EntryT’
+  190 | Fun(__get_entry)(LipType* l, EntryT* k, EntryT* ent[1]) {
+      |                                         ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:212:40: note: in expansion of macro ‘EntryT’
+  212 | static inline int Fun(del)(LipType* l, EntryT* k) {
+      |                                        ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:230:28: note: in expansion of macro ‘EntryT’
+  230 | Fun(get_entry)(LipType* l, EntryT* k, EntryT* ent[1]) {
+      |                            ^~~~~~
+../include/hotl.h:30:34: error: unknown type name ‘lipset_T_entry’; did you mean ‘buf_lipset_T_entry’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:32:26: note: in expansion of macro ‘HOTL_CAT_IND’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                          ^~~~~~~~~~~~
+../include/hotl.h:13:28: note: in expansion of macro ‘HOTL_CAT_LITERAL’
+   13 | #define HOTL_CAT_IND(A, B) HOTL_CAT_LITERAL(A,B)
+      |                            ^~~~~~~~~~~~~~~~
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../include/hotl.h:32:39: note: in expansion of macro ‘LipOf’
+   32 | #define LipSetEntryOf(T) HOTL_CAT_IND(LipOf(T), entry)
+      |                                       ^~~~~
+../include/lipset.h:23:16: note: in expansion of macro ‘LipSetEntryOf’
+   23 | #define EntryT LipSetEntryOf(T)
+      |                ^~~~~~~~~~~~~
+../include/lip.h:230:39: note: in expansion of macro ‘EntryT’
+  230 | Fun(get_entry)(LipType* l, EntryT* k, EntryT* ent[1]) {
+      |                                       ^~~~~~
+test_lipset.c: In function ‘test_0’:
+../include/hotl.h:30:34: error: unknown type name ‘lipset_int’; did you mean ‘lipset_T’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_lipset.c:10:5: note: in expansion of macro ‘LipOf’
+   10 |     LipOf(int)* x = &(LipOf(int)){0};
+      |     ^~~~~
+../include/hotl.h:30:34: error: ‘lipset_int’ undeclared (first use in this function); did you mean ‘lipset_T’?
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                                  ^~~~~~
+../include/hotl.h:12:32: note: in definition of macro ‘HOTL_CAT_LITERAL’
+   12 | #define HOTL_CAT_LITERAL(A, B) A##_##B
+      |                                ^
+../include/hotl.h:30:21: note: in expansion of macro ‘HOTL_CAT_IND’
+   30 | #define LipSetOf(T) HOTL_CAT_IND(lipset, T)
+      |                     ^~~~~~~~~~~~
+../include/hotl.h:15:57: note: in expansion of macro ‘LipSetOf’
+   15 | #define HOTL_GET_MACRO_1_OR_2_PARAMS(_1,_2,_3,NAME,...) NAME
+      |                                                         ^~~~
+../include/hotl.h:40:5: note: in expansion of macro ‘HOTL_GET_MACRO_1_OR_2_PARAMS’
+   40 |     HOTL_GET_MACRO_1_OR_2_PARAMS(NULL,__VA_ARGS__,LipMapOf,LipSetOf,HOTL_SKIP)(__VA_ARGS__)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_lipset.c:10:23: note: in expansion of macro ‘LipOf’
+   10 |     LipOf(int)* x = &(LipOf(int)){0};
+      |                       ^~~~~
+test_lipset.c:10:34: error: expected ‘,’ or ‘;’ before ‘{’ token
+   10 |     LipOf(int)* x = &(LipOf(int)){0};
+      |                                  ^
+cc1: all warnings being treated as errors
+make[1]: *** [Makefile:32: test_lipset] Error 1
+make: *** [Makefile:3: utests] Error 2

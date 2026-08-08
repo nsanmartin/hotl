@@ -37,6 +37,6 @@ static inline int cstrp_hash(char** s) {
 }
 
 static inline void cstrp_clean(char** s) { free(*s); }
-#include <lip.h>
+#include <lipmap.h>
 
 #endif // _LIP_STR_SIZE_T__

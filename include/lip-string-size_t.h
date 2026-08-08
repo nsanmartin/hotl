@@ -43,6 +43,6 @@ static inline int stringp_hash(string* s) {
 }
 
 static inline void string_free(string* s) {  if(s) free(s->s); }
-#include <lip.h>
+#include <lipmap.h>
 
 #endif // _LIP_STRING_SIZE_T__

@@ -104,7 +104,7 @@ To define a `LipOf(KT, VT)` we use macros like:
 ```C
 #define KT int
 #define VT int
-#include <lip.h> // LipOf(int,int)
+#include <lipmap.h> // LipOf(int,int)
 ```
 
 The key type default comparator is `memcmp` passing a pointer to a value
@@ -123,7 +123,7 @@ To define custom key comparator and copy use `KTCmp` and `KTCpy` like:
 #define KTCpy cstrp_copy
 #define VT int
 #define KHash cstrp_hash
-#include <lip.h> // LipOf(cstr, int)
+#include <lipmap.h> // LipOf(cstr, int)
 ```
 
 

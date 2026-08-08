@@ -3,7 +3,7 @@
 
 #define KT int
 #define VT int
-#include <lip.h>             /* LipOf(int,int) */
+#include <lipmap.h>             /* LipOf(int,int) */
 
 #include <lip-cstr-size_t.h> /* LipOf(cstr,size_t) */
 
@@ -13,7 +13,7 @@
 #define KTClean cstrp_clean
 #define VT int
 #define KHash cstrp_hash
-#include <lip.h>             /* LipOf(cstr,int) */
+#include <lipmap.h>             /* LipOf(cstr,int) */
 
 
 int test_0(void) {
