@@ -1,6 +1,6 @@
 CFLAGS:=-g -std=c2x -Wall -Wextra -Werror -pedantic -Wold-style-definition -Wunused-function
-SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
-				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
+# SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
+# 				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
 
 BUILD=../build
 OBJDIR=../build

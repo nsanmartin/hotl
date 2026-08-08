@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <utests.h>
 
-#define KT int
-#define VT int
+#define Hotl_LipMap_Kt int
+#define Hotl_LipMap_Vt int
 #include <lipmap.h>             /* LipOf(int,int) */
 
 #include <lip-cstr-size_t.h> /* LipOf(cstr,size_t) */
 
-#define KT cstr
-#define KTCmp cstrp_compare
-#define KTCpy cstrp_copy
-#define KTClean cstrp_clean
-#define VT int
-#define KHash cstrp_hash
+#define Hotl_LipMap_Kt cstr
+#define Hotl_LipMap_Vt int
+#define LipKtCmp cstrp_compare
+#define LipKtCpy cstrp_copy
+#define LipKtClean cstrp_clean
+#define LipHash cstrp_hash
 #include <lipmap.h>             /* LipOf(cstr,int) */
 
 

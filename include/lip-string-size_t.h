@@ -8,15 +8,15 @@
 #include <hotl.h>
 typedef struct { size_t len; char* s; } string;
 
-#define KT string
-#define KTCmp stringp_compare
-#define KTCpy stringp_copy
-#define KTClean string_free
-#ifndef KHash
-#define KHash stringp_hash
+#define Hotl_LipMap_Kt string
+#define Hotl_LipMap_Vt size_t
+#define LipKtCmp       stringp_compare
+#define LipKtCpy       stringp_copy
+#define LipKtClean     string_free
+#ifndef LipHash
+#define LipHash stringp_hash
 #endif
 
-#define VT size_t
 
 static inline int stringp_compare(string* s1, string* s2) {
     if (s1->s == s2->s) { return 0; }

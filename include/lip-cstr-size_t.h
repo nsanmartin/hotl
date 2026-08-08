@@ -12,15 +12,15 @@
 #include <hotl.h>
 typedef char* cstr;
 
-#define KT cstr
-#define KTCmp cstrp_compare
-#define KTCpy cstrp_copy
-#define KTClean cstrp_clean
-#ifndef KHash
-#define KHash cstrp_hash
+#define Hotl_LipMap_Kt cstr
+#define Hotl_LipMap_Vt size_t
+#define LipKtCmp cstrp_compare
+#define LipKtCpy cstrp_copy
+#define LipKtClean cstrp_clean
+#ifndef LipHash
+#define LipHash cstrp_hash
 #endif
 
-#define VT size_t
 
 static inline int cstrp_compare(cstr* s1, cstr* s2) {
     if (*s1 == *s2) { return 0; }
