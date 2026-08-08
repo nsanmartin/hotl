@@ -63,11 +63,47 @@ int test_2(void) {
     clean_and_ret(status, clean, lipfn(int,clean)(x));
 }
 
+int test_3(void) {
+    int status = 1;
+    LipOf(int)* x = &(LipOf(int)){0};
+    size_t initsz = 10;
+    int err = lipfn(int,init)(x, (LipInitArgs){.sz=initsz});
+    utest_assert(!err, clean);
+
+#define TEST_3_N 19231
+    //insert TEST_3_N
+    err = lipfn(int,insert)(x, &(int){TEST_3_N});
+    utest_assert(!err, clean);
+
+    //find TEST_3_N
+    int* g = lipfn(int,find)(x, &(int){TEST_3_N});
+    utest_assert(g, clean);
+    utest_assert(*g == TEST_3_N, clean);
+
+    //del TEST_3_N
+    err = lipfn(int,del)(x, &(int){TEST_3_N});
+    utest_assert(!err, clean);
+
+    //find TEST_3_N (not found)
+    g = lipfn(int,find)(x, &(int){TEST_3_N});
+    utest_assert(!g, clean);
+
+
+    //del TEST_3_N (error, undefined)
+    err = lipfn(int,del)(x, &(int){TEST_3_N});
+    utest_assert(err, clean);
+
+    //clean and return
+    clean_and_ret(status, clean, lipfn(int,clean)(x));
+}
+
+
 int main(void) {
     int failures 
         = test_0()
         + test_1()
         + test_2()
+        + test_3()
         ;
 
 	if (failures) {
