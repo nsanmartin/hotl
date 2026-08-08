@@ -40,15 +40,12 @@ int test_1(void) {
     err = lipfn(int,int,set)(x, &k, &v);
     utest_assert(!err, clean);
 
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
 
     k = 13;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, clean);
 
 
@@ -70,9 +67,7 @@ int test_2(void) {
     }
 
     for (int i = -10; i < 10; ++i) {
-        int* p;
-        err = lipfn(int,int,get)(x, &i, &p);
-        utest_assert(!err, clean);
+        int* p = lipfn(int,int,get)(x, &i);
         utest_assert(p, clean);
         utest_assert(*p == i * 300, clean);
     }
@@ -94,9 +89,7 @@ int test_3(void) {
     err = lipfn(int,int,set)(x, &k, &v);
     utest_assert(!err, clean);
 
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
 
@@ -118,9 +111,7 @@ int test_4(void) {
     utest_assert(!err, clean);
 
     //get 1
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
 
@@ -129,8 +120,7 @@ int test_4(void) {
     utest_assert(!err, clean);
 
     //get 1 (not found)
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, clean);
 
 
@@ -157,9 +147,7 @@ int test_5(void) {
     utest_assert(!err, clean);
 
     //get 0
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
 
@@ -168,8 +156,7 @@ int test_5(void) {
     utest_assert(!err, clean);
 
     //get 0 (not found)
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, clean);
 
 
@@ -195,9 +182,7 @@ int test_6(void) {
     utest_assert(!lipfn(cstr,int,set)(x, &k, &v), clean);
 
     //get "Foo"
-    int* g;
-    err = lipfn(cstr,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(cstr,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
 
@@ -209,16 +194,14 @@ int test_6(void) {
     utest_assert(!err, clean);
 
     //get "Bar"
-    err = lipfn(cstr,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    g = lipfn(cstr,int,get)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == v, clean);
     free(k);
 
     //get "Fubar"
     k = "Fubar";
-    err = lipfn(cstr,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    g = lipfn(cstr,int,get)(x, &k);
     utest_assert(!g, clean);
 
     //clean and return
@@ -244,9 +227,8 @@ int lip_int_int_get_many(LipOf(int,int)* l, int* ks, int* vs, size_t n) {
     for (size_t i = 0; i < n; ++i) {
         int k = ks[i];
         int v = vs[i];
-        int* g;
-        int err = lipfn(int,int,get)(l, &k, &g);
-        if (err || !g || *g != v) { return -1; }
+        int* g = lipfn(int,int,get)(l, &k);
+        if (!g || *g != v) { return -1; }
     }
     return 0;
 }
@@ -268,9 +250,7 @@ int test_7(void) {
     utest_assert(!err, clean);
 
     int k = 64;
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, clean);
 
 
@@ -296,9 +276,7 @@ int test_8(void) {
     utest_assert(!err, clean);
 
     int k = 64;
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, clean);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, clean);
 
 
@@ -313,9 +291,7 @@ int test_9(void) /*Empty lip should not have zero key*/{
     utest_assert(!err, Fail);
 
     int k = 0;
-    int* g;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, Fail);
+    int* g = lipfn(int,int,get)(x, &k);
     utest_assert(!g, Fail);
 
 
@@ -325,8 +301,7 @@ int test_9(void) /*Empty lip should not have zero key*/{
     utest_assert(!err, Fail);
 
     k = 0;
-    err = lipfn(int,int,get)(x, &k, &g);
-    utest_assert(!err, Fail);
+    g = lipfn(int,int,get)(x, &k);
     utest_assert(g, Fail);
 
     lipfn(int,int,clean)(x);

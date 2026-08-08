@@ -38,10 +38,6 @@
 typedef struct { LipKT k; LipVT v; } EntryT;
 #include <lip.h>
 
-// #ifndef LipVTCmp
-// #define LipVTCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(LipVT))
-// #endif // LipVTCmp
-
 #ifndef LipVTCpy
 #define LipVTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVT))
 #endif // LipVTCpy
@@ -49,8 +45,8 @@ typedef struct { LipKT k; LipVT v; } EntryT;
 
 /* Value Functions */
 
-static inline
-LipVT* Fun(get_or_set)(LipType* l, LipKT* k, LipVT* v) {
+static inline LipVT*
+Fun(get_or_set)(LipType* l, LipKT* k, LipVT* v) {
     if (Fun(is_zero)(k) && l->zero) return &l->zero->v; /* Ok: get zero */
 
     bool found = 0;
@@ -60,12 +56,11 @@ LipVT* Fun(get_or_set)(LipType* l, LipKT* k, LipVT* v) {
     return &e->v;
 }
 
-static inline int
-Fun(get)(LipType* l, LipKT* k, LipVT* v[1]) {
+static inline LipVT*
+Fun(get)(LipType* l, LipKT* k) {
     EntryT* ent = Fun(__get_entry)(l,k );
-    if (ent) *v = &ent->v;                          /* Ok: found */
-    else *v = NULL;
-    return 0;                                       /* Ok: not found */
+    if (ent) return &ent->v;                          /* Ok: found */
+    return NULL;                                      /* Ok: not found */
 }
 
 
@@ -74,7 +69,7 @@ Fun(set)(LipType* l, LipKT* k, LipVT* v) {
     bool found;
     EntryT* ent = Fun(__insert)(l, k, &found);
     if (!ent) return -1;                        /* __insert ERROR */
-    if (LipVTCpy(&ent->v, v)) return -1;           /* LipVTCpy ERROR */
+    if (LipVTCpy(&ent->v, v)) return -1;        /* LipVTCpy ERROR */
     return 0;                                   /* Ok */
 }
 

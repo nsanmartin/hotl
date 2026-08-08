@@ -199,7 +199,6 @@ Fun(__get_entry)(LipType* l, LipKT* k) {
 }
 
 
-//TODO0: Clean Entry
 static inline int Fun(del)(LipType* l, LipKT* k) {
     if (Fun(is_zero)(k)) {
         if (!l->zero) return -1;        /* CLIENT ERROR: cannot delete zero */
@@ -211,9 +210,11 @@ static inline int Fun(del)(LipType* l, LipKT* k) {
     bool found = 0;
     EntryT* e = Fun(__find)(l, k, &found);
 
-    if (!e && found) return -1;      /* HOTL ERROR */
     if (!e || !found) return -1;     /* CLIENT ERROR: not fouind */ 
     --l->inserts;
+#ifdef LipKTClean
+    LipKTClean(&e->k);
+#endif //LipKTClean
     return LipKTCpy(&e->k, &(LipKT){0});
 }
 
