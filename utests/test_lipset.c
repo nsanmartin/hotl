@@ -29,13 +29,35 @@ int test_1(void) {
     err = lipfn(int,insert)(x, &k);
     utest_assert(!err, clean);
 
-    int* g = lipfn(int,get)(x, &k);
+    int* g = lipfn(int,find)(x, &k);
     utest_assert(g, clean);
     utest_assert(*g == k, clean);
 
     k = 13;
-    g = lipfn(int,get)(x, &k);
+    g = lipfn(int,find)(x, &k);
     utest_assert(!g, clean);
+
+
+    clean_and_ret(status, clean, lipfn(int,clean)(x));
+}
+
+int test_2(void) {
+    int status = 1;
+    LipOf(int)* x = &(LipOf(int)){0};
+    size_t initsz = 1000;
+    int err = lipfn(int,init)(x, (LipInitArgs){.sz=initsz});
+    utest_assert(!err, clean);
+
+    for (int i = -10; i < 10; ++i) {
+        err = lipfn(int,insert)(x, &i);
+        utest_assert(!err, clean);
+    }
+
+    for (int i = -10; i < 10; ++i) {
+        int* p = lipfn(int,find)(x, &i);
+        utest_assert(p, clean);
+        utest_assert(*p == i, clean);
+    }
 
 
     clean_and_ret(status, clean, lipfn(int,clean)(x));
@@ -44,6 +66,8 @@ int test_1(void) {
 int main(void) {
     int failures 
         = test_0()
+        + test_1()
+        + test_2()
         ;
 
 	if (failures) {

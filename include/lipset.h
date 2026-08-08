@@ -28,7 +28,7 @@ typedef struct { LipKT k; } EntryT;
 #include <lip.h>
 
 static inline LipKT*
-Fun(get)(LipType* l, LipKT* k) {
+Fun(find)(LipType* l, LipKT* k) {
     EntryT* ent = Fun(__get_entry)(l,k);
     if (ent) return &ent->k;                          /* Ok: found */
     return NULL;                                      /* Ok: not found */
