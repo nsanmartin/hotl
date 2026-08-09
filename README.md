@@ -1,8 +1,8 @@
 hotl (Header-only template library)
 
-`hotl` includes generic hash table and array list types. It uses the
-generic programming technique of [clt](https://github.com/glouw/ctl)
-(the type-safe template-like c library).
+`hotl` includes generic hash table, hash set and array list types. It uses the
+generic programming technique of [clt](https://github.com/glouw/ctl) (the
+type-safe template-like c library).
 
 It defines templates that are used to define concrete types. For example,
 an `arl` (array list) type of `int` with default comparator, copy and clean
@@ -39,32 +39,70 @@ The macro `arlfn` receives a type `T` and a name `N` and returns the
 function for `N` for an `ArlOf(T)`.
 
 # Types
-## Lip (linear probing).
+## LipMap (linear probing hash table).
 
-`lip` is the hash table. Its constructor is `LipOf` and receives the key
+`lipmap` is the hash table. Its constructor is `LipOf` and receives the key
 and value types (and optionally a key type hash function, comparator,
 copier and cleaner).
 
 
-`Lip: KT, VT, KHash, KTCmp, KTCpy -> LipOf(KT,VT)`
+```
+LipMap:
+KeyType, ValueType [, Hash, KeyTypeCmp, KeyTypeCpy, ValueTypeCpy] -> LipMap
+```
 
-`KT`:    key type
-`VT`:    value type
-`KHash`: hash function (`KT* -> size_t`).
-`KTCmp`: comparison function for values of the key type.
-`KTCpy`: copy function for values of the key type.
+`Hotl_LipMap_KT`     : the key type (required).
+`Hotl_LipMap_VT`     : the value type (required).
+`Hotl_LipMap_K_Hash`     : `KeyType* -> size_t`: the hash function  (optional).
+`Hotl_LipMap_KT_Cmp` : `KeyType*, KeyType* -> int` the comparison function for values of the key type (optional).
+`Hotl_LipMap_KT_Cpy` : `KeyType*, KeyType* -> int` copy function for values of the key type (optional).
+`Hotl_LipMap_VT_Cpy` : `ValueType*, ValueType* -> int` copy function for values of the value type (optional).
+
+Default values for parameters are in `hotl.h`:
+`Hotl_LipMap_K_Hash`     : `hotl_djb2_k33_with_seed`
+`Hotl_LipMap_KT_Cmp` : `hotl_compare_bytes`
+`Hotl_LipMap_KT_Cpy` : `hotl_copy_bytes`
+`Hotl_LipMap_VT_Cpy` : `hotl_copy_bytes`
 
 
 Methods:
 --------
++ `init`:        LipOf(K,V)*, LipInitArgs -> int
++ `del`:         LipOf(K,V)*, K*          -> int 
++ `clean`:       LipOf(K,V)*              -> int 
++ `get_or_set`:  LipOf(K,V)*, K*, V*      -> V*
++ `get`:         LipOf(K,V)*, K*          -> V*
++ `set`:         LipOf(K,V)*, K*, V*      -> int
 
-+ `clean`:      `LipOf(KV,TV)* -> int`
-+ `del`:        `LipOf(KV,TV)*, KT* -> int`
-+ `get`:        `LipOf(KV,TV)*, KT* -> VT*`
-+ `get_or_set`: `LipOf(KV,TV)*, KT*, VT* -> VT*`
-+ `init`:       `LipOf(KV,TV)*, LipInitArgs -> int`
-+ `set`:        `LipOf(KV,TV)*, KT*, VT* -> int`
+## LipSep (linear probing set).
 
+`lipset` is the hash set. Its constructor is `LipOf` and receives the element
+type (and optionally its hash function, comparator, copier and cleaner).
+
+
+```
+LipSet:
+Type [, Hash, TypeCmp, TypeCpy] -> LipSet
+```
+
+`Hotl_LipSet_T`     : the key type (required).
+`Hotl_LipSet_Hash`     : `Type* -> size_t`: the hash function  (optional).
+`Hotl_LipSep_T_Cmp` : `Type*, Type* -> int` the comparison function for values of the key type (optional).
+`Hotl_LipSep_T_Cpy` : `Type*, Type* -> int` copy function for values of the key type (optional).
+
+Default values for parameters are in `hotl.h`:
+`Hotl_LipSet_Hash`     : `hotl_djb2_k33_with_seed`
+`Hotl_LipSet_T_Cmp` : `hotl_compare_bytes`
+`Hotl_LipSet_T_Cpy` : `hotl_copy_bytes`
+
+
+Methods:
+--------
++ `init`  : LipOf(T)*, LipInitArgs -> int
++ `del`   : LipOf(T)*, T*          -> int 
++ `clean` : LipOf(T)*              -> int 
++ `find`  : LipOf(T)*, T*          -> T*
++ `insert`: LipOf(T)*, T*          -> int
 
 ## Arl (Array list)
 

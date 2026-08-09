@@ -27,6 +27,7 @@
 
 #include <hotl.h>
 
+/* Required params */
 #ifndef Hotl_LipMap_KT
 #error "Template type Hotl_LipMap_KT undefined"
 #endif
@@ -35,18 +36,34 @@
 #error "Template type Hotl_LipMap_VT undefined"
 #endif
 
-
 #define LipKT      Hotl_LipMap_KT
 #define LipVT      Hotl_LipMap_VT
+/* Optional Params */
+#ifdef Hotl_LipMap_K_Hash
+#define LipHash Hotl_LipMap_K_Hash
+#endif 
+
+#ifdef Hotl_LipMap_KT_Cmp
+#define LipKTCmp Hotl_LipMap_KT_Cmp
+#endif 
+
+#ifdef Hotl_LipMap_KT_Cpy
+#define LipKTCpy Hotl_LipMap_KT_Cpy
+#endif 
+
+#ifndef Hotl_LipMap_VT_Cpy 
+#define LipVTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVT))
+#else
+#define LipVTCpy Hotl_LipMap_VT_Cpy
+#endif // LipVTCpy
+/* end of parameters */
+
 #define EntryT     LipMapEntryOf(LipKT, LipVT)
 #define Fun(FName) lipmapfn(LipKT,LipVT,FName)
 #define LipType    LipMapOf(LipKT,LipVT)
 typedef struct { LipKT k; LipVT v; } EntryT;
 #include <lip.h>
 
-#ifndef LipVTCpy
-#define LipVTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVT))
-#endif // LipVTCpy
 
 
 /* Value Functions */
@@ -89,5 +106,23 @@ Fun(set)(LipType* l, LipKT* k, LipVT* v) {
 #undef LipVT
 #undef LipVTCpy
 
+/* Clear required parameters */
 #undef Hotl_LipMap_KT
 #undef Hotl_LipMap_VT
+
+/* Clear optional parameters */
+#ifdef Hotl_LipMap_K_Hash
+#undef Hotl_LipMap_K_Hash
+#endif
+
+#ifdef Hotl_LipMap_KT_Cmp
+#undef Hotl_LipMap_KT_Cmp
+#endif
+
+#ifdef Hotl_LipMap_KT_Cpy
+#undef Hotl_LipMap_KT_Cpy
+#endif
+
+#ifdef Hotl_LipMap_VT_Cpy 
+#undef Hotl_LipMap_VT_Cpy
+#endif

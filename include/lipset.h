@@ -20,11 +20,25 @@
 
 #include <hotl.h>
 
+/* Required param */
 #ifndef Hotl_LipSet_T
 #error "Template type Hotl_LipSet_T undefined"
 #endif
-
 #define LipKT      Hotl_LipSet_T
+/* Optional Params */
+#ifdef Hotl_LipSet_T_Cmp
+#define LipKTCmp Hotl_LipSet_T_Cmp
+#endif 
+
+#ifdef Hotl_LipSet_T_Cpy
+#define LipKTCpy Hotl_LipSet_T_Cpy
+#endif 
+
+#ifdef Hotl_LipSet_Hash
+#define LipHash Hotl_LipSet_Hash
+#endif 
+/* end of parameters */
+
 #define EntryT     LipSetEntryOf(LipKT)
 #define Fun(FName) lipsetfn(LipKT,FName)
 #define LipType    LipOf(LipKT)
@@ -54,5 +68,19 @@ Fun(insert)(LipType* l, LipKT* k) {
 #undef LipType
 #undef EntryT
 #undef Fun
-#undef Hotl_LipMap_KT
+
+/* Clear required parameter */
 #undef Hotl_LipSet_T
+/* Clear optional parameters */
+#ifdef Hotl_LipSet_Hash
+#undef Hotl_LipSet_Hash
+#endif
+
+#ifdef Hotl_LipSet_T_Cmp
+#undef Hotl_LipSet_T_Cmp
+#endif
+
+#ifdef Hotl_LipSet_T_Cpy
+#undef Hotl_LipSet_T_Cpy
+#endif
+

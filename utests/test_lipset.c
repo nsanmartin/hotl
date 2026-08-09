@@ -4,6 +4,14 @@
 #define Hotl_LipSet_T int
 #include <lipset.h>             /* LipOf(int) */
 
+#define Hotl_LipSet_T char
+int cmp_char(const char* s, const char* t) { return memcmp(s, t, sizeof(char)); }
+#define Hotl_LipSet_T_Cmp cmp_char
+int cpy_char(char* dest, const char* src) { memmove(dest, src, sizeof(char)); return 0; }
+#define Hotl_LipSet_T_Cpy cpy_char
+size_t hash_char(char* s) { return hotl_djb2_k33_with_seed(s, sizeof(char), 5381); }
+#define Hotl_LipSet_Hash  hash_char
+#include <lipset.h>             /* LipOf(char) */
 
 int test_0(void) {
     int status = 1;
@@ -98,12 +106,37 @@ int test_3(void) {
 }
 
 
+int test_4(void) {
+    int status = 1;
+    LipOf(char)* x = &(LipOf(char)){0};
+    size_t initsz = 10;
+    int err = lipfn(char,init)(x, (LipInitArgs){.sz=initsz});
+    utest_assert(!err, clean);
+
+    for (char c = 0; c < 200; ++c) {
+        err = lipfn(char,insert)(x, &c);
+        utest_assert(!err, clean);
+    }
+
+    for (char c = 0; c < 250; ++c) {
+        char* elem = lipfn(char,find)(x, &c);
+        if (c < 200) utest_assert(elem, clean);
+        else  utest_assert(!elem, clean);
+    }
+
+    utest_assert(x->inserts == 200, clean);
+    //clean and return
+    clean_and_ret(status, clean, lipfn(char,clean)(x));
+}
+
+
 int main(void) {
     int failures 
         = test_0()
         + test_1()
         + test_2()
         + test_3()
+        + test_4()
         ;
 
 	if (failures) {

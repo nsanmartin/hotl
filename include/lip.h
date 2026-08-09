@@ -123,6 +123,7 @@ Fun(__dup)(LipType* l) {
     const size_t nX2 = n + n;
     if (nX2 < n) return -1;                                 /* size_t overflow */
 
+    const size_t inserts = l->inserts;
     bool has_zero     = l->zero;
     EntryT zero_entry = (EntryT){0};
     if (has_zero) {
@@ -135,11 +136,13 @@ Fun(__dup)(LipType* l) {
     *(liptab(l))     = (BufOf(EntryT)){0};
     size_t attempts  = nX2 < LipMaximumAttempts ? nX2 : LipMaximumAttempts;
     Fun(init)(l,(LipInitArgs){.sz=nX2,.attempts=attempts});
+    l->inserts = inserts;
 
     if (has_zero) {
         bool found;
         l->zero = Fun(__insert)(l, &(LipKT){0}, &found);
         if (!l->zero) return -1;                            /* __insert ERROR */
+        --l->inserts;
         *l->zero = zero_entry;
         zero_entry = (EntryT){0};
     }
