@@ -20,20 +20,32 @@
 
 #include <hotl.h>
 
+#ifdef LipKT
+#error "LipKT internal symbol should not be defined"
+#endif
 /* Required param */
 #ifndef Hotl_LipSet_T
 #error "Template type Hotl_LipSet_T undefined"
 #endif
 #define LipKT      Hotl_LipSet_T
 /* Optional Params */
+#ifdef LipKTCmp
+#error "LipKTCmp internal symbol should not be defined"
+#endif
 #ifdef Hotl_LipSet_T_Cmp
 #define LipKTCmp Hotl_LipSet_T_Cmp
 #endif 
 
+#ifdef LipKTCpy
+#error "LipKTCpy internal symbol should not be defined"
+#endif
 #ifdef Hotl_LipSet_T_Cpy
 #define LipKTCpy Hotl_LipSet_T_Cpy
 #endif 
 
+#ifdef LipHash
+#error "LipHash internal symbol should not be defined"
+#endif
 #ifdef Hotl_LipSet_Hash
 #define LipHash Hotl_LipSet_Hash
 #endif 

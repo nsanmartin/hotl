@@ -14,11 +14,11 @@ typedef char* cstr;
 
 #define Hotl_LipMap_KT cstr
 #define Hotl_LipMap_VT size_t
-#define LipKTCmp cstrp_compare
-#define LipKTCpy cstrp_copy
-#define LipKTClean cstrp_clean
-#ifndef LipHash
-#define LipHash cstrp_hash
+#define Hotl_LipMap_KTCmp cstrp_compare
+#define Hotl_LipMap_KTCpy cstrp_copy
+#define Hotl_LipMap_KTClean cstrp_clean
+#ifndef Hotl_LipMap_Hash
+#define Hotl_LipMap_Hash cstrp_hash
 #endif
 
 

@@ -10,11 +10,11 @@ typedef struct { size_t len; char* s; } string;
 
 #define Hotl_LipMap_KT string
 #define Hotl_LipMap_VT size_t
-#define LipKTCmp       stringp_compare
-#define LipKTCpy       stringp_copy
-#define LipKTClean     string_free
-#ifndef LipHash
-#define LipHash stringp_hash
+#define Hotl_LipMap_KT_Cmp       stringp_compare
+#define Hotl_LipMap_KT_Cpy       stringp_copy
+#define Hotl_LipMap_KT_Clean     string_free
+#ifndef Hotl_LipMap_K_Hash
+#define Hotl_LipMap_K_Hash stringp_hash
 #endif
 
 

@@ -27,6 +27,12 @@
 
 #include <hotl.h>
 
+#ifdef LipKT
+#error "LipKT internal symbol should not be defined"
+#endif
+#ifdef LipVT
+#error "LipVT internal symbol should not be defined"
+#endif
 /* Required params */
 #ifndef Hotl_LipMap_KT
 #error "Template type Hotl_LipMap_KT undefined"
@@ -39,23 +45,37 @@
 #define LipKT      Hotl_LipMap_KT
 #define LipVT      Hotl_LipMap_VT
 /* Optional Params */
-#ifdef Hotl_LipMap_K_Hash
-#define LipHash Hotl_LipMap_K_Hash
-#endif 
 
+#ifdef LipKTCmp
+#error "LipKTCmp internal symbol should not be defined"
+#endif
 #ifdef Hotl_LipMap_KT_Cmp
 #define LipKTCmp Hotl_LipMap_KT_Cmp
 #endif 
 
+#ifdef LipKTCpy
+#error "LipKTCpy internal symbol should not be defined"
+#endif
 #ifdef Hotl_LipMap_KT_Cpy
 #define LipKTCpy Hotl_LipMap_KT_Cpy
 #endif 
 
+#ifdef LipVTCpy
+#error "LipVTCpy internal symbol should not be defined"
+#endif
 #ifndef Hotl_LipMap_VT_Cpy 
 #define LipVTCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(LipVT))
 #else
 #define LipVTCpy Hotl_LipMap_VT_Cpy
 #endif // LipVTCpy
+
+#ifdef LipHash
+#error "LipHash internal symbol should not be defined"
+#endif
+#ifdef Hotl_LipMap_K_Hash
+#define LipHash Hotl_LipMap_K_Hash
+#endif 
+
 /* end of parameters */
 
 #define EntryT     LipMapEntryOf(LipKT, LipVT)
