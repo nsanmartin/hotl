@@ -1,125 +1,126 @@
 /*
  * Arl (Array list)
  *
- * Arl: T, TCmp, TCpy, TClean -> ArlOf(T)
+ * Arl: T, T_Cmp, T_Cpy, T_Clean -> ArlOf(T)
  * ---
  *  + T: element type
- *  + TCmp: element ptr comparator. Default: hotl_compare_bytes (memcmp sizeof T)
- *  + TCpy: element ptr copy. Default: hotl_copy_bytes (memmove sizeof T).
- *  + TClean: element ptr clean. Default: (void).
+ *  + T_Cmp: element ptr comparator. Default: hotl_compare_bytes (memcmp sizeof T)
+ *  + T_Cpy: element ptr copy. Default: hotl_copy_bytes (memmove sizeof T).
+ *  + T_Clean: element ptr clean. Default: (void).
  *
  * Methods:
  * -------
  *
- * append: ArlOf(T)*, T* -> T*
- * at:     ArlOf(T)*, size_t -> T*
- * back:   ArlOf(T)* -> T*
- * begin:  ArlOf(T)* -> T
- * clean:  ArlOf(T)* -> void
- * end:    ArlOf(T)* -> T
- * find:   ArlOf(T)*, T* -> T*
- * pop:    ArlOf(T)* -> T*
+ * append : ArlOf(T)*, T*     -> T*
+ * at     : ArlOf(T)*, size_t -> T*
+ * back   : ArlOf(T)*         -> T*
+ * begin  : ArlOf(T)*         -> T
+ * clean  : ArlOf(T)*         -> void
+ * end    : ArlOf(T)*         -> T
+ * find   : ArlOf(T)*, T*     -> T*
+ * pop    : ArlOf(T)*         -> T*
  *
  */
 
 #include <hotl.h>
 
-#ifndef T
-#error "Template type T undefined"
+#ifndef Hotl_Arl_T
+#error "Template type Hotl_Arl_T undefined"
 #endif
 
-#ifndef TCmp
-#define TCmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(T))
-#endif // TCmp
+#ifndef Hotl_Arl_T_Cmp
+#define Hotl_Arl_T_Cmp(S1, S2) hotl_compare_bytes(S1, S2, sizeof(Hotl_Arl_T))
+#endif // Hotl_Arl_T_Cmp
 
 
-#ifndef TCpy
-#define TCpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(T))
-#endif // TCpy
+#ifndef Hotl_Arl_T_Cpy
+#define Hotl_Arl_T_Cpy(Dst, Src) hotl_copy_bytes(Dst, Src, sizeof(Hotl_Arl_T))
+#endif // Hotl_Arl_T_Cpy
 
 
-typedef struct ArlOf(T) {
-    T* items;
+typedef struct ArlOf(Hotl_Arl_T) {
+    Hotl_Arl_T* items;
     size_t len;
     size_t capacity;
-} ArlOf(T);
+} ArlOf(Hotl_Arl_T);
 
 
 static inline int
-ArlFn(T, __realloc)(ArlOf(T)* a) {
+arlfn(Hotl_Arl_T, __realloc)(ArlOf(Hotl_Arl_T)* a) {
     if (a->capacity * 2 < a->capacity) { /* overflow */ return -1; }
     a->capacity = a->capacity ? 2 * a->capacity : ArlDefaultInitialCapacity ;
-    a->items = realloc((void*)a->items, a->capacity * sizeof(T)); 
+    a->items = realloc((void*)a->items, a->capacity * sizeof(Hotl_Arl_T)); 
     return a->items == 0;
 } 
 
 
 static inline int
-ArlFn(T, init_reserve)(ArlOf(T)* a, size_t size) {
+arlfn(Hotl_Arl_T, init_reserve)(ArlOf(Hotl_Arl_T)* a, size_t size) {
     if (a->capacity || a->items) return -1; /* we expect an empty arl */
     a->len      = 0;
     a->capacity = size;
-    a->items    = calloc(a->capacity, sizeof(T));
+    a->items    = calloc(a->capacity, sizeof(Hotl_Arl_T));
     return a->items == 0;
 }
 
 
-static inline T*
-ArlFn(T, at)(ArlOf(T)* a, size_t ix) {
+static inline Hotl_Arl_T*
+arlfn(Hotl_Arl_T, at)(ArlOf(Hotl_Arl_T)* a, size_t ix) {
     return ix < a->len ? &a->items[ix] : NULL;
 }
 
-static inline T*
-ArlFn(T, back)(ArlOf(T)* a) {
-    return arl_len(a) ? ArlFn(T, at)(a, arl_len(a) - 1) : 0x0;
+static inline Hotl_Arl_T*
+arlfn(Hotl_Arl_T, back)(ArlOf(Hotl_Arl_T)* a) {
+    return arl_len(a) ? arlfn(Hotl_Arl_T, at)(a, arl_len(a) - 1) : 0x0;
 }
 
 static inline bool
-ArlFn(T, pop)(ArlOf(T)* a) {
-    T* pp = arlfn(T,back)(a);
+arlfn(Hotl_Arl_T, pop)(ArlOf(Hotl_Arl_T)* a) {
+    Hotl_Arl_T* pp = arlfn(Hotl_Arl_T,back)(a);
     if (!pp) return false;
-#ifdef TClean
-    TClean(pp);
+#ifdef Hotl_Arl_T_Clean
+    Hotl_Arl_T_Clean(pp);
 #endif
     --a->len;
     return true;
 }
 
 
-static inline T*
-ArlFn(T, append)(ArlOf(T)* a, const T* ptr) {
+static inline Hotl_Arl_T*
+arlfn(Hotl_Arl_T, append)(ArlOf(Hotl_Arl_T)* a, const Hotl_Arl_T* ptr) {
     if (a->len >= a->capacity) {
-        if (ArlFn(T, __realloc)(a)) { /*error in realloc*/ return  NULL; }
+        if (arlfn(Hotl_Arl_T, __realloc)(a)) { /*error in realloc*/ return  NULL; }
     }
-    if (TCpy((void*)(a->items + a->len), ptr)) { return NULL; }
+    if (Hotl_Arl_T_Cpy((void*)(a->items + a->len), ptr)) { return NULL; }
     return a->items + a->len++;
 }
 
 
-static inline T* arlfn(T, begin)(ArlOf(T)*a) { return a->items; }
+static inline Hotl_Arl_T* arlfn(Hotl_Arl_T, begin)(ArlOf(Hotl_Arl_T)*a) { return a->items; }
 /*
  * We test whether items is NULL to avoid clang message:
  * runtime error: applying zero offset to null pointer
  *  SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior
  */
-static inline T* arlfn(T, end)(ArlOf(T)*a) { return a->items ? a->items + a->len : a->items; }
+static inline Hotl_Arl_T*
+arlfn(Hotl_Arl_T, end)(ArlOf(Hotl_Arl_T)*a) { return a->items ? a->items + a->len : a->items; }
 
 
-static inline T*
-ArlFn(T, find) (ArlOf(T)* a, T* x) {
+static inline Hotl_Arl_T*
+arlfn(Hotl_Arl_T, find) (ArlOf(Hotl_Arl_T)* a, Hotl_Arl_T* x) {
     for (size_t i = 0; i < a->len; ++i) {
-        T* addr = &a->items[i];
-        if (TCmp(addr, x) == 0) { return addr; }
+        Hotl_Arl_T* addr = &a->items[i];
+        if (Hotl_Arl_T_Cmp(addr, x) == 0) { return addr; }
     }
     return NULL;
 }
 
 
 static inline void
-ArlFn(T, reset)(ArlOf(T)* a) {
-#ifdef TClean
-    for (T* it = arlfn(T, begin)(a); it != arlfn(T,end)(a); ++it) {
-        TClean(it);
+arlfn(Hotl_Arl_T, reset)(ArlOf(Hotl_Arl_T)* a) {
+#ifdef Hotl_Arl_T_Clean
+    for (Hotl_Arl_T* it = arlfn(Hotl_Arl_T, begin)(a); it != arlfn(Hotl_Arl_T,end)(a); ++it) {
+        Hotl_Arl_T_Clean(it);
     }
 #endif
     a->len = 0;
@@ -127,49 +128,49 @@ ArlFn(T, reset)(ArlOf(T)* a) {
 
 
 static inline void
-arlfn(T, clean)(ArlOf(T)*a) {
-#ifdef TClean
-    for (T* it = arlfn(T, begin)(a); it != arlfn(T,end)(a); ++it) {
-        TClean(it);
+arlfn(Hotl_Arl_T, clean)(ArlOf(Hotl_Arl_T)*a) {
+#ifdef Hotl_Arl_T_Clean
+    for (Hotl_Arl_T* it = arlfn(Hotl_Arl_T, begin)(a); it != arlfn(Hotl_Arl_T,end)(a); ++it) {
+        Hotl_Arl_T_Clean(it);
     }
 #endif
     free((void*)a->items);
-    *a = (ArlOf(T)){0};
+    *a = (ArlOf(Hotl_Arl_T)){0};
 }
 
 
 static inline int
-arlfn(T, remove_at)(ArlOf(T)* a, size_t ix) {
-    T* elem = arlfn(T,at)(a,ix);
+arlfn(Hotl_Arl_T, remove_at)(ArlOf(Hotl_Arl_T)* a, size_t ix) {
+    Hotl_Arl_T* elem = arlfn(Hotl_Arl_T,at)(a,ix);
     if (!elem) return -1;
-#ifdef TClean
-    TClean(elem);
+#ifdef Hotl_Arl_T_Clean
+    Hotl_Arl_T_Clean(elem);
 #endif
     --a->len;
     if (ix < a->len)
-        memmove(elem,  elem + 1, sizeof(T) * (a->len - ix));
+        memmove(elem,  elem + 1, sizeof(Hotl_Arl_T) * (a->len - ix));
     return 0;
 }
 
 static inline void
-arlfn(T, remove)(ArlOf(T)* a, T* v) {
+arlfn(Hotl_Arl_T, remove)(ArlOf(Hotl_Arl_T)* a, Hotl_Arl_T* v) {
     size_t rm_count = 0;
-    T* dest = arlfn(T, begin)(a);
-    for (T* it = arlfn(T, begin)(a); it != arlfn(T,end)(a); ++it) {
-        if (TCmp(it, v) == 0) {
-#ifdef TClean
-            TClean(it);
+    Hotl_Arl_T* dest = arlfn(Hotl_Arl_T, begin)(a);
+    for (Hotl_Arl_T* it = arlfn(Hotl_Arl_T, begin)(a); it != arlfn(Hotl_Arl_T,end)(a); ++it) {
+        if (Hotl_Arl_T_Cmp(it, v) == 0) {
+#ifdef Hotl_Arl_T_Clean
+            Hotl_Arl_T_Clean(it);
 #endif
             ++rm_count;
         } else {
-            if (dest < it) memmove(dest, it, sizeof(T));
+            if (dest < it) memmove(dest, it, sizeof(Hotl_Arl_T));
             ++dest;
         }
     }
     a->len -= rm_count;
 }
-#undef T
-#undef TCmp
-#undef TCpy
-#undef TClean
+#undef Hotl_Arl_T
+#undef Hotl_Arl_T_Cmp
+#undef Hotl_Arl_T_Cpy
+#undef Hotl_Arl_T_Clean
 

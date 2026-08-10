@@ -9,7 +9,7 @@
 #include <rand-word.h>
 #include <stats.h>
 
-#define T size_t
+#define Hotl_Arl_T size_t
 #include <arl.h>
 
 

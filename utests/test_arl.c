@@ -5,12 +5,12 @@ int value_cmp(void* x, void* y) {
     return strcmp(x, y);
 }
 
-#define T int
-#define TCmp value_cmp
+#define Hotl_Arl_T int
+#define Hotl_Arl_T_Cmp value_cmp
 #include <arl.h>
 
 typedef struct { int x, y; float f; } Foo;
-#define T Foo
+#define Hotl_Arl_T Foo
 #include <arl.h>
 
 typedef char* cstr;
@@ -21,14 +21,14 @@ int cstr_copy(cstr* dst, const cstr* src) {
 
 int cstr_compare(cstr* s, cstr* t) { return strcmp(*s, *t); }
 void cstrp_free(cstr* p) { free(*p); }
-#define T cstr
-#define TCpy cstr_copy
-#define TCmp cstr_compare
-#define TClean cstrp_free
+#define Hotl_Arl_T cstr
+#define Hotl_Arl_T_Cpy cstr_copy
+#define Hotl_Arl_T_Cmp cstr_compare
+#define Hotl_Arl_T_Clean cstrp_free
 #include <arl.h>
 
 typedef Foo* Fooptr;
-#define T Fooptr
+#define Hotl_Arl_T Fooptr
 #include <arl.h>
 
 int arl_not_found(void) {
