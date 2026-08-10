@@ -2,4 +2,5 @@
 build
 *.sw*
 tags
-
+err
+err.txt
