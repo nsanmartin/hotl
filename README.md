@@ -108,23 +108,21 @@ Methods:
 
 Arl: T, TCmp, TCpy, TClean -> ArlOf(T)
 
-+ `T`:      element type
-+ `TCmp`:   element ptr comparator. Default: `hotl_compare_bytes` (`memcmp
-  sizeof T`)
-+ `TCpy`:   element ptr copy. Default: `hotl_copy_bytes` (`memmove sizeof
-  T`).
-+ `TClean`: element ptr clean. Default: `(void)`.
++ `Hotl_Arl_T`:      element type
++ `Hotl_Arl_T_Cmp`:   element ptr comparator. Default: `hotl_compare_bytes` (`memcmp sizeof T`)
++ `Hotl_Arl_T_Cpy`:   element ptr copy. Default: `hotl_copy_bytes` (`memmove sizeof T`).
++ `Hotl_Arl_T_Clean`: element ptr clean. Default: `(void)`.
 
 Methods:
 -------
 
-+ `append`: `ArlOf(T)*, T* -> int`
-+ `at`:     `ArlOf(T)*, size_t -> T*`
-+ `back`:   `ArlOf(T)* -> T*`
-+ `begin`:  `ArlOf(T)* -> T`
-+ `clean`:  `ArlOf(T)* -> void`
-+ `end`:    `ArlOf(T)* -> T`
-+ `find`:   `ArlOf(T)*, T* -> T*`
++ `append` : `ArlOf(T)*, T*     -> int`
++ `at`     : `ArlOf(T)*, size_t -> T*`
++ `back`   : `ArlOf(T)*         -> T*`
++ `begin`  : `ArlOf(T)*         -> T`
++ `clean`  : `ArlOf(T)*         -> void`
++ `end`    : `ArlOf(T)*         -> T`
++ `find`   : `ArlOf(T)*, T*     -> T*`
 
 `ArlOf(T)` can be iterated using `begin` and `end` like in:
 
@@ -134,14 +132,16 @@ for(it = arlfn(int, begin(x)) ; it != arlfn(int, end(x)); ++it) {
 }
 ```
 
+[TODO: document Buf and Pair]
+
 # Usage
 
 To define a `LipOf(KT, VT)` we use macros like:
 
 
 ```C
-#define KT int
-#define VT int
+#define Hotl_LipMap_KT int
+#define Hotl_LipMap_VT int
 #include <lipmap.h> // LipOf(int,int)
 ```
 
@@ -156,17 +156,17 @@ The key type default clean does nothing.
 To define custom key comparator and copy use `KTCmp` and `KTCpy` like:
 
 ```C
-#define KT cstr
-#define KTCmp cstrp_compare
-#define KTCpy cstrp_copy
-#define VT int
-#define KHash cstrp_hash
+#define Hotl_LipMap_KT      cstr
+#define Hotl_LipMap_KT_Cmp  cstrp_compare
+#define Hotl_LipMap_KT_Cpy  cstrp_copy
+#define Hotl_LipMap_VT      int
+#define Hotl_LipMap_K_Hash  cstrp_hash
 #include <lipmap.h> // LipOf(cstr, int)
 ```
 
 
-`lip-cstr-size_t.h` defines a `LipOf(char*, size_t)` setting `KTCmp`,
-`KTCpy`, `KTClean` and `KHash`.
+`lip-cstr-size_t.h` defines a `LipOf(char*, size_t)` setting `KT_Cmp`,
+`KT_Cpy`, `KT_Clean` and `K_Hash`.
 
 The `typedef char* cstr` is needed because the macros used by hotl need
 their type parameters to be source code strings instead of actual types.
