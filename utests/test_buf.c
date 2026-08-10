@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <utests.h>
 
-#define T int
+#define Hotl_Buf_T int
 #include <buf.h>
 
-#define T char
+#define Hotl_Buf_T char
 #include <buf.h>
 
 /* calloc */

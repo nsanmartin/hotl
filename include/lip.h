@@ -49,9 +49,9 @@ Fun(clean_entry)(EntryT* e) {
 }
 #endif // LipKTClean || LipVTClean
 
-#define T EntryT
+#define Hotl_Buf_T EntryT
 #if defined(LipKTClean) || defined(LipVTClean) 
-#define TClean Fun(clean_entry)
+#define Hotl_Buf_T_Clean Fun(clean_entry)
 #endif
 #include <buf.h>
 
@@ -91,16 +91,15 @@ Fun(is_zero)(LipKT* k) { return LipKTCmp(k, &(LipKT){0}) == 0; }
 #endif // LipHash
 
 /*
- * found==true and NULL is an error
  * return value:
  * + if value is found, `found` is set to true and a ptr returned
  * + if value is not found, `found` is set to false and a ptr to
  *   the entry were it should be returned.
  * + if nmovs >= attempts, found is set to false en NULL is returned
- * + if an unexpected error in at, found is set to true and NULL returned.
  */
 static inline EntryT*
 Fun(__find)(LipType* l, LipKT* k, bool found[1]) {
+    if (!l->table.len) { *found = false; return NULL; }
     size_t h = LipHash(k);
     size_t nmovs = 0;
     while (nmovs++ < l->attempts) {
