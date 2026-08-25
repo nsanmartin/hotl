@@ -48,8 +48,13 @@ typedef struct ArlOf(Hotl_Arl_T) {
 static inline int
 arlfn(Hotl_Arl_T, __realloc)(ArlOf(Hotl_Arl_T)* a) {
     if (a->capacity * 2 < a->capacity) { /* overflow */ return -1; }
-    a->capacity = a->capacity ? 2 * a->capacity : ArlDefaultInitialCapacity ;
-    a->items = realloc((void*)a->items, a->capacity * sizeof(Hotl_Arl_T)); 
+
+    const size_t new_capacity = a->capacity ? 2 * a->capacity : ArlDefaultInitialCapacity;
+    Hotl_Arl_T* reallocated   = realloc((void*)a->items, new_capacity * sizeof(Hotl_Arl_T));
+    if (!reallocated) return -1;
+
+    a->capacity = new_capacity;
+    a->items 	= reallocated;
     return a->items == 0;
 } 
 
@@ -91,7 +96,7 @@ arlfn(Hotl_Arl_T, append)(ArlOf(Hotl_Arl_T)* a, const Hotl_Arl_T* ptr) {
     if (a->len >= a->capacity) {
         if (arlfn(Hotl_Arl_T, __realloc)(a)) { /*error in realloc*/ return  NULL; }
     }
-    if (Hotl_Arl_T_Cpy((void*)(a->items + a->len), ptr)) { return NULL; }
+    if (Hotl_Arl_T_Cpy((void*)(a->items + a->len), ptr)) { /*error in T_Cpy */  return NULL; }
     return a->items + a->len++;
 }
 

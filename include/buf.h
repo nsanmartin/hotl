@@ -51,9 +51,12 @@ buffn(Hotl_Buf_T, __ensure_extra_capacity)(BufOf(Hotl_Buf_T)* b, size_t len) {
     if (b->len + len < b->len) { /* overflow */ return NULL; }
     size_t rest_offset = b->len;
     if (b->len + len > b->capacity) {
-        b->capacity  = b->len + len;
-        b->items = realloc((void*)b->items, b->capacity * sizeof(Hotl_Buf_T)); 
-        if (!b->items) { return NULL; };
+        const size_t new_capacity  = b->len + len;
+        Hotl_Buf_T* reallocated    = realloc((void*)b->items, new_capacity * sizeof(Hotl_Buf_T));
+        if (!reallocated) { /* realloc error */ return NULL; }
+
+        b->capacity = new_capacity;
+        b->items    = reallocated;
     }
 
     return b->items + rest_offset;
