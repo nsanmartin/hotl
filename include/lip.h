@@ -231,8 +231,30 @@ Fun(clean)(LipType*l) {
 }
 
 
+static inline EntryT*
+Fun(entry_next)(LipType* l, EntryT* it) {
+    EntryT* end = buffn(EntryT,end)(liptab(l));
+    if (it >= end) return end;
+    for (++it; it < end; ++it) {
+        if (it == end) return end;
+        else if (it == l->zero) return it;
+        else if (!Fun(is_zero)(&it->k)) return it;
+    }
+    return it;
+}
+
+
+static inline EntryT*
+Fun(entry_begin)(LipType* l) { return buffn(EntryT,begin)(liptab(l)); }
+
+
+static inline EntryT*
+Fun(entry_end)(LipType* l) { return buffn(EntryT,end)(liptab(l)); }
+
+
 
 #undef LipHash 
 #undef LipKTCmp
 #undef LipKTCpy
 #undef LipKTClean
+#undef LipVTClean

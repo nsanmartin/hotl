@@ -60,6 +60,13 @@
 #define LipKTCpy Hotl_LipMap_KT_Cpy
 #endif 
 
+#ifdef LipKTClean
+#error "LipKTClean internal symbol should not be defined"
+#endif
+#ifdef Hotl_LipMap_KT_Clean 
+#define LipKTClean Hotl_LipMap_KT_Clean
+#endif // LipKTClean
+
 #ifdef LipVTCpy
 #error "LipVTCpy internal symbol should not be defined"
 #endif
@@ -68,6 +75,13 @@
 #else
 #define LipVTCpy Hotl_LipMap_VT_Cpy
 #endif // LipVTCpy
+
+#ifdef LipVTClean
+#error "LipVTClean internal symbol should not be defined"
+#endif
+#ifdef Hotl_LipMap_VT_Clean 
+#define LipVTClean Hotl_LipMap_VT_Clean
+#endif // LipVTClean
 
 #ifdef LipHash
 #error "LipHash internal symbol should not be defined"
@@ -145,4 +159,12 @@ Fun(set)(LipType* l, LipKT* k, LipVT* v) {
 
 #ifdef Hotl_LipMap_VT_Cpy 
 #undef Hotl_LipMap_VT_Cpy
+#endif
+
+#ifdef Hotl_LipMap_KT_Clean 
+#undef Hotl_LipMap_KT_Clean
+#endif
+
+#ifdef Hotl_LipMap_VT_Clean 
+#undef Hotl_LipMap_VT_Clean
 #endif
