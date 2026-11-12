@@ -1,11 +1,18 @@
+# Copyright (C) 2026 Nicolas San Martin
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
 CFLAGS:=-g -std=c2x -Wall -Wextra -Werror -pedantic -Wold-style-definition -Wunused-function
 SANITIZE_FLAGS:= -fsanitize=leak -fsanitize=address -fsanitize=undefined \
 				 -fsanitize=null -fsanitize=bounds -fsanitize=pointer-overflow
 
-BUILD=../build
-OBJDIR=../build
+BUILD=../../build
+OBJDIR=../../build
 SRCDIR=src
-INCLUDE=../include
+INCLUDE=../../include
 HEADERS=$(wildcard $(INCLUDE)/*.h)
 SRCS=$(wildcard $(SRCDIR)/*.c)
 OBJ=$(SRCS:src/%.c=$(OBJDIR)/%.o)

@@ -1,3 +1,21 @@
+/* Copyright (C) 2026 Nicolas San Martin
+
+This file is part of hotl.
+
+hotl is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 3, or (at your option) any later
+version.
+
+hotl is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
+
+You should have received a copy of the GNU General Public License
+along with hotl; see the file LICENSE or see
+<https://www.gnu.org/licenses/>.  */
+
 /*
  * The string type is the pair size_t (len) char* (c string)
  */

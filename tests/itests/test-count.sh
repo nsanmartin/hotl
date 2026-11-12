@@ -1,3 +1,10 @@
+# Copyright (C) 2026 Nicolas San Martin
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
 DIR=$1 # Dir where to store data
 N=$2
 SEED=$3   # N to pass as SEED
